@@ -2,10 +2,7 @@ package ec.edu.ups.controlador;
 
 import ec.edu.ups.dao.ProductoDAO;
 import ec.edu.ups.modelo.Producto;
-import ec.edu.ups.vista.CarritoAnadirView;
-import ec.edu.ups.vista.ProductoAnadirView;
-import ec.edu.ups.vista.ProductoEliminarView;
-import ec.edu.ups.vista.ProductoListaView;
+import ec.edu.ups.vista.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +12,7 @@ public class ProductoController {
 
     private final ProductoAnadirView productoAnadirView;
     private final ProductoListaView productoListaView;
+    private final ProductoActualizarView productoActualizarView;
     private final ProductoEliminarView productoEliminarView;
     private final CarritoAnadirView carritoAnadirView;
 
@@ -23,12 +21,14 @@ public class ProductoController {
     public ProductoController(ProductoDAO productoDAO,
                               ProductoAnadirView productoAnadirView,
                               ProductoListaView productoListaView,
+                              ProductoActualizarView productoActualizarView,
                               ProductoEliminarView productoEliminarView,
                               CarritoAnadirView carritoAnadirView) {
 
         this.productoDAO = productoDAO;
         this.productoAnadirView = productoAnadirView;
         this.productoListaView = productoListaView;
+        this.productoActualizarView = productoActualizarView;
         this.productoEliminarView = productoEliminarView;
         this.carritoAnadirView = carritoAnadirView;
         this.configurarEventosEnVistas();
@@ -76,6 +76,27 @@ public class ProductoController {
                 buscarProductoPorCodigo();
             }
         });
+
+        productoActualizarView.getBtnBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarProductoPorCodigoActualizar();
+            }
+        });
+
+        productoActualizarView.getBtnEditar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                editarValoresActualizar();
+            }
+        });
+
+        productoActualizarView.getBtnGuardar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                actualizarProducto();
+            }
+        });
     }
 
     private void guardarProducto() {
@@ -116,6 +137,42 @@ public class ProductoController {
             carritoAnadirView.getTxtPrecio().setText(String.valueOf(producto.getPrecio()));
         }
 
+    }
+
+    public void buscarProductoPorCodigoActualizar() {
+        int codigo = Integer.parseInt(productoActualizarView.getTxtCodigoBusqueda().getText());
+        Producto producto = productoDAO.buscarPorCodigo(codigo);
+        if (producto == null) {
+            productoActualizarView.mostrarMensaje("No se encontro el producto");
+            productoActualizarView.getTxtNombre().setText("");
+            productoActualizarView.getTxtPrecio().setText("");
+        } else {
+            productoActualizarView.getTxtCodigo().setText(String.valueOf(producto.getCodigo()));
+            productoActualizarView.getTxtNombre().setText(producto.getNombre());
+            productoActualizarView.getTxtPrecio().setText(String.valueOf(producto.getPrecio()));
+        }
+    }
+
+    public void actualizarProducto() {
+        int codigo = Integer.parseInt(productoActualizarView.getTxtCodigo().getText());
+        String nombre = productoActualizarView.getTxtNombre().getText();
+        double precio = Double.parseDouble(productoActualizarView.getTxtPrecio().getText());
+        boolean confirmacion = productoActualizarView.confirmarEliminacion();
+
+        if (confirmacion) {
+            Producto producto = new Producto(codigo, nombre, precio);
+            productoDAO.actualizar(producto);
+            productoActualizarView.mostrarMensaje("Producto actualizado correctamente");
+            productoActualizarView.limpiarCampos();
+        } else  {
+            productoActualizarView.mostrarMensaje("No se actualizó el producto");
+        }
+
+    }
+
+    public void editarValoresActualizar() {
+        productoActualizarView.getTxtNombre().setEnabled(true);
+        productoActualizarView.getTxtPrecio().setEnabled(true);
     }
 
     private void buscarProductoPorCodigoEliminar() {

@@ -44,13 +44,14 @@ public class Main {
                             MenuPrincipalView principalView = new MenuPrincipalView();
                             ProductoAnadirView productoAnadirView = new ProductoAnadirView();
                             ProductoListaView productoListaView = new ProductoListaView();
+                            ProductoActualizarView productoActualizarView = new ProductoActualizarView();
                             ProductoEliminarView productoEliminarView = new ProductoEliminarView();
                             CarritoAnadirView carritoAnadirView = new CarritoAnadirView();
 
 
                             //instanciamos Controladores
                             ProductoController productoController = new ProductoController(productoDAO, productoAnadirView,
-                                    productoListaView, productoEliminarView,carritoAnadirView);
+                                    productoListaView, productoActualizarView, productoEliminarView,carritoAnadirView);
                             CarritoController carritoController = new CarritoController(carritoDAO, productoDAO, carritoAnadirView);
 
                             principalView.mostrarMensaje("Bienvenido: " + usuarioAuntenticado.getUsername());
@@ -95,6 +96,16 @@ public class Main {
                                     if (!productoEliminarView.isVisible()) {
                                         productoEliminarView.setVisible(true);
                                         principalView.getjDesktopPane().add(productoEliminarView);
+                                    }
+                                }
+                            });
+
+                            principalView.getMenuItemActualizarProducto().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    if (!productoActualizarView.isVisible()) {
+                                        productoActualizarView.setVisible(true);
+                                        principalView.getjDesktopPane().add(productoActualizarView);
                                     }
                                 }
                             });
