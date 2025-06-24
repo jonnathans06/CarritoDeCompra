@@ -17,6 +17,8 @@ public class CarritoAnadirView extends JInternalFrame {
     private JButton btnLimpiar;
     private JComboBox cbxCantidad;
     private JPanel panelPrincipal;
+    private JTextField TxtCodigoCarrito;
+    private JLabel LblCodCarrito;
 
     public CarritoAnadirView(){
 

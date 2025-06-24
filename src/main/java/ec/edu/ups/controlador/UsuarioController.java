@@ -1,6 +1,7 @@
 package ec.edu.ups.controlador;
 
 import ec.edu.ups.dao.UsuarioDAO;
+import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.vista.LoginView;
 
@@ -26,6 +27,18 @@ public class UsuarioController {
             public void actionPerformed(ActionEvent e) {
                 autenticar();
             }
+     });
+
+        loginView.getBtnRegistrarse().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (loginView.getTxtUsername().getText().isEmpty() || loginView.getTxtContrasenia().getText().isEmpty()) {
+                    loginView.mostrarMensaje("Funcionalidad de registro no implementada.");
+                } else {
+                    crearUsuario();
+                    loginView.mostrarMensaje("Usuario creado exitosamente.");
+                }
+            }
         });
     }
 
@@ -39,6 +52,13 @@ public class UsuarioController {
         }else{
             loginView.dispose();
         }
+    }
+
+    public void crearUsuario() {
+        String username = loginView.getTxtUsername().getText();
+        String contrasenia = loginView.getTxtContrasenia().getText();
+        Usuario usuario = new Usuario(username, contrasenia, Rol.USUARIO);
+        usuarioDAO.crear(usuario);
     }
 
     public Usuario getUsuarioAutenticado(){

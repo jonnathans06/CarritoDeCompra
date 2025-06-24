@@ -13,7 +13,7 @@ public class ProductoActualizarView extends JInternalFrame {
     private JButton BtnEditar;
 
     public ProductoActualizarView() {
-        setContentPane(panelPrincipal);
+        setContentPane(panelPrincipal); 
         setTitle("Actualizar Producto");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
