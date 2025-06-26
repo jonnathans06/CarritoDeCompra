@@ -7,12 +7,17 @@ public class MenuPrincipalView extends JFrame {
 
     private JMenu menuProducto;
     private JMenu menuCarrito;
+    private JMenu menuUsuario;
 
     private JMenuItem menuItemCrearProducto;
     private JMenuItem menuItemListarCarritos;
     private JMenuItem menuItemEliminarProducto;
     private JMenuItem menuItemActualizarProducto;
     private JMenuItem menuItemBuscarProducto;
+    private JMenuItem menuItemCrearUsuario;
+    private JMenuItem menuItemBuscarUsuario;
+    private JMenuItem menuItemEliminarUsuario;
+    private JMenuItem menuItemActualizarUsuario;
 
     private JMenuItem menuItemCrearCarrito;
 
@@ -24,6 +29,7 @@ public class MenuPrincipalView extends JFrame {
 
         menuProducto = new JMenu("Producto");
         menuCarrito = new JMenu("Carrito");
+        menuUsuario = new JMenu("Usuario");
 
         menuItemCrearProducto = new JMenuItem("Crear Producto");
         menuItemEliminarProducto = new JMenuItem("Eliminar Producto");
@@ -33,8 +39,14 @@ public class MenuPrincipalView extends JFrame {
         menuItemCrearCarrito = new JMenuItem("Crear Carrito");
         menuItemListarCarritos = new JMenuItem("Buscar Carritos");
 
+        menuItemCrearUsuario = new JMenuItem("Crear Usuario");
+        menuItemBuscarUsuario = new JMenuItem("Buscar Usuario");
+        menuItemEliminarUsuario = new JMenuItem("Eliminar Usuario");
+        menuItemActualizarUsuario = new JMenuItem("Actualizar Usuario");
+
         menuBar.add(menuProducto);
         menuBar.add(menuCarrito);
+        menuBar.add(menuUsuario);
 
         menuProducto.add(menuItemCrearProducto);
         menuProducto.add(menuItemEliminarProducto);
@@ -43,6 +55,11 @@ public class MenuPrincipalView extends JFrame {
 
         menuCarrito.add(menuItemCrearCarrito);
         menuCarrito.add(menuItemListarCarritos);
+
+        menuUsuario.add(menuItemCrearUsuario);
+        menuUsuario.add(menuItemBuscarUsuario);
+        menuUsuario.add(menuItemEliminarUsuario);
+        menuUsuario.add(menuItemActualizarUsuario);
 
         setJMenuBar(menuBar);
         setContentPane(jDesktopPane);
@@ -129,10 +146,27 @@ public class MenuPrincipalView extends JFrame {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
+    public JMenu getMenuUsuario() {
+        return menuUsuario;
+    }
+
+    public void setMenuUsuario(JMenu menuUsuario) {
+        this.menuUsuario = menuUsuario;
+    }
+
+    public JMenuItem getMenuItemCrearUsuario() {
+        return menuItemCrearUsuario;
+    }
+
+    public void setMenuItemCrearUsuario(JMenuItem menuItemCrearUsuario) {
+        this.menuItemCrearUsuario = menuItemCrearUsuario;
+    }
+
     public void deshabilitarMenusAdministrador() {
         getMenuItemCrearProducto().setEnabled(false);
         getMenuItemBuscarProducto().setEnabled(false);
         getMenuItemActualizarProducto().setEnabled(false);
         getMenuItemEliminarProducto().setEnabled(false);
+        getMenuItemCrearUsuario().setEnabled(false);
     }
 }
