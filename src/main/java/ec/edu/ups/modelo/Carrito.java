@@ -1,5 +1,6 @@
 package ec.edu.ups.modelo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Iterator;
@@ -7,20 +8,25 @@ import java.util.List;
 
 public class Carrito {
 
-    private final double IVA = 0.12;
-
-    private static int contador = 1;
-
     private int codigo;
-
+    private final double IVA = 0.14;
+    private static int contador = 1;
     private GregorianCalendar fechaCreacion;
-
     private List<ItemCarrito> items;
+    private Usuario usuario;
 
     public Carrito() {
         codigo = contador++;
         items = new ArrayList<>();
         fechaCreacion = new GregorianCalendar();
+        this.usuario = usuario;
+    }
+
+    public Carrito(Usuario usuario) {
+        codigo = contador++;
+        items = new ArrayList<>();
+        fechaCreacion = new GregorianCalendar();
+        this.usuario = usuario;
     }
 
     public int getCodigo() {
@@ -35,8 +41,12 @@ public class Carrito {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(GregorianCalendar fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public void agregarProducto(Producto producto, int cantidad) {
@@ -82,14 +92,16 @@ public class Carrito {
         return calcularSubtotal() + calcularIVA();
     }
 
+    public String getFechaFormateada() {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        return formato.format(fechaCreacion.getTime());
+    }
+
     @Override
     public String toString() {
-        return "Carrito{" +
-                "IVA=" + IVA +
-                ", codigo=" + codigo +
-                ", fechaCreacion=" + fechaCreacion +
-                ", items=" + items +
-                '}';
+        return  "Cod. Carrito= " + codigo +
+                ", Fecha= " + getFechaFormateada() +
+                ", items= " + items;
     }
 }
 

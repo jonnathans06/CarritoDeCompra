@@ -1,4 +1,7 @@
-package ec.edu.ups.vista;
+package ec.edu.ups.vista.carrito;
+
+import ec.edu.ups.modelo.Carrito;
+import ec.edu.ups.modelo.Usuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -17,12 +20,12 @@ public class CarritoAnadirView extends JInternalFrame {
     private JButton btnLimpiar;
     private JComboBox cbxCantidad;
     private JPanel panelPrincipal;
-    private JTextField TxtCodigoCarrito;
-    private JLabel LblCodCarrito;
+    private Carrito carrito;
+    private Usuario usuario;
 
     public CarritoAnadirView(){
 
-        super("Carrito de Compras", true, true, false, true);
+        super("carrito de Compras", true, true, false, true);
         setContentPane(panelPrincipal);
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
@@ -31,6 +34,7 @@ public class CarritoAnadirView extends JInternalFrame {
         Object[] columnas = {"Codigo", "Nombre", "Precio", "Cantidad", "Subtotal"};
         modelo.setColumnIdentifiers(columnas);
         tblProductos.setModel(modelo);
+        this.carrito = new Carrito(usuario);
 
         cargarDatos();
 
@@ -94,6 +98,16 @@ public class CarritoAnadirView extends JInternalFrame {
     public JPanel getPanelPrincipal() {
         return panelPrincipal;
     }
+
+    public Carrito getCarrito() {
+        return carrito;
+    }
+
+    public void setCarrito(Carrito carrito) {
+        this.carrito = carrito;
+    }
+
+
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);

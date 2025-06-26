@@ -12,6 +12,12 @@ import ec.edu.ups.dao.impl.UsuarioDAOMemoria;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.vista.*;
+import ec.edu.ups.vista.carrito.CarritoAnadirView;
+import ec.edu.ups.vista.carrito.CarritoListarView;
+import ec.edu.ups.vista.producto.ProductoActualizarView;
+import ec.edu.ups.vista.producto.ProductoAnadirView;
+import ec.edu.ups.vista.producto.ProductoEliminarView;
+import ec.edu.ups.vista.producto.ProductoListaView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,12 +53,14 @@ public class Main {
                             ProductoActualizarView productoActualizarView = new ProductoActualizarView();
                             ProductoEliminarView productoEliminarView = new ProductoEliminarView();
                             CarritoAnadirView carritoAnadirView = new CarritoAnadirView();
+                            CarritoListarView carritoListarView = new CarritoListarView();
 
 
                             //instanciamos Controladores
                             ProductoController productoController = new ProductoController(productoDAO, productoAnadirView,
                                     productoListaView, productoActualizarView, productoEliminarView,carritoAnadirView);
-                            CarritoController carritoController = new CarritoController(carritoDAO, productoDAO, carritoAnadirView);
+                            CarritoController carritoController = new CarritoController(carritoDAO, productoDAO, carritoAnadirView,
+                                                                                        carritoListarView);
 
                             principalView.mostrarMensaje("Bienvenido: " + usuarioAuntenticado.getUsername());
                             if (usuarioAuntenticado.getRol().equals(Rol.USUARIO)) {
@@ -79,16 +87,6 @@ public class Main {
                                 }
                             });
 
-                            principalView.getMenuItemCrearCarrito().addActionListener(new ActionListener() {
-                                @Override
-                                public void actionPerformed(ActionEvent e) {
-                                    if(!carritoAnadirView.isVisible()){
-                                        carritoAnadirView.setVisible(true);
-                                        principalView.getjDesktopPane().add(carritoAnadirView);
-                                    }
-                                }
-                            });
-
                             principalView.getMenuItemEliminarProducto().addActionListener(new ActionListener() {
 
                                 @Override
@@ -106,6 +104,26 @@ public class Main {
                                     if (!productoActualizarView.isVisible()) {
                                         productoActualizarView.setVisible(true);
                                         principalView.getjDesktopPane().add(productoActualizarView);
+                                    }
+                                }
+                            });
+
+                            principalView.getMenuItemCrearCarrito().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    if(!carritoAnadirView.isVisible()){
+                                        carritoAnadirView.setVisible(true);
+                                        principalView.getjDesktopPane().add(carritoAnadirView);
+                                    }
+                                }
+                            });
+
+                            principalView.getMenuItemListarCarritos().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    if(!productoListaView.isVisible()){
+                                        carritoListarView.setVisible(true);
+                                        principalView.getjDesktopPane().add(carritoListarView);
                                     }
                                 }
                             });
