@@ -18,6 +18,9 @@ import ec.edu.ups.vista.producto.ProductoActualizarView;
 import ec.edu.ups.vista.producto.ProductoAnadirView;
 import ec.edu.ups.vista.producto.ProductoEliminarView;
 import ec.edu.ups.vista.producto.ProductoListaView;
+import ec.edu.ups.vista.usuario.UsuarioActualizarView;
+import ec.edu.ups.vista.usuario.UsuarioCrearView;
+import ec.edu.ups.vista.usuario.UsuarioListarView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,9 +35,13 @@ public class Main {
                 //Iniciar sesión
                 UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
                 LoginView loginView = new LoginView();
+                UsuarioCrearView usuarioCrearView = new UsuarioCrearView(usuarioDAO);
+                UsuarioListarView usuarioListarView = new UsuarioListarView();
+                UsuarioActualizarView usuarioActualizarView = new UsuarioActualizarView(usuarioDAO);
                 loginView.setVisible(true);
 
-                UsuarioController usuarioController = new UsuarioController(usuarioDAO, loginView);
+                UsuarioController usuarioController = new UsuarioController(usuarioDAO, loginView, usuarioCrearView,
+                                                                            usuarioListarView, usuarioActualizarView);
 
                 loginView.addWindowListener(new WindowAdapter() {
                     @Override
@@ -124,6 +131,36 @@ public class Main {
                                     if(!productoListaView.isVisible()){
                                         carritoListarView.setVisible(true);
                                         principalView.getjDesktopPane().add(carritoListarView);
+                                    }
+                                }
+                            });
+
+                            principalView.getMenuItemCrearUsuario().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    if (!usuarioCrearView.isVisible()) {
+                                        usuarioCrearView.setVisible(true);
+                                        principalView.getjDesktopPane().add(usuarioCrearView);
+                                    }
+                                }
+                            });
+
+                            principalView.getMenuItemListarUsuario().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    if (!usuarioListarView.isVisible()) {
+                                        usuarioListarView.setVisible(true);
+                                        principalView.getjDesktopPane().add(usuarioListarView);
+                                    }
+                                }
+                            });
+
+                            principalView.getMenuItemActualizarUsuario().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    if (!usuarioActualizarView.isVisible()) {
+                                        usuarioActualizarView.setVisible(true);
+                                        principalView.getjDesktopPane().add(usuarioActualizarView);
                                     }
                                 }
                             });

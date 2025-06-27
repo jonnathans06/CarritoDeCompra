@@ -15,7 +15,7 @@ public class MenuPrincipalView extends JFrame {
     private JMenuItem menuItemActualizarProducto;
     private JMenuItem menuItemBuscarProducto;
     private JMenuItem menuItemCrearUsuario;
-    private JMenuItem menuItemBuscarUsuario;
+    private JMenuItem menuItemListarUsuario;
     private JMenuItem menuItemEliminarUsuario;
     private JMenuItem menuItemActualizarUsuario;
 
@@ -40,7 +40,7 @@ public class MenuPrincipalView extends JFrame {
         menuItemListarCarritos = new JMenuItem("Buscar Carritos");
 
         menuItemCrearUsuario = new JMenuItem("Crear Usuario");
-        menuItemBuscarUsuario = new JMenuItem("Buscar Usuario");
+        menuItemListarUsuario = new JMenuItem("Buscar Usuario");
         menuItemEliminarUsuario = new JMenuItem("Eliminar Usuario");
         menuItemActualizarUsuario = new JMenuItem("Actualizar Usuario");
 
@@ -57,7 +57,7 @@ public class MenuPrincipalView extends JFrame {
         menuCarrito.add(menuItemListarCarritos);
 
         menuUsuario.add(menuItemCrearUsuario);
-        menuUsuario.add(menuItemBuscarUsuario);
+        menuUsuario.add(menuItemListarUsuario);
         menuUsuario.add(menuItemEliminarUsuario);
         menuUsuario.add(menuItemActualizarUsuario);
 
@@ -162,11 +162,41 @@ public class MenuPrincipalView extends JFrame {
         this.menuItemCrearUsuario = menuItemCrearUsuario;
     }
 
+    public JMenuItem getMenuItemListarUsuario() {
+        return menuItemListarUsuario;
+    }
+
+    public void setMenuItemListarUsuario(JMenuItem menuItemListarUsuario) {
+        this.menuItemListarUsuario = menuItemListarUsuario;
+    }
+
+    public JMenuItem getMenuItemEliminarUsuario() {
+        return menuItemEliminarUsuario;
+    }
+
+    public void setMenuItemEliminarUsuario(JMenuItem menuItemEliminarUsuario) {
+        this.menuItemEliminarUsuario = menuItemEliminarUsuario;
+    }
+
+    public JMenuItem getMenuItemActualizarUsuario() {
+        return menuItemActualizarUsuario;
+    }
+
+    public void setMenuItemActualizarUsuario(JMenuItem menuItemActualizarUsuario) {
+        this.menuItemActualizarUsuario = menuItemActualizarUsuario;
+    }
+
+
+
     public void deshabilitarMenusAdministrador() {
         getMenuItemCrearProducto().setEnabled(false);
         getMenuItemBuscarProducto().setEnabled(false);
         getMenuItemActualizarProducto().setEnabled(false);
         getMenuItemEliminarProducto().setEnabled(false);
+        getMenuItemListarCarritos().setEnabled(false);
         getMenuItemCrearUsuario().setEnabled(false);
+        getMenuItemListarUsuario().setEnabled(false);
+        getMenuItemActualizarUsuario().setEnabled(false);
+        getMenuItemEliminarUsuario().setEnabled(false);
     }
 }

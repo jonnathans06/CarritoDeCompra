@@ -4,6 +4,9 @@ import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.vista.LoginView;
+import ec.edu.ups.vista.usuario.UsuarioActualizarView;
+import ec.edu.ups.vista.usuario.UsuarioCrearView;
+import ec.edu.ups.vista.usuario.UsuarioListarView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,12 +16,20 @@ public class UsuarioController {
     private Usuario usuario;
     private final UsuarioDAO usuarioDAO;
     private final LoginView loginView;
+    private final UsuarioCrearView usuarioCrearView;
+    private final UsuarioListarView usuarioListarView;
+    private final UsuarioActualizarView usuarioActualizarView;
 
-    public UsuarioController(UsuarioDAO usuarioDAO, LoginView loginView) {
+    public UsuarioController(UsuarioDAO usuarioDAO, LoginView loginView, UsuarioCrearView usuarioCrearView,
+                             UsuarioListarView usuarioListarView, UsuarioActualizarView usuarioActualizarView) {
         this.usuarioDAO = usuarioDAO;
         this.loginView = loginView;
+        this.usuarioCrearView = usuarioCrearView;
+        this.usuarioListarView = usuarioListarView;
+        this.usuarioActualizarView = usuarioActualizarView;
         this.usuario = null;
         configurarEventosEnVistas();
+        configurarEventosUsuarios();
     }
 
     private void configurarEventosEnVistas(){
@@ -40,6 +51,67 @@ public class UsuarioController {
                 }
             }
         });
+    }
+
+    private void configurarEventosUsuarios() {
+        usuarioCrearView.getBtnRegistrar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuarioCrearView.crearUsuario();
+                usuarioCrearView.limpiarCampos();
+                System.out.println(usuarioDAO.listarTodos());
+            }
+        });
+
+        usuarioListarView.getBtnListar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuarioListarView.listarUsuarios(usuarioDAO.listarTodos());
+            }
+        });
+
+        usuarioListarView.getBtnBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (usuarioListarView.getTxtUser().getText().isEmpty()) {
+                    usuarioListarView.mostrarMensaje("Ingrese un nombre de usuario para buscar.");
+                    return;
+                }
+                String username = usuarioListarView.getTxtUser().getText();
+                usuarioListarView.listarUsuariosPorUsername(usuarioDAO.listarTodos(), username);
+            }
+        });
+
+        usuarioActualizarView.getBtnBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuarioActualizarView.buscarUsuario();
+            }
+        });
+
+        usuarioActualizarView.getBtnEditar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuarioActualizarView.editarValoresActualizarTrue();
+            }
+        });
+
+        usuarioActualizarView.getBtnGuardar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                boolean confirmacion = usuarioActualizarView.confirmarEliminacion();
+                String username = usuarioActualizarView.getTxtUsername().getText();
+                String contrasenia = usuarioActualizarView.getTxtPassword().getText();
+                String rol = usuarioActualizarView.getCbxRol().getSelectedItem().toString();
+                if (confirmacion) {
+                    Usuario usuario = new Usuario(username, contrasenia, Rol.valueOf(rol));
+                    usuarioDAO.actualizar(usuario);
+                } else {
+                    usuarioActualizarView.mostrarMensaje("Actualización cancelada.");
+                }
+            }
+        });
+
     }
 
     private void autenticar(){
