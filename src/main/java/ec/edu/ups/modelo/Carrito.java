@@ -101,7 +101,8 @@ public class Carrito {
     public String toString() {
         return  "Cod. Carrito= " + codigo +
                 ", Fecha= " + getFechaFormateada() +
-                ", items= " + items;
+                ", items= " + items +
+                ", Total= " + calcularTotal();
     }
 }
 

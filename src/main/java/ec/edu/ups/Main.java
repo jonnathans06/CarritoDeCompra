@@ -13,6 +13,7 @@ import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.vista.*;
 import ec.edu.ups.vista.carrito.CarritoAnadirView;
+import ec.edu.ups.vista.carrito.CarritoEliminarView;
 import ec.edu.ups.vista.carrito.CarritoListarView;
 import ec.edu.ups.vista.producto.ProductoActualizarView;
 import ec.edu.ups.vista.producto.ProductoAnadirView;
@@ -66,12 +67,13 @@ public class Main {
 
                             CarritoAnadirView carritoAnadirView = new CarritoAnadirView();
                             CarritoListarView carritoListarView = new CarritoListarView();
+                            CarritoEliminarView carritoEliminarView = new CarritoEliminarView();
 
                             //instanciamos Controladores
                             ProductoController productoController = new ProductoController(productoDAO, productoAnadirView,
                                     productoListaView, productoActualizarView, productoEliminarView);
                             CarritoController carritoController = new CarritoController(carritoDAO, productoDAO, carritoAnadirView,
-                                                                                        carritoListarView);
+                                                                                        carritoListarView, carritoEliminarView);
 
                             principalView.mostrarMensaje("Bienvenido: " + usuarioAuntenticado.getUsername());
                             if (usuarioAuntenticado.getRol().equals(Rol.USUARIO)) {
@@ -185,6 +187,16 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     principalView.dispose();
                                     usuarioController.cerrarSesion();
+                                }
+                            });
+
+                            principalView.getMenuItemEliminarCarrito().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    if (!carritoAnadirView.isVisible()) {
+                                        carritoEliminarView.setVisible(true);
+                                        principalView.getjDesktopPane().add(carritoEliminarView);
+                                    }
                                 }
                             });
 
