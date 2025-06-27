@@ -1,23 +1,25 @@
 package ec.edu.ups.vista.usuario;
 
+import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.Usuario;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
 
-public class UsuarioEliminarView extends JInternalFrame{
+public class UsuarioEliminarView extends JInternalFrame {
     private JPanel panelPrincipal;
     private JTextField txtUsername;
     private JButton BtnBuscar;
     private JButton BtnGuardar;
     private JTable TblUsuario;
     private DefaultTableModel modelo;
+    private UsuarioDAO usuarioDAO;
 
     public UsuarioEliminarView() {
         setContentPane(panelPrincipal);
         setTitle("Eliminar Usuario");
-        setSize(500,500);
+        setSize(500, 500);
         setResizable(true);
         setClosable(true);
         setIconifiable(true);
@@ -86,6 +88,11 @@ public class UsuarioEliminarView extends JInternalFrame{
         int respuesta = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el usuario?",
                 "Confirmación", JOptionPane.YES_NO_OPTION);
         return respuesta == JOptionPane.YES_OPTION;
+    }
+
+    public void limpiarCampos() {
+        txtUsername.setText("");
+        modelo.setRowCount(0);
     }
 
     public void mostrarMensaje(String mensaje) {

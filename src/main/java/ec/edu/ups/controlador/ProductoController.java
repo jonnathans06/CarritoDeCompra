@@ -122,8 +122,6 @@ public class ProductoController {
         productoListaView.cargarDatos(productos);
     }
 
-
-
     public void buscarProductoPorCodigoActualizar() {
         int codigo = Integer.parseInt(productoActualizarView.getTxtCodigoBusqueda().getText());
         Producto producto = productoDAO.buscarPorCodigo(codigo);

@@ -147,6 +147,23 @@ public class UsuarioController {
                 }
             }
         });
+
+        usuarioEliminarView.getBtnGuardar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codigo = usuarioEliminarView.getTxtUsername().getText();
+                Usuario usuario = usuarioDAO.buscarPorUsername(codigo);
+                boolean confirmacion = usuarioEliminarView.confirmarEliminacion();
+
+                if (confirmacion && usuario != null) {
+                    usuarioDAO.eliminar(codigo);
+                    usuarioEliminarView.mostrarMensaje("Usuario eliminado correctamente.");
+                    usuarioEliminarView.limpiarCampos();
+                } else {
+                    usuarioEliminarView.mostrarMensaje("El usuario no existe o la eliminación fue cancelada.");
+                }
+            }
+        });
     }
 
     private void autenticar(){
