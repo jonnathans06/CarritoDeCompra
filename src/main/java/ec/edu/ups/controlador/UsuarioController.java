@@ -4,6 +4,7 @@ import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.vista.LoginView;
+import ec.edu.ups.vista.MenuPrincipalView;
 import ec.edu.ups.vista.usuario.UsuarioActualizarView;
 import ec.edu.ups.vista.usuario.UsuarioCrearView;
 import ec.edu.ups.vista.usuario.UsuarioListarView;
@@ -20,8 +21,9 @@ public class UsuarioController {
     private final UsuarioListarView usuarioListarView;
     private final UsuarioActualizarView usuarioActualizarView;
 
-    public UsuarioController(UsuarioDAO usuarioDAO, LoginView loginView, UsuarioCrearView usuarioCrearView,
-                             UsuarioListarView usuarioListarView, UsuarioActualizarView usuarioActualizarView) {
+    public UsuarioController(UsuarioDAO usuarioDAO,LoginView loginView,
+                             UsuarioCrearView usuarioCrearView, UsuarioListarView usuarioListarView,
+                             UsuarioActualizarView usuarioActualizarView) {
         this.usuarioDAO = usuarioDAO;
         this.loginView = loginView;
         this.usuarioCrearView = usuarioCrearView;
@@ -146,6 +148,11 @@ public class UsuarioController {
         String contrasenia = loginView.getTxtContrasenia().getText();
         Usuario usuario = new Usuario(username, contrasenia, Rol.USUARIO);
         usuarioDAO.crear(usuario);
+    }
+
+    public void cerrarSesion() {
+        usuario = null;
+        loginView.setVisible(true);
     }
 
     public Usuario getUsuarioAutenticado(){

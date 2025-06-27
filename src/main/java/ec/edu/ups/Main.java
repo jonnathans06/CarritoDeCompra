@@ -29,19 +29,24 @@ import java.awt.event.WindowEvent;
 
 public class Main {
     public static void main(String[] args) {
+
+        UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
+        LoginView loginView = new LoginView();
+        ProductoDAO productoDAO = new ProductoDAOMemoria();
+        CarritoDAO carritoDAO = new CarritoDAOMemoria();
+
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
                 //Iniciar sesión
-                UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
-                LoginView loginView = new LoginView();
                 UsuarioCrearView usuarioCrearView = new UsuarioCrearView(usuarioDAO);
                 UsuarioListarView usuarioListarView = new UsuarioListarView();
                 UsuarioActualizarView usuarioActualizarView = new UsuarioActualizarView(usuarioDAO);
                 loginView.setVisible(true);
 
-                UsuarioController usuarioController = new UsuarioController(usuarioDAO, loginView, usuarioCrearView,
-                                                                            usuarioListarView, usuarioActualizarView);
+                UsuarioController usuarioController = new UsuarioController(usuarioDAO,loginView,
+                                                                            usuarioCrearView, usuarioListarView,
+                                                                            usuarioActualizarView);
 
                 loginView.addWindowListener(new WindowAdapter() {
                     @Override
@@ -50,8 +55,6 @@ public class Main {
                         Usuario usuarioAuntenticado = usuarioController.getUsuarioAutenticado();
                         if (usuarioAuntenticado != null) {
                             //instanciamos DAO (Singleton)
-                            ProductoDAO productoDAO = new ProductoDAOMemoria();
-                            CarritoDAO carritoDAO = new CarritoDAOMemoria();
 
                             //instancio Vistas
                             MenuPrincipalView principalView = new MenuPrincipalView();
@@ -61,7 +64,6 @@ public class Main {
                             ProductoEliminarView productoEliminarView = new ProductoEliminarView();
                             CarritoAnadirView carritoAnadirView = new CarritoAnadirView();
                             CarritoListarView carritoListarView = new CarritoListarView();
-
 
                             //instanciamos Controladores
                             ProductoController productoController = new ProductoController(productoDAO, productoAnadirView,
@@ -164,11 +166,18 @@ public class Main {
                                     }
                                 }
                             });
+
+                            principalView.getMenuItemCerrarSesion().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    principalView.dispose();
+                                    usuarioController.cerrarSesion();
+                                }
+                            });
                         }
                     }
                 });
             }
         });
     }
-
 }
