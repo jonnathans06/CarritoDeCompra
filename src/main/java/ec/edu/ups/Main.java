@@ -20,6 +20,7 @@ import ec.edu.ups.vista.producto.ProductoEliminarView;
 import ec.edu.ups.vista.producto.ProductoListaView;
 import ec.edu.ups.vista.usuario.UsuarioActualizarView;
 import ec.edu.ups.vista.usuario.UsuarioCrearView;
+import ec.edu.ups.vista.usuario.UsuarioEliminarView;
 import ec.edu.ups.vista.usuario.UsuarioListarView;
 
 import java.awt.event.ActionEvent;
@@ -38,15 +39,15 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                //Iniciar sesión
                 UsuarioCrearView usuarioCrearView = new UsuarioCrearView(usuarioDAO);
                 UsuarioListarView usuarioListarView = new UsuarioListarView();
                 UsuarioActualizarView usuarioActualizarView = new UsuarioActualizarView(usuarioDAO);
+                UsuarioEliminarView  usuarioEliminarView = new UsuarioEliminarView();
                 loginView.setVisible(true);
 
                 UsuarioController usuarioController = new UsuarioController(usuarioDAO,loginView,
                                                                             usuarioCrearView, usuarioListarView,
-                                                                            usuarioActualizarView);
+                                                                            usuarioActualizarView, usuarioEliminarView);
 
                 loginView.addWindowListener(new WindowAdapter() {
                     @Override
@@ -62,12 +63,13 @@ public class Main {
                             ProductoListaView productoListaView = new ProductoListaView();
                             ProductoActualizarView productoActualizarView = new ProductoActualizarView();
                             ProductoEliminarView productoEliminarView = new ProductoEliminarView();
+
                             CarritoAnadirView carritoAnadirView = new CarritoAnadirView();
                             CarritoListarView carritoListarView = new CarritoListarView();
 
                             //instanciamos Controladores
                             ProductoController productoController = new ProductoController(productoDAO, productoAnadirView,
-                                    productoListaView, productoActualizarView, productoEliminarView,carritoAnadirView);
+                                    productoListaView, productoActualizarView, productoEliminarView);
                             CarritoController carritoController = new CarritoController(carritoDAO, productoDAO, carritoAnadirView,
                                                                                         carritoListarView);
 
@@ -167,6 +169,17 @@ public class Main {
                                 }
                             });
 
+                            principalView.getMenuItemEliminarUsuario().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    if (!usuarioEliminarView.isVisible()) {
+                                        usuarioEliminarView.setVisible(true);
+                                        principalView.getjDesktopPane().add(usuarioEliminarView);
+                                        System.out.println("Se activó");
+                                    }
+                                }
+                            });
+
                             principalView.getMenuItemCerrarSesion().addActionListener(new ActionListener() {
                                 @Override
                                 public void actionPerformed(ActionEvent e) {
@@ -174,6 +187,7 @@ public class Main {
                                     usuarioController.cerrarSesion();
                                 }
                             });
+
                         }
                     }
                 });

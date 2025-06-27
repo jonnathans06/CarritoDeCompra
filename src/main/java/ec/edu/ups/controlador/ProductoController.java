@@ -18,7 +18,7 @@ public class ProductoController {
     private final ProductoListaView productoListaView;
     private final ProductoActualizarView productoActualizarView;
     private final ProductoEliminarView productoEliminarView;
-    private final CarritoAnadirView carritoAnadirView;
+    //private final CarritoAnadirView carritoAnadirView;
 
     private final ProductoDAO productoDAO;
 
@@ -26,15 +26,14 @@ public class ProductoController {
                               ProductoAnadirView productoAnadirView,
                               ProductoListaView productoListaView,
                               ProductoActualizarView productoActualizarView,
-                              ProductoEliminarView productoEliminarView,
-                              CarritoAnadirView carritoAnadirView) {
+                              ProductoEliminarView productoEliminarView) {
 
         this.productoDAO = productoDAO;
         this.productoAnadirView = productoAnadirView;
         this.productoListaView = productoListaView;
         this.productoActualizarView = productoActualizarView;
         this.productoEliminarView = productoEliminarView;
-        this.carritoAnadirView = carritoAnadirView;
+        //this.carritoAnadirView = carritoAnadirView;
         this.configurarEventosEnVistas();
     }
 
@@ -74,12 +73,6 @@ public class ProductoController {
             }
         });
 
-        carritoAnadirView.getBtnBuscar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                buscarProductoPorCodigo();
-            }
-        });
 
         productoActualizarView.getBtnBuscar().addActionListener(new ActionListener() {
             @Override
@@ -129,19 +122,7 @@ public class ProductoController {
         productoListaView.cargarDatos(productos);
     }
 
-    private void buscarProductoPorCodigo() {
-        int codigo = Integer.parseInt(carritoAnadirView.getTxtCodigo().getText());
-        Producto producto = productoDAO.buscarPorCodigo(codigo);
-        if (producto == null) {
-            carritoAnadirView.mostrarMensaje("No se encontro el producto");
-            carritoAnadirView.getTxtNombre().setText("");
-            carritoAnadirView.getTxtPrecio().setText("");
-        } else {
-            carritoAnadirView.getTxtNombre().setText(producto.getNombre());
-            carritoAnadirView.getTxtPrecio().setText(String.valueOf(producto.getPrecio()));
-        }
 
-    }
 
     public void buscarProductoPorCodigoActualizar() {
         int codigo = Integer.parseInt(productoActualizarView.getTxtCodigoBusqueda().getText());

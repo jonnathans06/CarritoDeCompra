@@ -7,10 +7,12 @@ import ec.edu.ups.vista.LoginView;
 import ec.edu.ups.vista.MenuPrincipalView;
 import ec.edu.ups.vista.usuario.UsuarioActualizarView;
 import ec.edu.ups.vista.usuario.UsuarioCrearView;
+import ec.edu.ups.vista.usuario.UsuarioEliminarView;
 import ec.edu.ups.vista.usuario.UsuarioListarView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class UsuarioController {
 
@@ -20,18 +22,21 @@ public class UsuarioController {
     private final UsuarioCrearView usuarioCrearView;
     private final UsuarioListarView usuarioListarView;
     private final UsuarioActualizarView usuarioActualizarView;
+    private final UsuarioEliminarView usuarioEliminarView;
 
     public UsuarioController(UsuarioDAO usuarioDAO,LoginView loginView,
                              UsuarioCrearView usuarioCrearView, UsuarioListarView usuarioListarView,
-                             UsuarioActualizarView usuarioActualizarView) {
+                             UsuarioActualizarView usuarioActualizarView, UsuarioEliminarView usuarioEliminarView) {
         this.usuarioDAO = usuarioDAO;
         this.loginView = loginView;
         this.usuarioCrearView = usuarioCrearView;
         this.usuarioListarView = usuarioListarView;
         this.usuarioActualizarView = usuarioActualizarView;
+        this.usuarioEliminarView = usuarioEliminarView;
         this.usuario = null;
         configurarEventosEnVistas();
         configurarEventosUsuarios();
+        configurarEventosEliminar();
     }
 
     private void configurarEventosEnVistas(){
@@ -129,6 +134,19 @@ public class UsuarioController {
             }
         });
 
+    }
+
+    private void configurarEventosEliminar() {
+        usuarioEliminarView.getBtnBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codigo = usuarioEliminarView.getTxtUsername().getText();
+                Usuario usuario = usuarioDAO.buscarPorUsername(codigo);
+                if (usuario != null) {
+                    usuarioEliminarView.cargarUsuario(List.of(usuario));
+                }
+            }
+        });
     }
 
     private void autenticar(){

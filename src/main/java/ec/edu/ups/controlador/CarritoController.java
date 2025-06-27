@@ -41,6 +41,13 @@ public class CarritoController {
             }
         });
 
+        carritoAnadirView.getBtnBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                buscarProductoPorCodigo();
+            }
+        });
+
         carritoAnadirView.getBtnGuardar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -92,6 +99,20 @@ public class CarritoController {
                 }
             }
         });
+    }
+
+    private void buscarProductoPorCodigo() {
+        int codigo = Integer.parseInt(carritoAnadirView.getTxtCodigo().getText());
+        Producto producto = productoDAO.buscarPorCodigo(codigo);
+        if (producto == null) {
+            carritoAnadirView.mostrarMensaje("No se encontro el producto");
+            carritoAnadirView.getTxtNombre().setText("");
+            carritoAnadirView.getTxtPrecio().setText("");
+        } else {
+            carritoAnadirView.getTxtNombre().setText(producto.getNombre());
+            carritoAnadirView.getTxtPrecio().setText(String.valueOf(producto.getPrecio()));
+        }
+
     }
 
     private void guardarCarrito() {
