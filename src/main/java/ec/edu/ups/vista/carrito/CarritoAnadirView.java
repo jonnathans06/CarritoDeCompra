@@ -1,6 +1,7 @@
 package ec.edu.ups.vista.carrito;
 
 import ec.edu.ups.modelo.Carrito;
+import ec.edu.ups.modelo.ItemCarrito;
 import ec.edu.ups.modelo.Usuario;
 
 import javax.swing.*;
@@ -22,6 +23,7 @@ public class CarritoAnadirView extends JInternalFrame {
     private JPanel panelPrincipal;
     private Carrito carrito;
     private Usuario usuario;
+    DefaultTableModel modelo = new DefaultTableModel();
 
     public CarritoAnadirView(){
 
@@ -29,22 +31,36 @@ public class CarritoAnadirView extends JInternalFrame {
         setContentPane(panelPrincipal);
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
+        this.carrito = new Carrito(usuario);
 
         DefaultTableModel modelo = new DefaultTableModel();
         Object[] columnas = {"Codigo", "Nombre", "Precio", "Cantidad", "Subtotal"};
         modelo.setColumnIdentifiers(columnas);
         tblProductos.setModel(modelo);
-        this.carrito = new Carrito(usuario);
 
-        cargarDatos();
+        cargarDatosProductos();
 
     }
 
-    private void cargarDatos(){
+    private void cargarDatosProductos(){
         cbxCantidad.removeAllItems();
         for(int i = 0; i < 20; i++){
             cbxCantidad.addItem(String.valueOf(i + 1));
         }
+    }
+
+    public void cargarDatosProductos(Carrito carrito) {
+        modelo.setRowCount(0);
+        for(ItemCarrito item : carrito.obtenerItems()) {
+            Object[] fila = {
+                    item.getProducto().getCodigo(),
+                    item.getProducto().getNombre(),
+                    item.getProducto().getPrecio(),
+                    item.getCantidad()
+            };
+            modelo.addRow(fila);
+        }
+
     }
 
     public JButton getBtnBuscar() {
@@ -107,7 +123,13 @@ public class CarritoAnadirView extends JInternalFrame {
         this.carrito = carrito;
     }
 
+    public DefaultTableModel getModelo() {
+        return modelo;
+    }
 
+    public void setModelo(DefaultTableModel modelo) {
+        this.modelo = modelo;
+    }
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);

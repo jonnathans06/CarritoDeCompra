@@ -122,10 +122,12 @@ public class UsuarioActualizarView extends JInternalFrame {
     }
 
     public void editarValoresActualizarTrue() {
-        CbxRol.setEnabled(true);
+        TxtPassword.setEnabled(true);
     }
 
     public void editarValoresActualizarFalse() {
+        TxtUsername.setEnabled(false);
+        TxtPassword.setEnabled(false);
         CbxRol.setEnabled(false);
     }
 
