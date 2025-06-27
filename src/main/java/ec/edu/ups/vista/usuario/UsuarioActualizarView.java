@@ -16,6 +16,7 @@ public class UsuarioActualizarView extends JInternalFrame {
     private JButton BtnGuardar;
     private JPanel panelPrincipal;
     private UsuarioDAO usuarioDAO;
+    private Usuario usuarioSeleccionado;
 
     public UsuarioActualizarView(UsuarioDAO usuarioDAO) {
         setContentPane(panelPrincipal);
@@ -26,6 +27,7 @@ public class UsuarioActualizarView extends JInternalFrame {
         setIconifiable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.usuarioDAO = usuarioDAO;
+        cargarDatosRol();
     }
 
     public JButton getBtnBuscar() {
@@ -42,6 +44,14 @@ public class UsuarioActualizarView extends JInternalFrame {
 
     public void setBtnEditar(JButton btnEditar) {
         BtnEditar = btnEditar;
+    }
+
+    public JTextField getTxtUsernameBusqueda() {
+        return TxtUsernameBusqueda;
+    }
+
+    public void setTxtUsernameBusqueda(JTextField txtUsernameBusqueda) {
+        TxtUsernameBusqueda = txtUsernameBusqueda;
     }
 
     public JTextField getTxtUsername() {
@@ -84,13 +94,18 @@ public class UsuarioActualizarView extends JInternalFrame {
         this.panelPrincipal = panelPrincipal;
     }
 
-    public void actualizarUsuario() {
-        String username = getTxtUsername().getText();
-        String password = getTxtPassword().getText();
-        Usuario usuario = usuarioDAO.buscarPorUsername(username);
-        usuario.setUsername(username);
-        usuario.setContrasenia(password);
-        mostrarMensaje("Usuario modificado exitosamente");
+    public Usuario getUsuarioSeleccionado() {
+        return usuarioSeleccionado;
+    }
+
+    public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
+        this.usuarioSeleccionado = usuarioSeleccionado;
+    }
+
+    public void cargarDatosRol () {
+        CbxRol.removeAllItems();
+        CbxRol.addItem("ADMINISTRADOR");
+        CbxRol.addItem("USUARIO");
     }
 
     public void buscarUsuario() {
@@ -107,21 +122,16 @@ public class UsuarioActualizarView extends JInternalFrame {
     }
 
     public void editarValoresActualizarTrue() {
-        TxtUsername.setEnabled(true);
-        TxtPassword.setEnabled(true);
         CbxRol.setEnabled(true);
     }
 
     public void editarValoresActualizarFalse() {
-        TxtUsername.setEnabled(true);
-        TxtPassword.setEnabled(true);
-        CbxRol.setEnabled(true);
+        CbxRol.setEnabled(false);
     }
 
     public void limpiarCampos() {
         TxtUsername.setText("");
         TxtPassword.setText("");
-        CbxRol.setSelectedIndex(0);
         TxtUsernameBusqueda.setText("");
     }
 

@@ -85,27 +85,42 @@ public class UsuarioController {
         usuarioActualizarView.getBtnBuscar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                usuarioActualizarView.buscarUsuario();
+                if (usuarioActualizarView.getTxtUsernameBusqueda().getText().isEmpty()) {
+                    usuarioActualizarView.mostrarMensaje("Ingrese un nombre de usuario para buscar.");
+                } else {
+                    usuarioActualizarView.buscarUsuario();
+                }
+
             }
         });
 
         usuarioActualizarView.getBtnEditar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                usuarioActualizarView.editarValoresActualizarTrue();
+                if (usuarioActualizarView.getTxtUsernameBusqueda().getText().isEmpty()) {
+                    usuarioActualizarView.mostrarMensaje("Ingrese un nombre de usuario para buscar.");
+                } else {
+                    usuarioActualizarView.editarValoresActualizarTrue();
+                }
+
             }
         });
 
         usuarioActualizarView.getBtnGuardar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                boolean confirmacion = usuarioActualizarView.confirmarEliminacion();
+
                 String username = usuarioActualizarView.getTxtUsername().getText();
-                String contrasenia = usuarioActualizarView.getTxtPassword().getText();
-                String rol = usuarioActualizarView.getCbxRol().getSelectedItem().toString();
-                if (confirmacion) {
-                    Usuario usuario = new Usuario(username, contrasenia, Rol.valueOf(rol));
-                    usuarioDAO.actualizar(usuario);
+                String password = usuarioActualizarView.getTxtPassword().getText();
+                Rol rol = Rol.valueOf(usuarioActualizarView.getCbxRol().getSelectedItem().toString());
+                boolean confirmar = usuarioActualizarView.confirmarEliminacion();
+
+                if (confirmar) {
+                    Usuario usuarioNuevo = new Usuario(username, password, rol);
+                    usuarioDAO.actualizar(usuarioNuevo);
+                    usuarioActualizarView.limpiarCampos();
+                    usuarioActualizarView.editarValoresActualizarFalse();
+                    usuarioActualizarView.mostrarMensaje("Usuario actualizado correctamente.");
                 } else {
                     usuarioActualizarView.mostrarMensaje("Actualización cancelada.");
                 }
