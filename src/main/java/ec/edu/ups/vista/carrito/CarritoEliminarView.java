@@ -17,7 +17,7 @@ public class CarritoEliminarView extends JInternalFrame{
     private JButton BtnEliminar;
     private JTable TblCarritos;
     private CarritoDAO carritoDAO;
-    DefaultTableModel TblCarritosModel = new DefaultTableModel();
+    DefaultTableModel  modelo;
 
     public CarritoEliminarView() {
         setContentPane(panelPrincipal);
@@ -29,8 +29,8 @@ public class CarritoEliminarView extends JInternalFrame{
         setResizable(true);
         setIconifiable(true);
 
-        DefaultTableModel modelo = new DefaultTableModel();
-        Object[] columnas = {"Código", "Fecha", "Productos", "Total"};
+        modelo = new DefaultTableModel();
+        Object[] columnas = {"Código","Fecha","Usuario","Subtotal","Total"};
         modelo.setColumnIdentifiers(columnas);
         TblCarritos.setModel(modelo);
 
@@ -76,28 +76,29 @@ public class CarritoEliminarView extends JInternalFrame{
         TblCarritos = tblCarritos;
     }
 
-    public DefaultTableModel getTblCarritosModel() {
-        return TblCarritosModel;
+    public DefaultTableModel getModelo() {
+        return modelo;
     }
 
-    public void setTblCarritosModel(DefaultTableModel tblCarritosModel) {
-        TblCarritosModel = tblCarritosModel;
+    public void setModelo(DefaultTableModel modelo) {
+        this.modelo = modelo;
     }
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
-    public void cargarDatosTabla(List<Carrito> carritos) {
-        TblCarritosModel.setRowCount(0);
+    public void cargargaDatosBusqueda(List<Carrito> carritos) {
+        modelo.setNumRows(0);
         for (Carrito carrito : carritos) {
             Object[] fila = {
-                carrito.getCodigo(),
-                carrito.getFechaFormateada(),
-                carrito.obtenerItems().size(),
-                carrito.calcularTotal()
+                    carrito.getCodigo(),
+                    carrito.getFechaFormateada(),
+                    carrito.getUsuario().getUsername(),
+                    carrito.calcularSubtotal(),
+                    carrito.calcularTotal()
             };
-            TblCarritosModel.addRow(fila);
+            modelo.addRow(fila);
         }
     }
 
@@ -107,7 +108,18 @@ public class CarritoEliminarView extends JInternalFrame{
         if (carrito == null && getTxtCarrito().getText().isEmpty()) {
             mostrarMensaje("No existe el carrito");
         } else  {
-            cargarDatosTabla(List.of(carrito));
+            cargargaDatosBusqueda(List.of(carrito));
         }
+    }
+
+    public boolean confirmarEliminacion() {
+        int respuesta = JOptionPane.showConfirmDialog(this, "¿Está seguro de eliminar el carrito?",
+                "Confirmación", JOptionPane.YES_NO_OPTION);
+        return respuesta == JOptionPane.YES_OPTION;
+    }
+
+    public void limpiarCampos() {
+        TxtCarrito.setText("");
+        modelo.setRowCount(0);
     }
 }

@@ -39,6 +39,7 @@ public class CarritoController {
         this.carritoMostrarDetallesView = carritoMostrarDetallesView;
         this.carrito = carritoAnadirView.getCarrito();
         configurarEventosEnVistas();
+        configuraEventosEliminar();
         confiurarEventosDetalles();
     }
 
@@ -95,7 +96,9 @@ public class CarritoController {
                     carritoListarView.mostrarMensaje("No hay carritos registrados.");
                 }
                 else {
-                    carritoListarView.cargargaDatosBusqueda(carritoDAO.listarTodos());
+                    int codigo = Integer.parseInt(carritoListarView.getTxtCodigo().getText());
+                    Carrito carrito = carritoDAO.buscarPorCodigo(codigo);
+                    carritoListarView.cargargaDatosBusqueda(List.of(carrito));
                 }
             }
         });
@@ -105,16 +108,29 @@ public class CarritoController {
         carritoEliminarView.getBtnBuscar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                int codigo = Integer.parseInt(carritoEliminarView.getTxtCarrito().getText());
-                carritoEliminarView.buscarPorCodigoCarrito(codigo);
+                if (carritoDAO == null) {
+                    carritoEliminarView.mostrarMensaje("No hay carritos registrados.");
+                }
+                else {
+                    int codigo = Integer.parseInt(carritoEliminarView.getTxtCarrito().getText());
+                    Carrito carrito = carritoDAO.buscarPorCodigo(codigo);
+                    carritoEliminarView.cargargaDatosBusqueda(List.of(carrito));
+                }
             }
         });
-
-        carritoEliminarView.getBtnListar().addActionListener(new ActionListener() {
+        carritoEliminarView.getBtnEliminar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               List<Carrito> carritos = carritoDAO.listarTodos();
-               carritoEliminarView.cargarDatosTabla(carritos);
+                int codigo = Integer.parseInt(carritoEliminarView.getTxtCarrito().getText());
+                Carrito carrito = carritoDAO.buscarPorCodigo(codigo);
+                boolean confirmacion = carritoEliminarView.confirmarEliminacion();
+                if (confirmacion && carrito == null) {
+                    carritoEliminarView.mostrarMensaje("No existe el carrito");
+                } else {
+                    carritoDAO.eliminar(codigo);
+                    carritoEliminarView.mostrarMensaje("Carrito eliminado correctamente");
+                    carritoEliminarView.limpiarCampos();
+                }
             }
         });
     }
