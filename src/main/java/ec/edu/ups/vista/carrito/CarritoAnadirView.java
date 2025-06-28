@@ -25,7 +25,7 @@ public class CarritoAnadirView extends JInternalFrame {
     private Usuario usuario;
     DefaultTableModel modelo = new DefaultTableModel();
 
-    public CarritoAnadirView(){
+    public CarritoAnadirView(Usuario usuario) {
 
         super("carrito de Compras", true, true, false, true);
         setContentPane(panelPrincipal);

@@ -86,21 +86,11 @@ public class CarritoController {
         carritoListarView.getBtnBuscar().addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (carritoListarView.getTxtCodigo().getText().equals("")) {
-                    carritoListarView.mostrarMensaje("Debe ingresar el codigo.");
-                } else {
-                    int codigo = Integer.parseInt(carritoListarView.getTxtCodigo().getText());
-                    Carrito carrito = carritoDAO.buscarPorCodigo(codigo);
-                    if (carrito != null) {
-                        DefaultTableModel modelo = (DefaultTableModel) carritoListarView.getTblCarritos().getModel();
-                        modelo.setNumRows(0);
-                        modelo.addRow(new Object[]{carrito.getCodigo(),
-                                carrito.getFechaFormateada(),
-                                carrito.calcularSubtotal(),
-                                carrito.calcularTotal()});
-                    } else {
-                        carritoListarView.mostrarMensaje("Carrito no encontrado.");
-                    }
+                if (carritoDAO == null) {
+                    carritoListarView.mostrarMensaje("No hay carritos registrados.");
+                }
+                else {
+                    carritoListarView.cargargaDatosBusqueda(carritoDAO.listarTodos());
                 }
             }
         });
@@ -139,6 +129,7 @@ public class CarritoController {
     }
 
     private void guardarCarrito() {
+        carrito.setUsuario(carritoAnadirView.getCarrito().getUsuario());
         carritoDAO.crear(carritoAnadirView.getCarrito());
         carritoAnadirView.mostrarMensaje("Carrito creado correctamente");
         limpiarCampos();

@@ -15,6 +15,7 @@ import ec.edu.ups.vista.*;
 import ec.edu.ups.vista.carrito.CarritoAnadirView;
 import ec.edu.ups.vista.carrito.CarritoEliminarView;
 import ec.edu.ups.vista.carrito.CarritoListarView;
+import ec.edu.ups.vista.login.LoginView;
 import ec.edu.ups.vista.producto.ProductoActualizarView;
 import ec.edu.ups.vista.producto.ProductoAnadirView;
 import ec.edu.ups.vista.producto.ProductoEliminarView;
@@ -65,7 +66,7 @@ public class Main {
                             ProductoActualizarView productoActualizarView = new ProductoActualizarView();
                             ProductoEliminarView productoEliminarView = new ProductoEliminarView();
 
-                            CarritoAnadirView carritoAnadirView = new CarritoAnadirView();
+                            CarritoAnadirView carritoAnadirView = new CarritoAnadirView(usuarioAuntenticado);
                             CarritoListarView carritoListarView = new CarritoListarView();
                             CarritoEliminarView carritoEliminarView = new CarritoEliminarView();
 

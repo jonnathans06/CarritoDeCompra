@@ -1,10 +1,8 @@
 package ec.edu.ups.vista.usuario;
 
 import ec.edu.ups.dao.UsuarioDAO;
-import ec.edu.ups.dao.impl.UsuarioDAOMemoria;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
-import ec.edu.ups.vista.LoginView;
 
 import javax.swing.*;
 

@@ -102,7 +102,8 @@ public class Carrito {
         return  "Cod. Carrito= " + codigo +
                 ", Fecha= " + getFechaFormateada() +
                 ", items= " + items +
-                ", Total= " + calcularTotal();
+                ", Total= " + calcularTotal() +
+                ", Usuario= " + usuario.getUsername();
     }
 }
 

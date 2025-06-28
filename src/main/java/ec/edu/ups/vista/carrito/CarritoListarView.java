@@ -25,7 +25,7 @@ public class CarritoListarView extends JInternalFrame {
         setResizable(true);
 
         modelo = new DefaultTableModel();
-        Object[] columnas = {"Código","Fecha","Subtotal","Total"};
+        Object[] columnas = {"Código","Fecha","Usuario","Subtotal","Total"};
         modelo.setColumnIdentifiers(columnas);
         TblCarritos.setModel(modelo);
     }
@@ -84,6 +84,7 @@ public class CarritoListarView extends JInternalFrame {
             Object[] fila = {
                 carrito.getCodigo(),
                 carrito.getFechaFormateada(),
+                carrito.getUsuario().getUsername(),
                 carrito.calcularSubtotal(),
                 carrito.calcularTotal()
             };
@@ -96,7 +97,8 @@ public class CarritoListarView extends JInternalFrame {
         for (Carrito carrito : carritos) {
             Object[] fila = {
                     carrito.getCodigo(),
-                    carrito.getFechaCreacion(),
+                    carrito.getFechaFormateada(),
+                    carrito.getUsuario().getUsername(),
                     carrito.calcularSubtotal(),
                     carrito.calcularTotal()
             };
