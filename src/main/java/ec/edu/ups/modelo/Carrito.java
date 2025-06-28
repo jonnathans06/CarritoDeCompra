@@ -29,6 +29,14 @@ public class Carrito {
         this.usuario = usuario;
     }
 
+    public List<ItemCarrito> getItems() {
+        return items;
+    }
+
+    public void setItems(List<ItemCarrito> items) {
+        this.items = items;
+    }
+
     public int getCodigo() {
         return codigo;
     }

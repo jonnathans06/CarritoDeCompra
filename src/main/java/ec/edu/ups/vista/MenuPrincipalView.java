@@ -23,6 +23,7 @@ public class MenuPrincipalView extends JFrame {
     private JMenuItem menuItemCrearCarrito;
     private JMenuItem menuItemActualizarCarrito;
     private JMenuItem menuItemListarCarritos;
+    private JMenuItem menuItemDetalleCarrito;
     private JMenuItem menuItemEliminarCarrito;
 
     private JMenuItem menuItemCerrarSesion;
@@ -45,6 +46,7 @@ public class MenuPrincipalView extends JFrame {
 
         menuItemCrearCarrito = new JMenuItem("Crear Carrito");
         menuItemListarCarritos = new JMenuItem("Buscar Carritos");
+        menuItemDetalleCarrito = new JMenuItem("Detalle Carrito");
         menuItemActualizarCarrito = new JMenuItem("Actualizar Carrito");
         menuItemEliminarCarrito = new JMenuItem("Eliminar Carrito");
 
@@ -67,6 +69,7 @@ public class MenuPrincipalView extends JFrame {
 
         menuCarrito.add(menuItemCrearCarrito);
         menuCarrito.add(menuItemListarCarritos);
+        menuCarrito.add(menuItemDetalleCarrito);
         menuCarrito.add(menuItemActualizarCarrito);
         menuCarrito.add(menuItemEliminarCarrito);
 
@@ -195,6 +198,14 @@ public class MenuPrincipalView extends JFrame {
 
     public void setMenuItemActualizarCarrito(JMenuItem menuItemActualizarCarrito) {
         this.menuItemActualizarCarrito = menuItemActualizarCarrito;
+    }
+
+    public JMenuItem getMenuItemDetalleCarrito() {
+        return menuItemDetalleCarrito;
+    }
+
+    public void setMenuItemDetalleCarrito(JMenuItem menuItemDetalleCarrito) {
+        this.menuItemDetalleCarrito = menuItemDetalleCarrito;
     }
 
     public JMenuItem getMenuItemListarCarritos() {

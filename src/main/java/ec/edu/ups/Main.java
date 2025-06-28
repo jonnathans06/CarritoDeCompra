@@ -15,6 +15,7 @@ import ec.edu.ups.vista.*;
 import ec.edu.ups.vista.carrito.CarritoAnadirView;
 import ec.edu.ups.vista.carrito.CarritoEliminarView;
 import ec.edu.ups.vista.carrito.CarritoListarView;
+import ec.edu.ups.vista.carrito.CarritoMostrarDetallesView;
 import ec.edu.ups.vista.login.LoginView;
 import ec.edu.ups.vista.producto.ProductoActualizarView;
 import ec.edu.ups.vista.producto.ProductoAnadirView;
@@ -69,12 +70,14 @@ public class Main {
                             CarritoAnadirView carritoAnadirView = new CarritoAnadirView(usuarioAuntenticado);
                             CarritoListarView carritoListarView = new CarritoListarView();
                             CarritoEliminarView carritoEliminarView = new CarritoEliminarView();
+                            CarritoMostrarDetallesView carritoMostrarDetallesView = new CarritoMostrarDetallesView();
 
                             //instanciamos Controladores
                             ProductoController productoController = new ProductoController(productoDAO, productoAnadirView,
                                     productoListaView, productoActualizarView, productoEliminarView);
                             CarritoController carritoController = new CarritoController(carritoDAO, productoDAO, carritoAnadirView,
-                                                                                        carritoListarView, carritoEliminarView);
+                                                                                        carritoListarView, carritoEliminarView,
+                                                                                        carritoMostrarDetallesView);
 
                             principalView.mostrarMensaje("Bienvenido: " + usuarioAuntenticado.getUsername());
                             if (usuarioAuntenticado.getRol().equals(Rol.USUARIO)) {
@@ -138,6 +141,16 @@ public class Main {
                                     if(!productoListaView.isVisible()){
                                         carritoListarView.setVisible(true);
                                         principalView.getjDesktopPane().add(carritoListarView);
+                                    }
+                                }
+                            });
+
+                            principalView.getMenuItemDetalleCarrito().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    if (!carritoMostrarDetallesView.isVisible()) {
+                                        carritoMostrarDetallesView.setVisible(true);
+                                        principalView.getjDesktopPane().add(carritoMostrarDetallesView);
                                     }
                                 }
                             });

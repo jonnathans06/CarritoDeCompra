@@ -8,6 +8,7 @@ import ec.edu.ups.modelo.Producto;
 import ec.edu.ups.vista.carrito.CarritoAnadirView;
 import ec.edu.ups.vista.carrito.CarritoEliminarView;
 import ec.edu.ups.vista.carrito.CarritoListarView;
+import ec.edu.ups.vista.carrito.CarritoMostrarDetallesView;
 
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -21,20 +22,24 @@ public class CarritoController {
     private final CarritoAnadirView carritoAnadirView;
     private final CarritoListarView carritoListarView;
     private final CarritoEliminarView carritoEliminarView;
+    private final CarritoMostrarDetallesView carritoMostrarDetallesView;
     private Carrito carrito;
 
     public CarritoController(CarritoDAO carritoDAO,
                              ProductoDAO productoDAO,
                              CarritoAnadirView carritoAnadirView,
                              CarritoListarView carritoListarView,
-                             CarritoEliminarView carritoEliminarView) {
+                             CarritoEliminarView carritoEliminarView,
+                             CarritoMostrarDetallesView carritoMostrarDetallesView) {
         this.carritoDAO = carritoDAO;
         this.productoDAO = productoDAO;
         this.carritoAnadirView = carritoAnadirView;
         this.carritoListarView = carritoListarView;
         this.carritoEliminarView = carritoEliminarView;
+        this.carritoMostrarDetallesView = carritoMostrarDetallesView;
         this.carrito = carritoAnadirView.getCarrito();
         configurarEventosEnVistas();
+        confiurarEventosDetalles();
     }
 
     private void configurarEventosEnVistas() {
@@ -110,6 +115,21 @@ public class CarritoController {
             public void actionPerformed(ActionEvent e) {
                List<Carrito> carritos = carritoDAO.listarTodos();
                carritoEliminarView.cargarDatosTabla(carritos);
+            }
+        });
+    }
+
+    private void confiurarEventosDetalles(){
+        carritoMostrarDetallesView.getBtnBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codigo = carritoMostrarDetallesView.getTxtCodigoCarrito().getText();
+                Carrito carrito = carritoDAO.buscarPorCodigo(Integer.parseInt(codigo));
+                if (carrito == null) {
+                    carritoMostrarDetallesView.mostrarMensaje("No existe el carrito");
+                } else {
+                    carritoMostrarDetallesView.cargarDatosCarrito(List.of(carrito));
+                }
             }
         });
     }

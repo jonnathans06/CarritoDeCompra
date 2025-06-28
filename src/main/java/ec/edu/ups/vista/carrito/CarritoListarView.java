@@ -78,6 +78,14 @@ public class CarritoListarView extends JInternalFrame {
         this.modelo = modelo;
     }
 
+    public JButton getBtnDetallesCarrito() {
+        return BtnDetallesCarrito;
+    }
+
+    public void setBtnDetallesCarrito(JButton btnDetallesCarrito) {
+        BtnDetallesCarrito = btnDetallesCarrito;
+    }
+
     public void cargargaDatosLista(List<Carrito> carritos) {
         modelo.setNumRows(0);
         for (Carrito carrito : carritos) {
