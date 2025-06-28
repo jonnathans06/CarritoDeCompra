@@ -33,7 +33,6 @@ public class CarritoMostrarDetallesView extends JInternalFrame {
             }
         };
         TblDetalleCarrito.setModel(modelo);
-        TblDetalleCarrito.setModel(modelo);
     }
 
     public JTextField getTxtCodigoCarrito() {

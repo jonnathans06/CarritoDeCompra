@@ -5,10 +5,7 @@ import ec.edu.ups.dao.ProductoDAO;
 import ec.edu.ups.modelo.Carrito;
 import ec.edu.ups.modelo.ItemCarrito;
 import ec.edu.ups.modelo.Producto;
-import ec.edu.ups.vista.carrito.CarritoAnadirView;
-import ec.edu.ups.vista.carrito.CarritoEliminarView;
-import ec.edu.ups.vista.carrito.CarritoListarView;
-import ec.edu.ups.vista.carrito.CarritoMostrarDetallesView;
+import ec.edu.ups.vista.carrito.*;
 
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
@@ -21,6 +18,7 @@ public class CarritoController {
     private final ProductoDAO productoDAO;
     private final CarritoAnadirView carritoAnadirView;
     private final CarritoListarView carritoListarView;
+    private final CarritoActualizarView carritoActualizarView;
     private final CarritoEliminarView carritoEliminarView;
     private final CarritoMostrarDetallesView carritoMostrarDetallesView;
     private Carrito carrito;
@@ -29,18 +27,21 @@ public class CarritoController {
                              ProductoDAO productoDAO,
                              CarritoAnadirView carritoAnadirView,
                              CarritoListarView carritoListarView,
+                             CarritoActualizarView carritoActualizarView,
                              CarritoEliminarView carritoEliminarView,
                              CarritoMostrarDetallesView carritoMostrarDetallesView) {
         this.carritoDAO = carritoDAO;
         this.productoDAO = productoDAO;
         this.carritoAnadirView = carritoAnadirView;
         this.carritoListarView = carritoListarView;
+        this.carritoActualizarView = carritoActualizarView;
         this.carritoEliminarView = carritoEliminarView;
         this.carritoMostrarDetallesView = carritoMostrarDetallesView;
         this.carrito = carritoAnadirView.getCarrito();
         configurarEventosEnVistas();
-        configuraEventosEliminar();
         confiurarEventosDetalles();
+        configurarEventosActualizar();
+        configuraEventosEliminar();
     }
 
     private void configurarEventosEnVistas() {
@@ -133,6 +134,10 @@ public class CarritoController {
                 }
             }
         });
+    }
+
+    private void configurarEventosActualizar() {
+
     }
 
     private void confiurarEventosDetalles(){

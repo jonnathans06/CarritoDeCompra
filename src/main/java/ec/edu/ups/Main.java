@@ -12,10 +12,7 @@ import ec.edu.ups.dao.impl.UsuarioDAOMemoria;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.vista.*;
-import ec.edu.ups.vista.carrito.CarritoAnadirView;
-import ec.edu.ups.vista.carrito.CarritoEliminarView;
-import ec.edu.ups.vista.carrito.CarritoListarView;
-import ec.edu.ups.vista.carrito.CarritoMostrarDetallesView;
+import ec.edu.ups.vista.carrito.*;
 import ec.edu.ups.vista.login.LoginView;
 import ec.edu.ups.vista.producto.ProductoActualizarView;
 import ec.edu.ups.vista.producto.ProductoAnadirView;
@@ -69,14 +66,18 @@ public class Main {
 
                             CarritoAnadirView carritoAnadirView = new CarritoAnadirView(usuarioAuntenticado);
                             CarritoListarView carritoListarView = new CarritoListarView();
+                            CarritoActualizarView carritoActualizarView = new CarritoActualizarView();
                             CarritoEliminarView carritoEliminarView = new CarritoEliminarView();
                             CarritoMostrarDetallesView carritoMostrarDetallesView = new CarritoMostrarDetallesView();
 
                             //instanciamos Controladores
                             ProductoController productoController = new ProductoController(productoDAO, productoAnadirView,
                                     productoListaView, productoActualizarView, productoEliminarView);
-                            CarritoController carritoController = new CarritoController(carritoDAO, productoDAO, carritoAnadirView,
-                                                                                        carritoListarView, carritoEliminarView,
+                            CarritoController carritoController = new CarritoController(carritoDAO, productoDAO,
+                                                                                        carritoAnadirView,
+                                                                                        carritoListarView,
+                                                                                        carritoActualizarView,
+                                                                                        carritoEliminarView,
                                                                                         carritoMostrarDetallesView);
 
                             principalView.mostrarMensaje("Bienvenido: " + usuarioAuntenticado.getUsername());
@@ -131,6 +132,16 @@ public class Main {
                                     if(!carritoAnadirView.isVisible()){
                                         carritoAnadirView.setVisible(true);
                                         principalView.getjDesktopPane().add(carritoAnadirView);
+                                    }
+                                }
+                            });
+
+                            principalView.getMenuItemActualizarCarrito().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    if(!carritoListarView.isVisible()){
+                                        carritoActualizarView.setVisible(true);
+                                        principalView.getjDesktopPane().add(carritoActualizarView);
                                     }
                                 }
                             });
