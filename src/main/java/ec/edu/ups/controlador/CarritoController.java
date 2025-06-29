@@ -1,4 +1,4 @@
-package ec.edu.ups.controlador;
+ package ec.edu.ups.controlador;
 
 import ec.edu.ups.dao.CarritoDAO;
 import ec.edu.ups.dao.ProductoDAO;
@@ -137,7 +137,36 @@ public class CarritoController {
     }
 
     private void configurarEventosActualizar() {
+        carritoActualizarView.getBtnBuscar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String codigo = carritoActualizarView.getTxtCodigo().getText();
+                Carrito carrito = carritoDAO.buscarPorCodigo(Integer.parseInt(codigo));
+                if (carrito == null) {
+                    carritoActualizarView.mostrarMensaje("No existe el carrito");
+                } else {
+                    carritoActualizarView.cargarDatosCarrito(List.of(carrito));
+                }
+            }
+        });
 
+        carritoActualizarView.getBtnGuardar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carritoActualizarView.obtenerCarritoSeleccionado();
+                int filaSeleccionada = carritoActualizarView.getTblProductos().getSelectedRow();
+                carritoActualizarView.itemSeleccionado(filaSeleccionada);
+                Producto producto = carritoActualizarView.itemSeleccionado(filaSeleccionada);
+                carritoActualizarView.actualizaCantidadProductoSeleccionado(producto);
+
+                int codigo = Integer.parseInt(carritoActualizarView.getTxtCodigo().getText());
+                Carrito carrito = carritoDAO.buscarPorCodigo(codigo);
+                carritoActualizarView.setCarritoActual(carrito);
+
+                carritoDAO.actualizar(carritoActualizarView.getCarritoActual());
+                carritoActualizarView.mostrarMensaje("Carrito actualizado correctamente");
+            }
+        });
     }
 
     private void confiurarEventosDetalles(){

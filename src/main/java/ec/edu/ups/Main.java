@@ -66,7 +66,7 @@ public class Main {
 
                             CarritoAnadirView carritoAnadirView = new CarritoAnadirView(usuarioAuntenticado);
                             CarritoListarView carritoListarView = new CarritoListarView();
-                            CarritoActualizarView carritoActualizarView = new CarritoActualizarView();
+                            CarritoActualizarView carritoActualizarView = new CarritoActualizarView(carritoDAO);
                             CarritoEliminarView carritoEliminarView = new CarritoEliminarView();
                             CarritoMostrarDetallesView carritoMostrarDetallesView = new CarritoMostrarDetallesView();
 

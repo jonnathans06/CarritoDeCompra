@@ -91,8 +91,6 @@ public class CarritoMostrarDetallesView extends JInternalFrame {
         }
     }
 
-
-
     public void mostrarMensaje(String s) {
         JOptionPane.showMessageDialog(this, s, "Información", JOptionPane.INFORMATION_MESSAGE);
     }
