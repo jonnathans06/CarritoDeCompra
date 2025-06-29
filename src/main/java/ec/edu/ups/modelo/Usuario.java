@@ -4,7 +4,8 @@ public class Usuario {
     private String username;
     private String contrasenia;
     private Rol rol;
-    
+
+
     public Usuario(String nombreDeUsuario, String contrasenia, Rol rol) {
         this.username = nombreDeUsuario;
         this.contrasenia = contrasenia;
