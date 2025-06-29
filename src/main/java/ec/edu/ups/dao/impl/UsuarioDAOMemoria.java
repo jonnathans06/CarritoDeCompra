@@ -11,8 +11,6 @@ import java.util.List;
 public class UsuarioDAOMemoria implements UsuarioDAO {
 
     private List<Usuario> usuarios;
-    private Preguntas preguntaSeguridad;
-    private String respuestaSeguridad;
 
     public UsuarioDAOMemoria() {
         usuarios = new ArrayList<Usuario>();
@@ -93,21 +91,5 @@ public class UsuarioDAOMemoria implements UsuarioDAO {
 
     public void setUsuarios(List<Usuario> usuarios) {
         this.usuarios = usuarios;
-    }
-
-    public Preguntas getPreguntaSeguridad() {
-        return preguntaSeguridad;
-    }
-
-    public void setPreguntaSeguridad(Preguntas preguntaSeguridad) {
-        this.preguntaSeguridad = preguntaSeguridad;
-    }
-
-    public String getRespuestaSeguridad() {
-        return respuestaSeguridad;
-    }
-
-    public void setRespuestaSeguridad(String respuestaSeguridad) {
-        this.respuestaSeguridad = respuestaSeguridad;
     }
 }

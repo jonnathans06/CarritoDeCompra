@@ -11,6 +11,7 @@ import ec.edu.ups.dao.impl.ProductoDAOMemoria;
 import ec.edu.ups.dao.impl.UsuarioDAOMemoria;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 import ec.edu.ups.vista.*;
 import ec.edu.ups.vista.carrito.*;
 import ec.edu.ups.vista.login.LoginView;
@@ -35,6 +36,8 @@ public class Main {
         LoginView loginView = new LoginView();
         ProductoDAO productoDAO = new ProductoDAOMemoria();
         CarritoDAO carritoDAO = new CarritoDAOMemoria();
+
+        MensajeInternacionalizacionHandler mi = new MensajeInternacionalizacionHandler("es", "EC");
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
