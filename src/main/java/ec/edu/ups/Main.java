@@ -37,7 +37,7 @@ public class Main {
         ProductoDAO productoDAO = new ProductoDAOMemoria();
         CarritoDAO carritoDAO = new CarritoDAOMemoria();
 
-        MensajeInternacionalizacionHandler mi = new MensajeInternacionalizacionHandler("es", "EC");
+        MensajeInternacionalizacionHandler mI = new MensajeInternacionalizacionHandler("es", "EC");
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -61,7 +61,7 @@ public class Main {
                             //instanciamos DAO (Singleton)
 
                             //instancio Vistas
-                            MenuPrincipalView principalView = new MenuPrincipalView();
+                            MenuPrincipalView principalView = new MenuPrincipalView(mI);
                             ProductoAnadirView productoAnadirView = new ProductoAnadirView();
                             ProductoListaView productoListaView = new ProductoListaView();
                             ProductoActualizarView productoActualizarView = new ProductoActualizarView();

@@ -1,14 +1,19 @@
 package ec.edu.ups.vista;
 
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 
 public class MenuPrincipalView extends JFrame {
+    private MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler;
+
     private JMenuBar menuBar;
 
     private JMenu menuProducto;
     private JMenu menuCarrito;
     private JMenu menuUsuario;
-    private JMenuItem menuSalir;
+    private JMenu menuSalir;
+    private JMenu menuIdioma;
 
     private JMenuItem menuItemCrearProducto;
     private JMenuItem menuItemEliminarProducto;
@@ -28,18 +33,28 @@ public class MenuPrincipalView extends JFrame {
 
     private JMenuItem menuItemCerrarSesion;
 
+    private JMenuItem menuItemEspanol;
+    private JMenuItem menuItemIngles;
+    private JMenuItem menuItemFrances;
+
     private JDesktopPane jDesktopPane;
 
-    public MenuPrincipalView() {
+    public MenuPrincipalView(MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler) {
+        this.mensajeInternacionalizacionHandler = mensajeInternacionalizacionHandler;
+        initComponents();
+    }
+
+    public void initComponents() {
         jDesktopPane = new JDesktopPane();
         menuBar = new JMenuBar();
 
-        menuProducto = new JMenu("Producto");
-        menuCarrito = new JMenu("Carrito");
-        menuUsuario = new JMenu("Usuario");
-        menuSalir = new JMenu("Salir");
+        menuProducto = new JMenu(mensajeInternacionalizacionHandler.get("menu.producto"));
+        menuCarrito = new JMenu(mensajeInternacionalizacionHandler.get("menu.carrito"));
+        menuUsuario = new JMenu(mensajeInternacionalizacionHandler.get("menu.usuario"));
+        menuIdioma = new JMenu(mensajeInternacionalizacionHandler.get("menu.idioma"));
+        menuSalir = new JMenu(mensajeInternacionalizacionHandler.get("menu.salir"));
 
-        menuItemCrearProducto = new JMenuItem("Crear Producto");
+        menuItemCrearProducto = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.crear.producto"));
         menuItemActualizarProducto = new JMenuItem("Actualizar Producto");
         menuItemEliminarProducto = new JMenuItem("Eliminar Producto");
         menuItemBuscarProducto = new JMenuItem("Buscar Producto");
@@ -57,9 +72,14 @@ public class MenuPrincipalView extends JFrame {
 
         menuItemCerrarSesion = new JMenuItem("Cerrar Sesión");
 
+        menuItemEspanol = new JMenuItem("Espanol");
+        menuItemIngles = new JMenuItem("Ingles");
+        menuItemFrances = new JMenuItem("Frances");
+
         menuBar.add(menuProducto);
         menuBar.add(menuCarrito);
         menuBar.add(menuUsuario);
+        menuBar.add(menuIdioma);
         menuBar.add(menuSalir);
 
         menuProducto.add(menuItemCrearProducto);
@@ -79,6 +99,10 @@ public class MenuPrincipalView extends JFrame {
         menuUsuario.add(menuItemEliminarUsuario);
 
         menuSalir.add(menuItemCerrarSesion);
+
+        menuIdioma.add(menuItemEspanol);
+        menuIdioma.add(menuItemIngles);
+        menuIdioma.add(menuItemFrances);
 
         setJMenuBar(menuBar);
         setContentPane(jDesktopPane);
@@ -116,7 +140,7 @@ public class MenuPrincipalView extends JFrame {
         return menuSalir;
     }
 
-    public void setMenuSalir(JMenuItem menuSalir) {
+    public void setMenuSalir(JMenu menuSalir) {
         this.menuSalir = menuSalir;
     }
 
@@ -230,6 +254,38 @@ public class MenuPrincipalView extends JFrame {
 
     public void setMenuItemCerrarSesion(JMenuItem menuItemCerrarSesion) {
         this.menuItemCerrarSesion = menuItemCerrarSesion;
+    }
+
+    public JMenu getMenuIdioma() {
+        return menuIdioma;
+    }
+
+    public void setMenuIdioma(JMenu menuIdioma) {
+        this.menuIdioma = menuIdioma;
+    }
+
+    public JMenuItem getMenuItemEspanol() {
+        return menuItemEspanol;
+    }
+
+    public void setMenuItemEspanol(JMenuItem menuItemEspanol) {
+        this.menuItemEspanol = menuItemEspanol;
+    }
+
+    public JMenuItem getMenuItemIngles() {
+        return menuItemIngles;
+    }
+
+    public void setMenuItemIngles(JMenuItem menuItemIngles) {
+        this.menuItemIngles = menuItemIngles;
+    }
+
+    public JMenuItem getMenuItemFrances() {
+        return menuItemFrances;
+    }
+
+    public void setMenuItemFrances(JMenuItem menuItemFrances) {
+        this.menuItemFrances = menuItemFrances;
     }
 
     public void mostrarMensaje(String mensaje) {
