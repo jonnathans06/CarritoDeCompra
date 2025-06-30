@@ -11,6 +11,10 @@ public class ProductoActualizarView extends JInternalFrame {
     private JTextField TxtNombre;
     private JTextField TxtPrecio;
     private JButton BtnEditar;
+    private JLabel LblCodigoBusqueda;
+    private JLabel LblCodigo;
+    private JLabel LblNombre;
+    private JLabel LblPrecio;
 
     public ProductoActualizarView() {
         setContentPane(panelPrincipal); 
@@ -84,6 +88,38 @@ public class ProductoActualizarView extends JInternalFrame {
 
     public void setBtnEditar(JButton btnEditar) {
         BtnEditar = btnEditar;
+    }
+
+    public JLabel getLblCodigoBusqueda() {
+        return LblCodigoBusqueda;
+    }
+
+    public void setLblCodigoBusqueda(JLabel lblCodigoBusqueda) {
+        LblCodigoBusqueda = lblCodigoBusqueda;
+    }
+
+    public JLabel getLblCodigo() {
+        return LblCodigo;
+    }
+
+    public void setLblCodigo(JLabel lblCodigo) {
+        LblCodigo = lblCodigo;
+    }
+
+    public JLabel getLblNombre() {
+        return LblNombre;
+    }
+
+    public void setLblNombre(JLabel lblNombre) {
+        LblNombre = lblNombre;
+    }
+
+    public JLabel getLblPrecio() {
+        return LblPrecio;
+    }
+
+    public void setLblPrecio(JLabel lblPrecio) {
+        LblPrecio = lblPrecio;
     }
 
     public void mostrarMensaje(String mensaje) {

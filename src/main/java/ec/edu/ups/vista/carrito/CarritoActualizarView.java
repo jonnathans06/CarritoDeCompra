@@ -17,6 +17,9 @@ public class CarritoActualizarView extends JInternalFrame {
     private JScrollPane TblProducto;
     private JPanel panelPrincipal;
     private JButton BtnGuardar;
+    private JLabel LblTitulo;
+    private JLabel LblCodCarrito;
+    private JLabel LblCantidad;
     private Carrito carritoActual;
     private CarritoDAO carritoDAO;
     DefaultTableModel modelo;
@@ -103,6 +106,30 @@ public class CarritoActualizarView extends JInternalFrame {
 
     public DefaultTableModel getModelo() {
         return modelo;
+    }
+
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
+    public JLabel getLblCodCarrito() {
+        return LblCodCarrito;
+    }
+
+    public void setLblCodCarrito(JLabel lblCodCarrito) {
+        LblCodCarrito = lblCodCarrito;
+    }
+
+    public JLabel getLblCantidad() {
+        return LblCantidad;
+    }
+
+    public void setLblCantidad(JLabel lblCantidad) {
+        LblCantidad = lblCantidad;
     }
 
     public void setModelo(DefaultTableModel modelo) {

@@ -13,6 +13,8 @@ public class UsuarioEliminarView extends JInternalFrame {
     private JButton BtnBuscar;
     private JButton BtnGuardar;
     private JTable TblUsuario;
+    private JLabel LblTitulo;
+    private JLabel LblUsuario;
     private DefaultTableModel modelo;
     private UsuarioDAO usuarioDAO;
 
@@ -69,6 +71,30 @@ public class UsuarioEliminarView extends JInternalFrame {
 
     public void setModelo(DefaultTableModel modelo) {
         this.modelo = modelo;
+    }
+
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
+    public UsuarioDAO getUsuarioDAO() {
+        return usuarioDAO;
+    }
+
+    public void setUsuarioDAO(UsuarioDAO usuarioDAO) {
+        this.usuarioDAO = usuarioDAO;
+    }
+
+    public JLabel getLblUsuario() {
+        return LblUsuario;
+    }
+
+    public void setLblUsuario(JLabel lblUsuario) {
+        LblUsuario = lblUsuario;
     }
 
     public void cargarUsuario(List<Usuario> usuarios) {

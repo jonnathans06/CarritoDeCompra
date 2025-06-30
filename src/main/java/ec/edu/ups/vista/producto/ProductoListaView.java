@@ -13,6 +13,8 @@ public class ProductoListaView extends JInternalFrame {
     private JTable tblProductos;
     private JPanel panelPrincipal;
     private JButton btnListar;
+    private JLabel LblTitulo;
+    private JLabel LblNombre;
     private DefaultTableModel modelo;
 
     public ProductoListaView() {
@@ -77,6 +79,22 @@ public class ProductoListaView extends JInternalFrame {
 
     public void setModelo(DefaultTableModel modelo) {
         this.modelo = modelo;
+    }
+
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
+    public JLabel getLblNombre() {
+        return LblNombre;
+    }
+
+    public void setLblNombre(JLabel lblNombre) {
+        LblNombre = lblNombre;
     }
 
     public void cargarDatos(List<Producto> listaProductos) {

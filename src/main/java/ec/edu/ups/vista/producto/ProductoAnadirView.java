@@ -10,11 +10,15 @@ import java.util.List;
 public class ProductoAnadirView extends JInternalFrame {
 
     private JPanel panelPrincipal;
+    private JLabel LblProducto;
     private JTextField txtPrecio;
     private JTextField txtNombre;
     private JTextField txtCodigo;
     private JButton btnAceptar;
     private JButton btnLimpiar;
+    private JLabel LblCodigo;
+    private JLabel LblNombre;
+    private JLabel LblPrecio;
 
     public ProductoAnadirView() {
 
@@ -84,6 +88,38 @@ public class ProductoAnadirView extends JInternalFrame {
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public JLabel getLblProducto() {
+        return LblProducto;
+    }
+
+    public void setLblProducto(JLabel lblProducto) {
+        LblProducto = lblProducto;
+    }
+
+    public JLabel getLblCodigo() {
+        return LblCodigo;
+    }
+
+    public void setLblCodigo(JLabel lblCodigo) {
+        LblCodigo = lblCodigo;
+    }
+
+    public JLabel getLblNombre() {
+        return LblNombre;
+    }
+
+    public void setLblNombre(JLabel lblNombre) {
+        LblNombre = lblNombre;
+    }
+
+    public JLabel getLblPrecio() {
+        return LblPrecio;
+    }
+
+    public void setLblPrecio(JLabel lblPrecio) {
+        LblPrecio = lblPrecio;
     }
 
     public void limpiarCampos() {

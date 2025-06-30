@@ -13,6 +13,8 @@ public class ProductoEliminarView extends JInternalFrame {
     private JButton BtnEliminar;
     private JTable table1;
     private JScrollPane TblProducto;
+    private JLabel LblTitulo;
+    private JLabel LblCodigo;
     private DefaultTableModel modelo;
 
     public ProductoEliminarView() {
@@ -84,6 +86,22 @@ public class ProductoEliminarView extends JInternalFrame {
 
     public void setModelo(DefaultTableModel modelo) {
         this.modelo = modelo;
+    }
+
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
+    public JLabel getLblCodigo() {
+        return LblCodigo;
+    }
+
+    public void setLblCodigo(JLabel lblCodigo) {
+        LblCodigo = lblCodigo;
     }
 
     public void cargarDatos(List<Producto> listaProductos) {

@@ -16,6 +16,8 @@ public class CarritoEliminarView extends JInternalFrame{
     private JButton BtnListar;
     private JButton BtnEliminar;
     private JTable TblCarritos;
+    private JLabel LblTitulo;
+    private JLabel LblCodCarrito;
     private CarritoDAO carritoDAO;
     DefaultTableModel  modelo;
 
@@ -82,6 +84,30 @@ public class CarritoEliminarView extends JInternalFrame{
 
     public void setModelo(DefaultTableModel modelo) {
         this.modelo = modelo;
+    }
+
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
+    public JLabel getLblCodCarrito() {
+        return LblCodCarrito;
+    }
+
+    public void setLblCodCarrito(JLabel lblCodCarrito) {
+        LblCodCarrito = lblCodCarrito;
+    }
+
+    public CarritoDAO getCarritoDAO() {
+        return carritoDAO;
+    }
+
+    public void setCarritoDAO(CarritoDAO carritoDAO) {
+        this.carritoDAO = carritoDAO;
     }
 
     public void mostrarMensaje(String mensaje) {

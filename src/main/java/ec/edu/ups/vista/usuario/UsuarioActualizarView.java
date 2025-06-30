@@ -15,6 +15,11 @@ public class UsuarioActualizarView extends JInternalFrame {
     private JComboBox CbxRol;
     private JButton BtnGuardar;
     private JPanel panelPrincipal;
+    private JLabel LblTitulo;
+    private JLabel LblUsuarioBusqueda;
+    private JLabel LblUsuario;
+    private JLabel LblContraseña;
+    private JLabel LblRol;
     private UsuarioDAO usuarioDAO;
     private Usuario usuarioSeleccionado;
 
@@ -100,6 +105,46 @@ public class UsuarioActualizarView extends JInternalFrame {
 
     public void setUsuarioSeleccionado(Usuario usuarioSeleccionado) {
         this.usuarioSeleccionado = usuarioSeleccionado;
+    }
+
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
+    public JLabel getLblUsuarioBusqueda() {
+        return LblUsuarioBusqueda;
+    }
+
+    public void setLblUsuarioBusqueda(JLabel lblUsuarioBusqueda) {
+        LblUsuarioBusqueda = lblUsuarioBusqueda;
+    }
+
+    public JLabel getLblUsuario() {
+        return LblUsuario;
+    }
+
+    public void setLblUsuario(JLabel lblUsuario) {
+        LblUsuario = lblUsuario;
+    }
+
+    public JLabel getLblContraseña() {
+        return LblContraseña;
+    }
+
+    public void setLblContraseña(JLabel lblContraseña) {
+        LblContraseña = lblContraseña;
+    }
+
+    public JLabel getLblRol() {
+        return LblRol;
+    }
+
+    public void setLblRol(JLabel lblRol) {
+        LblRol = lblRol;
     }
 
     public void cargarDatosRol () {

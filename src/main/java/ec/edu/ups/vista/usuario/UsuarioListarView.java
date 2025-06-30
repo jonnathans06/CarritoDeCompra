@@ -12,6 +12,8 @@ public class UsuarioListarView extends JInternalFrame {
     private JButton BtnBuscar;
     private JButton BtnListar;
     private JTable TblUser;
+    private JLabel LblTitulo;
+    private JLabel LblUsuario;
     private DefaultTableModel modelo;
 
     public UsuarioListarView() {
@@ -58,6 +60,22 @@ public class UsuarioListarView extends JInternalFrame {
 
     public void setTblUser(JTable tblUser) {
         TblUser = tblUser;
+    }
+
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
+    public JLabel getLblUsuario() {
+        return LblUsuario;
+    }
+
+    public void setLblUsuario(JLabel lblUsuario) {
+        LblUsuario = lblUsuario;
     }
 
     public DefaultTableModel getModelo() {

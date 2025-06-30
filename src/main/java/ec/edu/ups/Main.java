@@ -48,7 +48,7 @@ public class Main {
                 UsuarioEliminarView  usuarioEliminarView = new UsuarioEliminarView();
                 loginView.setVisible(true);
 
-                UsuarioController usuarioController = new UsuarioController(usuarioDAO,loginView,
+                UsuarioController usuarioController = new UsuarioController(usuarioDAO, loginView,
                                                                             usuarioCrearView, usuarioListarView,
                                                                             usuarioActualizarView, usuarioEliminarView);
 

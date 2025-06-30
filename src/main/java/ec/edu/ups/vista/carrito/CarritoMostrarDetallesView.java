@@ -13,6 +13,9 @@ public class CarritoMostrarDetallesView extends JInternalFrame {
     private JTextField TxtCodigoCarrito;
     private JTable TblDetalleCarrito;
     private JButton BtnBuscar;
+    private JLabel LblTitulo;
+    private JLabel LblCodigoCarrito;
+    private JLabel LblDetalleCarrito;
     private Carrito carrito;
     DefaultTableModel modelo;
 
@@ -73,6 +76,30 @@ public class CarritoMostrarDetallesView extends JInternalFrame {
 
     public void setBtnBuscar(JButton btnBuscar) {
         BtnBuscar = btnBuscar;
+    }
+
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
+    public JLabel getLblCodigoCarrito() {
+        return LblCodigoCarrito;
+    }
+
+    public void setLblCodigoCarrito(JLabel lblCodigoCarrito) {
+        LblCodigoCarrito = lblCodigoCarrito;
+    }
+
+    public JLabel getLblDetalleCarrito() {
+        return LblDetalleCarrito;
+    }
+
+    public void setLblDetalleCarrito(JLabel lblDetalleCarrito) {
+        LblDetalleCarrito = lblDetalleCarrito;
     }
 
     public void cargarDatosCarrito(List<Carrito> carritos) {

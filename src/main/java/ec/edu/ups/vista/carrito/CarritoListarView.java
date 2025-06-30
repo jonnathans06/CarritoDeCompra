@@ -13,6 +13,7 @@ public class CarritoListarView extends JInternalFrame {
     private JButton BtnListar;
     private JLabel LblCodigo;
     private JTable TblCarritos;
+    private JLabel LblTitulo;
     private JButton BtnDetallesCarrito;
     private DefaultTableModel modelo;
 
@@ -84,6 +85,14 @@ public class CarritoListarView extends JInternalFrame {
 
     public void setBtnDetallesCarrito(JButton btnDetallesCarrito) {
         BtnDetallesCarrito = btnDetallesCarrito;
+    }
+
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
     }
 
     public void cargargaDatosLista(List<Carrito> carritos) {

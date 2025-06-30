@@ -21,6 +21,14 @@ public class CarritoAnadirView extends JInternalFrame {
     private JButton btnLimpiar;
     private JComboBox cbxCantidad;
     private JPanel panelPrincipal;
+    private JLabel LblTitulo;
+    private JLabel LblCodBusqueda;
+    private JPanel LblNombre;
+    private JLabel LblPrecio;
+    private JLabel LblCantidad;
+    private JLabel LblSubtotal;
+    private JLabel LblIva;
+    private JLabel LblTotal;
     private Carrito carrito;
     private Usuario usuario;
     DefaultTableModel modelo = new DefaultTableModel();
@@ -67,52 +75,168 @@ public class CarritoAnadirView extends JInternalFrame {
         return btnBuscar;
     }
 
+    public void setBtnBuscar(JButton btnBuscar) {
+        this.btnBuscar = btnBuscar;
+    }
+
     public JTextField getTxtCodigo() {
         return txtCodigo;
+    }
+
+    public void setTxtCodigo(JTextField txtCodigo) {
+        this.txtCodigo = txtCodigo;
     }
 
     public JTextField getTxtNombre() {
         return txtNombre;
     }
 
+    public void setTxtNombre(JTextField txtNombre) {
+        this.txtNombre = txtNombre;
+    }
+
     public JTextField getTxtPrecio() {
         return txtPrecio;
+    }
+
+    public void setTxtPrecio(JTextField txtPrecio) {
+        this.txtPrecio = txtPrecio;
     }
 
     public JButton getBtnAnadir() {
         return btnAnadir;
     }
 
+    public void setBtnAnadir(JButton btnAnadir) {
+        this.btnAnadir = btnAnadir;
+    }
+
     public JTable getTblProductos() {
         return tblProductos;
+    }
+
+    public void setTblProductos(JTable tblProductos) {
+        this.tblProductos = tblProductos;
     }
 
     public JTextField getTxtSubtotal() {
         return txtSubtotal;
     }
 
+    public void setTxtSubtotal(JTextField txtSubtotal) {
+        this.txtSubtotal = txtSubtotal;
+    }
+
     public JTextField getTxtIva() {
         return txtIva;
+    }
+
+    public void setTxtIva(JTextField txtIva) {
+        this.txtIva = txtIva;
     }
 
     public JTextField getTxtTotal() {
         return txtTotal;
     }
 
+    public void setTxtTotal(JTextField txtTotal) {
+        this.txtTotal = txtTotal;
+    }
+
     public JButton getBtnGuardar() {
         return btnGuardar;
+    }
+
+    public void setBtnGuardar(JButton btnGuardar) {
+        this.btnGuardar = btnGuardar;
     }
 
     public JButton getBtnLimpiar() {
         return btnLimpiar;
     }
 
+    public void setBtnLimpiar(JButton btnLimpiar) {
+        this.btnLimpiar = btnLimpiar;
+    }
+
     public JComboBox getCbxCantidad() {
         return cbxCantidad;
     }
 
+    public void setCbxCantidad(JComboBox cbxCantidad) {
+        this.cbxCantidad = cbxCantidad;
+    }
+
     public JPanel getPanelPrincipal() {
         return panelPrincipal;
+    }
+
+    public void setPanelPrincipal(JPanel panelPrincipal) {
+        this.panelPrincipal = panelPrincipal;
+    }
+
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
+    public JLabel getLblCodBusqueda() {
+        return LblCodBusqueda;
+    }
+
+    public void setLblCodBusqueda(JLabel lblCodBusqueda) {
+        LblCodBusqueda = lblCodBusqueda;
+    }
+
+    public JPanel getLblNombre() {
+        return LblNombre;
+    }
+
+    public void setLblNombre(JPanel lblNombre) {
+        LblNombre = lblNombre;
+    }
+
+    public JLabel getLblPrecio() {
+        return LblPrecio;
+    }
+
+    public void setLblPrecio(JLabel lblPrecio) {
+        LblPrecio = lblPrecio;
+    }
+
+    public JLabel getLblCantidad() {
+        return LblCantidad;
+    }
+
+    public void setLblCantidad(JLabel lblCantidad) {
+        LblCantidad = lblCantidad;
+    }
+
+    public JLabel getLblSubtotal() {
+        return LblSubtotal;
+    }
+
+    public void setLblSubtotal(JLabel lblSubtotal) {
+        LblSubtotal = lblSubtotal;
+    }
+
+    public JLabel getLblIva() {
+        return LblIva;
+    }
+
+    public void setLblIva(JLabel lblIva) {
+        LblIva = lblIva;
+    }
+
+    public JLabel getLblTotal() {
+        return LblTotal;
+    }
+
+    public void setLblTotal(JLabel lblTotal) {
+        LblTotal = lblTotal;
     }
 
     public Carrito getCarrito() {
@@ -121,6 +245,14 @@ public class CarritoAnadirView extends JInternalFrame {
 
     public void setCarrito(Carrito carrito) {
         this.carrito = carrito;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 
     public DefaultTableModel getModelo() {

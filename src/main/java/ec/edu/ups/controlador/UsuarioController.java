@@ -4,10 +4,10 @@ import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.vista.login.LoginView;
-import ec.edu.ups.vista.usuario.UsuarioActualizarView;
 import ec.edu.ups.vista.usuario.UsuarioCrearView;
-import ec.edu.ups.vista.usuario.UsuarioEliminarView;
 import ec.edu.ups.vista.usuario.UsuarioListarView;
+import ec.edu.ups.vista.usuario.UsuarioActualizarView;
+import ec.edu.ups.vista.usuario.UsuarioEliminarView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,7 +23,7 @@ public class UsuarioController {
     private final UsuarioActualizarView usuarioActualizarView;
     private final UsuarioEliminarView usuarioEliminarView;
 
-    public UsuarioController(UsuarioDAO usuarioDAO,LoginView loginView,
+    public UsuarioController(UsuarioDAO usuarioDAO, LoginView loginView,
                              UsuarioCrearView usuarioCrearView, UsuarioListarView usuarioListarView,
                              UsuarioActualizarView usuarioActualizarView, UsuarioEliminarView usuarioEliminarView) {
         this.usuarioDAO = usuarioDAO;
@@ -38,141 +38,104 @@ public class UsuarioController {
         configurarEventosEliminar();
     }
 
-    private void configurarEventosEnVistas(){
-        loginView.getBtnIniciarSesion().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                autenticar();
-            }
-     });
+    private void configurarEventosEnVistas() {
+        loginView.getBtnIniciarSesion().addActionListener(e -> autenticar());
 
-        loginView.getBtnRegistrarse().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (loginView.getTxtUsername().getText().isEmpty() || loginView.getTxtContrasenia().getText().isEmpty()) {
-                    loginView.mostrarMensaje("Funcionalidad de registro no implementada.");
-                } else {
-                    crearUsuario();
-                    loginView.mostrarMensaje("Usuario creado exitosamente.");
-                }
+        loginView.getBtnRegistrarse().addActionListener(e -> {
+            if (loginView.getTxtUsername().getText().isEmpty() || loginView.getTxtContrasenia().getText().isEmpty()) {
+                loginView.mostrarMensaje("Debe ingresar usuario y contraseña.");
+            } else {
+                crearUsuario();
+                loginView.mostrarMensaje("Usuario creado exitosamente.");
             }
         });
     }
 
     private void configurarEventosUsuarios() {
-        usuarioCrearView.getBtnRegistrar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                usuarioCrearView.crearUsuario();
-                usuarioCrearView.limpiarCampos();
-                System.out.println(usuarioDAO.listarTodos());
-            }
+        usuarioCrearView.getBtnRegistrar().addActionListener(e -> {
+            usuarioCrearView.crearUsuario();
+            usuarioCrearView.limpiarCampos();
         });
 
-        usuarioListarView.getBtnListar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                usuarioListarView.listarUsuarios(usuarioDAO.listarTodos());
-            }
-        });
+        usuarioListarView.getBtnListar().addActionListener(e ->
+                usuarioListarView.listarUsuarios(usuarioDAO.listarTodos())
+        );
 
-        usuarioListarView.getBtnBuscar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (usuarioListarView.getTxtUser().getText().isEmpty()) {
-                    usuarioListarView.mostrarMensaje("Ingrese un nombre de usuario para buscar.");
-                    return;
-                }
-                String username = usuarioListarView.getTxtUser().getText();
+        usuarioListarView.getBtnBuscar().addActionListener(e -> {
+            String username = usuarioListarView.getTxtUser().getText();
+            if (username.isEmpty()) {
+                usuarioListarView.mostrarMensaje("Ingrese un nombre de usuario para buscar.");
+            } else {
                 usuarioListarView.listarUsuariosPorUsername(usuarioDAO.listarTodos(), username);
             }
         });
 
-        usuarioActualizarView.getBtnBuscar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (usuarioActualizarView.getTxtUsernameBusqueda().getText().isEmpty()) {
-                    usuarioActualizarView.mostrarMensaje("Ingrese un nombre de usuario para buscar.");
-                } else {
-                    usuarioActualizarView.buscarUsuario();
-                }
-
+        usuarioActualizarView.getBtnBuscar().addActionListener(e -> {
+            if (usuarioActualizarView.getTxtUsernameBusqueda().getText().isEmpty()) {
+                usuarioActualizarView.mostrarMensaje("Ingrese un nombre de usuario para buscar.");
+            } else {
+                usuarioActualizarView.buscarUsuario();
             }
         });
 
-        usuarioActualizarView.getBtnEditar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (usuarioActualizarView.getTxtUsernameBusqueda().getText().isEmpty()) {
-                    usuarioActualizarView.mostrarMensaje("Ingrese un nombre de usuario para buscar.");
-                } else {
-                    usuarioActualizarView.editarValoresActualizarTrue();
-                }
-
+        usuarioActualizarView.getBtnEditar().addActionListener(e -> {
+            if (usuarioActualizarView.getTxtUsernameBusqueda().getText().isEmpty()) {
+                usuarioActualizarView.mostrarMensaje("Ingrese un nombre de usuario para buscar.");
+            } else {
+                usuarioActualizarView.editarValoresActualizarTrue();
             }
         });
 
-        usuarioActualizarView.getBtnGuardar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        usuarioActualizarView.getBtnGuardar().addActionListener(e -> {
+            String username = usuarioActualizarView.getTxtUsername().getText();
+            String password = usuarioActualizarView.getTxtPassword().getText();
+            Rol rol = Rol.valueOf(usuarioActualizarView.getCbxRol().getSelectedItem().toString());
+            boolean confirmar = usuarioActualizarView.confirmarEliminacion();
 
-                String username = usuarioActualizarView.getTxtUsername().getText();
-                String password = usuarioActualizarView.getTxtPassword().getText();
-                Rol rol = Rol.valueOf(usuarioActualizarView.getCbxRol().getSelectedItem().toString());
-                boolean confirmar = usuarioActualizarView.confirmarEliminacion();
-
-                if (confirmar) {
-                    Usuario usuarioNuevo = new Usuario(username, password, rol);
-                    usuarioDAO.actualizar(usuarioNuevo);
-                    usuarioActualizarView.limpiarCampos();
-                    usuarioActualizarView.editarValoresActualizarFalse();
-                    usuarioActualizarView.mostrarMensaje("Usuario actualizado correctamente.");
-                } else {
-                    usuarioActualizarView.mostrarMensaje("Actualización cancelada.");
-                }
+            if (confirmar) {
+                Usuario usuarioNuevo = new Usuario(username, password, rol);
+                usuarioDAO.actualizar(usuarioNuevo);
+                usuarioActualizarView.limpiarCampos();
+                usuarioActualizarView.editarValoresActualizarFalse();
+                usuarioActualizarView.mostrarMensaje("Usuario actualizado correctamente.");
+            } else {
+                usuarioActualizarView.mostrarMensaje("Actualización cancelada.");
             }
         });
-
     }
 
     private void configurarEventosEliminar() {
-        usuarioEliminarView.getBtnBuscar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String codigo = usuarioEliminarView.getTxtUsername().getText();
-                Usuario usuario = usuarioDAO.buscarPorUsername(codigo);
-                if (usuario != null) {
-                    usuarioEliminarView.cargarUsuario(List.of(usuario));
-                }
+        usuarioEliminarView.getBtnBuscar().addActionListener(e -> {
+            String codigo = usuarioEliminarView.getTxtUsername().getText();
+            Usuario usuario = usuarioDAO.buscarPorUsername(codigo);
+            if (usuario != null) {
+                usuarioEliminarView.cargarUsuario(List.of(usuario));
             }
         });
 
-        usuarioEliminarView.getBtnGuardar().addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String codigo = usuarioEliminarView.getTxtUsername().getText();
-                Usuario usuario = usuarioDAO.buscarPorUsername(codigo);
-                boolean confirmacion = usuarioEliminarView.confirmarEliminacion();
+        usuarioEliminarView.getBtnGuardar().addActionListener(e -> {
+            String codigo = usuarioEliminarView.getTxtUsername().getText();
+            Usuario usuario = usuarioDAO.buscarPorUsername(codigo);
+            boolean confirmacion = usuarioEliminarView.confirmarEliminacion();
 
-                if (confirmacion && usuario != null) {
-                    usuarioDAO.eliminar(codigo);
-                    usuarioEliminarView.mostrarMensaje("Usuario eliminado correctamente.");
-                    usuarioEliminarView.limpiarCampos();
-                } else {
-                    usuarioEliminarView.mostrarMensaje("El usuario no existe o la eliminación fue cancelada.");
-                }
+            if (confirmacion && usuario != null) {
+                usuarioDAO.eliminar(codigo);
+                usuarioEliminarView.mostrarMensaje("Usuario eliminado correctamente.");
+                usuarioEliminarView.limpiarCampos();
+            } else {
+                usuarioEliminarView.mostrarMensaje("El usuario no existe o la eliminación fue cancelada.");
             }
         });
     }
 
-    private void autenticar(){
+    private void autenticar() {
         String username = loginView.getTxtUsername().getText();
         String contrasenia = loginView.getTxtContrasenia().getText();
 
         usuario = usuarioDAO.autenticar(username, contrasenia);
-        if(usuario == null){
+        if (usuario == null) {
             loginView.mostrarMensaje("Usuario o contraseña incorrectos.");
-        }else{
+        } else {
             loginView.dispose();
         }
     }
@@ -189,7 +152,7 @@ public class UsuarioController {
         loginView.setVisible(true);
     }
 
-    public Usuario getUsuarioAutenticado(){
+    public Usuario getUsuarioAutenticado() {
         return usuario;
     }
 }
