@@ -59,7 +59,7 @@ public class Main {
                         Usuario usuarioAuntenticado = usuarioController.getUsuarioAutenticado();
                         if (usuarioAuntenticado != null) {
 
-                            //instancio Vistas
+                            //Instancia Vistas
                             MenuPrincipalView principalView = new MenuPrincipalView(mI);
                             ProductoAnadirView productoAnadirView = new ProductoAnadirView(mI);
                             ProductoListaView productoListaView = new ProductoListaView(mI);
