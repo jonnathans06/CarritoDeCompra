@@ -1,6 +1,7 @@
 package ec.edu.ups.vista.usuario;
 
 import ec.edu.ups.modelo.Usuario;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,19 +16,23 @@ public class UsuarioListarView extends JInternalFrame {
     private JLabel LblTitulo;
     private JLabel LblUsuario;
     private DefaultTableModel modelo;
+    MensajeInternacionalizacionHandler mI;
 
-    public UsuarioListarView() {
+    public UsuarioListarView(MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setTitle("Listar Usuarios");
         setSize(500, 500);
         setClosable(true);
         setResizable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        this.mI = mI;
 
         modelo = new DefaultTableModel();
         Object[] columnas = {"Username", "Password", "Rol"};
         modelo.setColumnIdentifiers(columnas);
         TblUser.setModel(modelo);
+
+        cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 
     public JTextField getTxtUser() {
@@ -85,6 +90,23 @@ public class UsuarioListarView extends JInternalFrame {
     public void setModelo(DefaultTableModel modelo) {
         this.modelo = modelo;
     }
+
+
+    public void cambiarIdioma(String language, String country) {
+        setTitle(mI.get("ventana.usuario.listar.titulo"));
+        LblTitulo.setText(mI.get("ventana.usuario.listar.titulo"));
+        LblUsuario.setText(mI.get("ventana.usuario.listar.usuario"));
+        BtnBuscar.setText(mI.get("ventana.usuario.listar.buscar"));
+        BtnListar.setText(mI.get("ventana.usuario.listar.listar"));
+
+        String[] columnas = {
+                mI.get("ventana.usuario.listar.tabla.username"),
+                mI.get("ventana.usuario.listar.tabla.password"),
+                mI.get("ventana.usuario.listar.tabla.rol")
+        };
+        modelo.setColumnIdentifiers(columnas);
+    }
+
 
     public void listarUsuarios(List<Usuario> listaUsuarios) {
         modelo.setRowCount(0);

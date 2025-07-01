@@ -3,6 +3,7 @@ package ec.edu.ups.vista.usuario;
 import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 
@@ -18,8 +19,9 @@ public class UsuarioCrearView extends JInternalFrame {
     private JLabel LblContraseña;
     private JLabel LblRol;
     private UsuarioDAO usuarioDAO;
+    MensajeInternacionalizacionHandler mI;
 
-    public UsuarioCrearView (UsuarioDAO usuarioDAO) {
+    public UsuarioCrearView (UsuarioDAO usuarioDAO, MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setTitle("Crear Usuario");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
@@ -28,7 +30,9 @@ public class UsuarioCrearView extends JInternalFrame {
         setIconifiable(true);
         setResizable(true);
         this.usuarioDAO = usuarioDAO;
+        this.mI = mI;
         cargarRoles();
+        cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 
     public JTextField getTxtUsername() {
@@ -101,6 +105,23 @@ public class UsuarioCrearView extends JInternalFrame {
 
     public void setLblRol(JLabel lblRol) {
         LblRol = lblRol;
+    }
+
+    public void cambiarIdioma(String lenguaje, String pais) {
+        setTitle(mI.get("ventana.usuario.crear.titulo"));
+
+        LblTitulo.setText(mI.get("ventana.usuario.crear.titulo"));
+        LblUsuario.setText(mI.get("ventana.usuario.crear.usuario"));
+        LblContraseña.setText(mI.get("ventana.usuario.crear.contrasena"));
+        LblRol.setText(mI.get("ventana.usuario.crear.rol"));
+
+        BtnCancelar.setText(mI.get("ventana.usuario.crear.cancelar"));
+        BtnRegistrar.setText(mI.get("ventana.usuario.crear.registrar"));
+
+        // Actualizar ítems del combo Rol
+        CbxRol.removeAllItems();
+        CbxRol.addItem(mI.get("rol.administrador"));
+        CbxRol.addItem(mI.get("rol.usuario"));
     }
 
     public void crearUsuario() {

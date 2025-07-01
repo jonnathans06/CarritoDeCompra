@@ -42,10 +42,10 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
 
-                UsuarioCrearView usuarioCrearView = new UsuarioCrearView(usuarioDAO);
-                UsuarioListarView usuarioListarView = new UsuarioListarView();
-                UsuarioActualizarView usuarioActualizarView = new UsuarioActualizarView(usuarioDAO);
-                UsuarioEliminarView  usuarioEliminarView = new UsuarioEliminarView();
+                UsuarioCrearView usuarioCrearView = new UsuarioCrearView(usuarioDAO, mI);
+                UsuarioListarView usuarioListarView = new UsuarioListarView(mI);
+                UsuarioActualizarView usuarioActualizarView = new UsuarioActualizarView(usuarioDAO, mI);
+                UsuarioEliminarView  usuarioEliminarView = new UsuarioEliminarView(mI);
                 loginView.setVisible(true);
 
                 UsuarioController usuarioController = new UsuarioController(usuarioDAO, loginView,
@@ -241,6 +241,8 @@ public class Main {
                                     productoActualizarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     productoListaView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     productoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    usuarioCrearView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    usuarioActualizarView.cambiarIdioma(principalView.getLocale().getLanguage(), mI.getLocale().getCountry());
                                 }
                             });
 
@@ -257,6 +259,10 @@ public class Main {
                                     productoActualizarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     productoListaView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     productoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    usuarioCrearView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    usuarioActualizarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    usuarioListarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    usuarioEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                 }
                             });
 
@@ -273,6 +279,10 @@ public class Main {
                                     productoActualizarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     productoListaView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     productoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    usuarioCrearView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    usuarioActualizarView.cambiarIdioma(principalView.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    usuarioListarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    usuarioCrearView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                 }
                             });
 

@@ -3,6 +3,7 @@ package ec.edu.ups.vista.usuario;
 import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 
@@ -22,8 +23,9 @@ public class UsuarioActualizarView extends JInternalFrame {
     private JLabel LblRol;
     private UsuarioDAO usuarioDAO;
     private Usuario usuarioSeleccionado;
+    MensajeInternacionalizacionHandler mI;
 
-    public UsuarioActualizarView(UsuarioDAO usuarioDAO) {
+    public UsuarioActualizarView(UsuarioDAO usuarioDAO, MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setTitle("Actualizar Usuario");
         setSize(500, 500);
@@ -32,7 +34,9 @@ public class UsuarioActualizarView extends JInternalFrame {
         setIconifiable(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         this.usuarioDAO = usuarioDAO;
+        this.mI = mI;
         cargarDatosRol();
+        cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 
     public JButton getBtnBuscar() {
@@ -146,6 +150,26 @@ public class UsuarioActualizarView extends JInternalFrame {
     public void setLblRol(JLabel lblRol) {
         LblRol = lblRol;
     }
+
+    public void cambiarIdioma(String lenguaje, String pais) {
+        setTitle(mI.get("ventana.usuario.actualizar.titulo"));
+
+        LblTitulo.setText(mI.get("ventana.usuario.actualizar.titulo"));
+        LblUsuarioBusqueda.setText(mI.get("ventana.usuario.actualizar.usuario.busqueda"));
+        LblUsuario.setText(mI.get("ventana.usuario.actualizar.usuario"));
+        LblContraseña.setText(mI.get("ventana.usuario.actualizar.contrasena"));
+        LblRol.setText(mI.get("ventana.usuario.actualizar.rol"));
+
+        BtnBuscar.setText(mI.get("ventana.usuario.actualizar.buscar"));
+        BtnEditar.setText(mI.get("ventana.usuario.actualizar.editar"));
+        BtnGuardar.setText(mI.get("ventana.usuario.actualizar.guardar"));
+
+        // Actualizar ítems del combo Rol
+        CbxRol.removeAllItems();
+        CbxRol.addItem(mI.get("rol.administrador"));
+        CbxRol.addItem(mI.get("rol.usuario"));
+    }
+
 
     public void cargarDatosRol () {
         CbxRol.removeAllItems();
