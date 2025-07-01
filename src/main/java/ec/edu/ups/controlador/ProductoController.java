@@ -2,7 +2,7 @@ package ec.edu.ups.controlador;
 
 import ec.edu.ups.dao.ProductoDAO;
 import ec.edu.ups.modelo.Producto;
-import ec.edu.ups.vista.carrito.CarritoAnadirView;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 import ec.edu.ups.vista.producto.ProductoActualizarView;
 import ec.edu.ups.vista.producto.ProductoAnadirView;
 import ec.edu.ups.vista.producto.ProductoEliminarView;
@@ -18,7 +18,7 @@ public class ProductoController {
     private final ProductoListaView productoListaView;
     private final ProductoActualizarView productoActualizarView;
     private final ProductoEliminarView productoEliminarView;
-    //private final CarritoAnadirView carritoAnadirView;
+    MensajeInternacionalizacionHandler mI;
 
     private final ProductoDAO productoDAO;
 
@@ -140,7 +140,7 @@ public class ProductoController {
         int codigo = Integer.parseInt(productoActualizarView.getTxtCodigo().getText());
         String nombre = productoActualizarView.getTxtNombre().getText();
         double precio = Double.parseDouble(productoActualizarView.getTxtPrecio().getText());
-        boolean confirmacion = productoActualizarView.confirmarEliminacion();
+        boolean confirmacion = productoActualizarView.confirmarEliminacion(mI);
 
         if (confirmacion) {
             Producto producto = new Producto(codigo, nombre, precio);

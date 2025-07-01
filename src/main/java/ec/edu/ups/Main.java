@@ -62,10 +62,10 @@ public class Main {
 
                             //instancio Vistas
                             MenuPrincipalView principalView = new MenuPrincipalView(mI);
-                            ProductoAnadirView productoAnadirView = new ProductoAnadirView();
-                            ProductoListaView productoListaView = new ProductoListaView();
-                            ProductoActualizarView productoActualizarView = new ProductoActualizarView();
-                            ProductoEliminarView productoEliminarView = new ProductoEliminarView();
+                            ProductoAnadirView productoAnadirView = new ProductoAnadirView(mI);
+                            ProductoListaView productoListaView = new ProductoListaView(mI);
+                            ProductoActualizarView productoActualizarView = new ProductoActualizarView(mI);
+                            ProductoEliminarView productoEliminarView = new ProductoEliminarView(mI);
 
                             CarritoAnadirView carritoAnadirView = new CarritoAnadirView(usuarioAuntenticado, mI);
                             CarritoListarView carritoListarView = new CarritoListarView(mI);
@@ -237,6 +237,10 @@ public class Main {
                                     carritoListarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     carritoMostrarDetallesView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     carritoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoAnadirView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoActualizarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoListaView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                 }
                             });
 
@@ -249,6 +253,10 @@ public class Main {
                                     carritoListarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     carritoMostrarDetallesView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     carritoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoAnadirView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoActualizarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoListaView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                 }
                             });
 
@@ -261,6 +269,10 @@ public class Main {
                                     carritoListarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     carritoMostrarDetallesView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                     carritoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoAnadirView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoActualizarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoListaView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    productoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                 }
                             });
 

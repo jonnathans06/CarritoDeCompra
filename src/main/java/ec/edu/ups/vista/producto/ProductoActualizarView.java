@@ -1,5 +1,7 @@
 package ec.edu.ups.vista.producto;
 
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 
 public class ProductoActualizarView extends JInternalFrame {
@@ -15,8 +17,10 @@ public class ProductoActualizarView extends JInternalFrame {
     private JLabel LblCodigo;
     private JLabel LblNombre;
     private JLabel LblPrecio;
+    private JLabel LblTitulo;
+    MensajeInternacionalizacionHandler mI;
 
-    public ProductoActualizarView() {
+    public ProductoActualizarView(MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal); 
         setTitle("Actualizar Producto");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
@@ -24,6 +28,8 @@ public class ProductoActualizarView extends JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
+        this.mI = mI;
+        cambiarIdioma(mI.getLocale().getCountry(), mI.getLocale().getLanguage());
     }
 
     public JPanel getPanelPrincipal() {
@@ -122,14 +128,43 @@ public class ProductoActualizarView extends JInternalFrame {
         LblPrecio = lblPrecio;
     }
 
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }
 
-    public boolean confirmarEliminacion() {
-        int respuesta = JOptionPane.showConfirmDialog(this, "¿Está seguro de actualizar el producto?", "Confirmación", JOptionPane.YES_NO_OPTION);
+    public boolean confirmarEliminacion(MensajeInternacionalizacionHandler mI) {
+        int respuesta = JOptionPane.showConfirmDialog(this,
+                mI.get("ventana.producto.actualizar.confirmar"),
+                "Confirmación", JOptionPane.YES_NO_OPTION);
         return respuesta == JOptionPane.YES_OPTION;
     }
+
+    public void cambiarIdioma(String idioma, String pais) {
+        mI.setLenguaje(idioma, pais);
+
+        setTitle(mI.get("ventana.producto.actualizar.titulo"));
+
+        LblTitulo.setText(mI.get("ventana.producto.actualizar.titulo"));
+
+        LblCodigoBusqueda.setText(mI.get("ventana.producto.actualizar.codigo.busqueda"));
+        LblCodigo.setText(mI.get("ventana.producto.actualizar.codigo"));
+        LblNombre.setText(mI.get("ventana.producto.actualizar.nombre"));
+        LblPrecio.setText(mI.get("ventana.producto.actualizar.precio"));
+
+        BtnBuscar.setText(mI.get("ventana.producto.actualizar.buscar"));
+        BtnEditar.setText(mI.get("ventana.producto.actualizar.editar"));
+        BtnGuardar.setText(mI.get("ventana.producto.actualizar.guardar"));
+    }
+
+
 
     public void limpiarCampos() {
         TxtCodigoBusqueda.setText("");

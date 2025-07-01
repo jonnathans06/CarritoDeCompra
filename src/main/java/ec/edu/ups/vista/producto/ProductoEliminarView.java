@@ -1,6 +1,7 @@
 package ec.edu.ups.vista.producto;
 
 import ec.edu.ups.modelo.Producto;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -16,8 +17,9 @@ public class ProductoEliminarView extends JInternalFrame {
     private JLabel LblTitulo;
     private JLabel LblCodigo;
     private DefaultTableModel modelo;
+    MensajeInternacionalizacionHandler mI;
 
-    public ProductoEliminarView() {
+    public ProductoEliminarView(MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setTitle("Eliminar Producto");
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
@@ -25,11 +27,13 @@ public class ProductoEliminarView extends JInternalFrame {
         setClosable(true);
         setIconifiable(true);
         setResizable(true);
+        this.mI = mI;
 
         modelo = new DefaultTableModel();
         Object[] columnas = {"Código", "Nombre", "Precio"};
         modelo.setColumnIdentifiers(columnas);
         table1.setModel(modelo);
+        cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 
     public JPanel getPanelPrincipal() {
@@ -103,6 +107,25 @@ public class ProductoEliminarView extends JInternalFrame {
     public void setLblCodigo(JLabel lblCodigo) {
         LblCodigo = lblCodigo;
     }
+
+    public void cambiarIdioma(String idioma, String pais) {
+        mI.setLenguaje(idioma, pais);
+
+        setTitle(mI.get("ventana.producto.eliminar.titulo"));
+        LblTitulo.setText(mI.get("ventana.producto.eliminar.titulo"));
+        LblCodigo.setText(mI.get("ventana.producto.eliminar.codigo"));
+        BtnBuscar.setText(mI.get("ventana.producto.eliminar.buscar"));
+        BtnEliminar.setText(mI.get("ventana.producto.eliminar.eliminar"));
+
+        Object[] columnas = {
+                mI.get("ventana.producto.eliminar.tabla.codigo"),
+                mI.get("ventana.producto.eliminar.tabla.nombre"),
+                mI.get("ventana.producto.eliminar.tabla.precio")
+        };
+        modelo.setColumnIdentifiers(columnas);
+        table1.getTableHeader().repaint();
+    }
+
 
     public void cargarDatos(List<Producto> listaProductos) {
         modelo.setNumRows(0);
