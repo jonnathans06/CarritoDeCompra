@@ -58,7 +58,6 @@ public class Main {
 
                         Usuario usuarioAuntenticado = usuarioController.getUsuarioAutenticado();
                         if (usuarioAuntenticado != null) {
-                            //instanciamos DAO (Singleton)
 
                             //instancio Vistas
                             MenuPrincipalView principalView = new MenuPrincipalView(mI);
