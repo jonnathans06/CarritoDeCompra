@@ -3,6 +3,7 @@ package ec.edu.ups.vista.carrito;
 import ec.edu.ups.modelo.Carrito;
 import ec.edu.ups.modelo.ItemCarrito;
 import ec.edu.ups.modelo.Usuario;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,32 +24,37 @@ public class CarritoAnadirView extends JInternalFrame {
     private JPanel panelPrincipal;
     private JLabel LblTitulo;
     private JLabel LblCodBusqueda;
-    private JPanel LblNombre;
+    private JLabel LblNombre;
     private JLabel LblPrecio;
     private JLabel LblCantidad;
     private JLabel LblSubtotal;
     private JLabel LblIva;
     private JLabel LblTotal;
+    private JPanel panel;
     private Carrito carrito;
     private Usuario usuario;
-    DefaultTableModel modelo = new DefaultTableModel();
+    MensajeInternacionalizacionHandler mI;
+    DefaultTableModel modelo;
 
-    public CarritoAnadirView(Usuario usuario) {
+    public CarritoAnadirView(Usuario usuario, MensajeInternacionalizacionHandler mI) {
 
         super("carrito de Compras", true, true, false, true);
         setContentPane(panelPrincipal);
         setDefaultCloseOperation(JInternalFrame.DISPOSE_ON_CLOSE);
         setSize(500, 500);
         this.carrito = new Carrito(usuario);
+        this.mI = mI;
 
-        DefaultTableModel modelo = new DefaultTableModel();
+        modelo = new DefaultTableModel();
         Object[] columnas = {"Codigo", "Nombre", "Precio", "Cantidad", "Subtotal"};
         modelo.setColumnIdentifiers(columnas);
         tblProductos.setModel(modelo);
 
         cargarDatosProductos();
+        cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
 
     }
+
 
     private void cargarDatosProductos(){
         cbxCantidad.removeAllItems();
@@ -191,14 +197,6 @@ public class CarritoAnadirView extends JInternalFrame {
         LblCodBusqueda = lblCodBusqueda;
     }
 
-    public JPanel getLblNombre() {
-        return LblNombre;
-    }
-
-    public void setLblNombre(JPanel lblNombre) {
-        LblNombre = lblNombre;
-    }
-
     public JLabel getLblPrecio() {
         return LblPrecio;
     }
@@ -255,6 +253,14 @@ public class CarritoAnadirView extends JInternalFrame {
         this.usuario = usuario;
     }
 
+    public JLabel getLblNombre() {
+        return LblNombre;
+    }
+
+    public void setLblNombre(JLabel lblNombre) {
+        LblNombre = lblNombre;
+    }
+
     public DefaultTableModel getModelo() {
         return modelo;
     }
@@ -262,6 +268,39 @@ public class CarritoAnadirView extends JInternalFrame {
     public void setModelo(DefaultTableModel modelo) {
         this.modelo = modelo;
     }
+
+    public void cambiarIdioma(String lenguaje, String pais) {
+        mI.setLenguaje(lenguaje, pais);
+        setTitle(mI.get("ventana.carrito.anadir.titulo"));
+
+        LblTitulo.setText(mI.get("ventana.carrito.anadir.titulo"));
+        LblCodBusqueda.setText(mI.get("ventana.carrito.anadir.codigo"));
+        LblNombre.setText(mI.get("ventana.carrito.anadir.nombre"));
+        LblPrecio.setText(mI.get("ventana.carrito.anadir.precio"));
+        LblCantidad.setText(mI.get("ventana.carrito.anadir.cantidad"));
+        LblSubtotal.setText(mI.get("ventana.carrito.anadir.subtotal"));
+        LblIva.setText(mI.get("ventana.carrito.anadir.iva"));
+        LblTotal.setText(mI.get("ventana.carrito.anadir.total"));
+
+        btnBuscar.setText(mI.get("ventana.carrito.anadir.buscar"));
+        btnAnadir.setText(mI.get("ventana.carrito.anadir.anadir"));
+        btnGuardar.setText(mI.get("ventana.carrito.anadir.guardar"));
+        btnLimpiar.setText(mI.get("ventana.carrito.anadir.cancelar"));
+
+        Object[] columnas = {
+                mI.get("ventana.carrito.anadir.tabla.codigo"),
+                mI.get("ventana.carrito.anadir.tabla.nombre"),
+                mI.get("ventana.carrito.anadir.tabla.precio"),
+                mI.get("ventana.carrito.anadir.tabla.cantidad"),
+                mI.get("ventana.carrito.anadir.tabla.subtotal")
+        };
+        modelo.setColumnIdentifiers(columnas);
+        tblProductos.getTableHeader().repaint();
+    }
+
+
+
+
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);

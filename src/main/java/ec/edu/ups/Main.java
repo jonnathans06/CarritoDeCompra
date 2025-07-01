@@ -67,11 +67,11 @@ public class Main {
                             ProductoActualizarView productoActualizarView = new ProductoActualizarView();
                             ProductoEliminarView productoEliminarView = new ProductoEliminarView();
 
-                            CarritoAnadirView carritoAnadirView = new CarritoAnadirView(usuarioAuntenticado);
-                            CarritoListarView carritoListarView = new CarritoListarView();
-                            CarritoActualizarView carritoActualizarView = new CarritoActualizarView(carritoDAO);
-                            CarritoEliminarView carritoEliminarView = new CarritoEliminarView();
-                            CarritoMostrarDetallesView carritoMostrarDetallesView = new CarritoMostrarDetallesView();
+                            CarritoAnadirView carritoAnadirView = new CarritoAnadirView(usuarioAuntenticado, mI);
+                            CarritoListarView carritoListarView = new CarritoListarView(mI);
+                            CarritoActualizarView carritoActualizarView = new CarritoActualizarView(carritoDAO, mI);
+                            CarritoEliminarView carritoEliminarView = new CarritoEliminarView(mI);
+                            CarritoMostrarDetallesView carritoMostrarDetallesView = new CarritoMostrarDetallesView(mI);
 
                             //instanciamos Controladores
                             ProductoController productoController = new ProductoController(productoDAO, productoAnadirView,
@@ -225,6 +225,42 @@ public class Main {
                                         carritoEliminarView.setVisible(true);
                                         principalView.getjDesktopPane().add(carritoEliminarView);
                                     }
+                                }
+                            });
+
+                            principalView.getMenuItemEspanol().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    principalView.cambiarIdiomaEspanol("es", "EC");
+                                    carritoAnadirView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoActualizarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoListarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoMostrarDetallesView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                }
+                            });
+
+                            principalView.getMenuItemIngles().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    principalView.cambiarIdiomaIngles("en", "US");
+                                    carritoAnadirView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoActualizarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoListarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoMostrarDetallesView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                }
+                            });
+
+                            principalView.getMenuItemFrances().addActionListener(new ActionListener() {
+                                @Override
+                                public void actionPerformed(ActionEvent e) {
+                                    principalView.cambiarIdiomaFrances("fr", "FR");
+                                    carritoAnadirView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoActualizarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoListarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoMostrarDetallesView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                                    carritoEliminarView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
                                 }
                             });
 

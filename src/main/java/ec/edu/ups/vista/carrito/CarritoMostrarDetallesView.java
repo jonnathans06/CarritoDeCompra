@@ -3,6 +3,7 @@ package ec.edu.ups.vista.carrito;
 import ec.edu.ups.modelo.Carrito;
 import ec.edu.ups.modelo.ItemCarrito;
 import ec.edu.ups.modelo.Producto;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -18,8 +19,9 @@ public class CarritoMostrarDetallesView extends JInternalFrame {
     private JLabel LblDetalleCarrito;
     private Carrito carrito;
     DefaultTableModel modelo;
+    MensajeInternacionalizacionHandler mI;
 
-    public CarritoMostrarDetallesView() {
+    public CarritoMostrarDetallesView(MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setTitle("Detalles del Carrito");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -27,7 +29,7 @@ public class CarritoMostrarDetallesView extends JInternalFrame {
         setClosable(true);
         setResizable(true);
         setIconifiable(true);
-
+        this.mI = mI;
 
         modelo = new DefaultTableModel(new Object[]{"Código","Producto","Cantidad","Total"}, 0) {
             @Override
@@ -36,6 +38,7 @@ public class CarritoMostrarDetallesView extends JInternalFrame {
             }
         };
         TblDetalleCarrito.setModel(modelo);
+        cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 
     public JTextField getTxtCodigoCarrito() {
@@ -101,6 +104,27 @@ public class CarritoMostrarDetallesView extends JInternalFrame {
     public void setLblDetalleCarrito(JLabel lblDetalleCarrito) {
         LblDetalleCarrito = lblDetalleCarrito;
     }
+
+    public void cambiarIdioma(String lenguaje, String pais) {
+        mI.setLenguaje(lenguaje, pais);
+        setTitle(mI.get("ventana.carrito.detalles.titulo"));
+
+        LblTitulo.setText(mI.get("ventana.carrito.detalles.titulo"));
+        LblCodigoCarrito.setText(mI.get("ventana.carrito.detalles.codigo"));
+        LblDetalleCarrito.setText(mI.get("ventana.carrito.detalles.detalle"));
+
+        BtnBuscar.setText(mI.get("ventana.carrito.detalles.buscar"));
+
+        Object[] columnas = {
+                mI.get("ventana.carrito.detalles.tabla.codigo"),
+                mI.get("ventana.carrito.detalles.tabla.producto"),
+                mI.get("ventana.carrito.detalles.tabla.cantidad"),
+                mI.get("ventana.carrito.detalles.tabla.total")
+        };
+        modelo.setColumnIdentifiers(columnas);
+        TblDetalleCarrito.getTableHeader().repaint();
+    }
+
 
     public void cargarDatosCarrito(List<Carrito> carritos) {
         modelo.setRowCount(0);

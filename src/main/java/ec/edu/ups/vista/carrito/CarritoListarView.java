@@ -1,6 +1,7 @@
 package ec.edu.ups.vista.carrito;
 
 import ec.edu.ups.modelo.Carrito;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,21 +15,22 @@ public class CarritoListarView extends JInternalFrame {
     private JLabel LblCodigo;
     private JTable TblCarritos;
     private JLabel LblTitulo;
-    private JButton BtnDetallesCarrito;
     private DefaultTableModel modelo;
+    private MensajeInternacionalizacionHandler mI;
 
-    public CarritoListarView() {
+    public CarritoListarView(MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setTitle("Listar Carritos");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setClosable(true);
         setResizable(true);
-
+        this.mI = mI;
         modelo = new DefaultTableModel();
         Object[] columnas = {"Código","Fecha","Usuario","Subtotal","Total"};
         modelo.setColumnIdentifiers(columnas);
         TblCarritos.setModel(modelo);
+        //cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 
     public JTextField getTxtCodigo() {
@@ -79,13 +81,6 @@ public class CarritoListarView extends JInternalFrame {
         this.modelo = modelo;
     }
 
-    public JButton getBtnDetallesCarrito() {
-        return BtnDetallesCarrito;
-    }
-
-    public void setBtnDetallesCarrito(JButton btnDetallesCarrito) {
-        BtnDetallesCarrito = btnDetallesCarrito;
-    }
 
     public JLabel getLblTitulo() {
         return LblTitulo;
@@ -122,6 +117,28 @@ public class CarritoListarView extends JInternalFrame {
             modelo.addRow(fila);
         }
     }
+
+    public void cambiarIdioma(String lenguaje, String pais) {
+        mI.setLenguaje(lenguaje, pais);
+
+        setTitle(mI.get("ventana.carrito.listar.titulo"));
+        LblTitulo.setText(mI.get("ventana.carrito.listar.titulo"));
+        LblCodigo.setText(mI.get("ventana.carrito.listar.codigo"));
+
+        BtnBuscar.setText(mI.get("ventana.carrito.listar.buscar"));
+        BtnListar.setText(mI.get("ventana.carrito.listar.listar"));
+
+        Object[] columnas = {
+                mI.get("ventana.carrito.listar.tabla.codigo"),
+                mI.get("ventana.carrito.listar.tabla.fecha"),
+                mI.get("ventana.carrito.listar.tabla.usuario"),
+                mI.get("ventana.carrito.listar.tabla.subtotal"),
+                mI.get("ventana.carrito.listar.tabla.total")
+        };
+        modelo.setColumnIdentifiers(columnas);
+        TblCarritos.getTableHeader().repaint();
+    }
+
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);

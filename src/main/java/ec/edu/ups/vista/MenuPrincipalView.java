@@ -55,26 +55,26 @@ public class MenuPrincipalView extends JFrame {
         menuSalir = new JMenu(mensajeInternacionalizacionHandler.get("menu.salir"));
 
         menuItemCrearProducto = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.crear.producto"));
-        menuItemActualizarProducto = new JMenuItem("Actualizar Producto");
-        menuItemEliminarProducto = new JMenuItem("Eliminar Producto");
-        menuItemBuscarProducto = new JMenuItem("Buscar Producto");
+        menuItemActualizarProducto = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.actualizar.producto"));
+        menuItemEliminarProducto = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.eliminar.producto"));
+        menuItemBuscarProducto = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.buscar.producto"));
 
-        menuItemCrearCarrito = new JMenuItem("Crear Carrito");
-        menuItemListarCarritos = new JMenuItem("Buscar Carritos");
-        menuItemDetalleCarrito = new JMenuItem("Detalle Carrito");
-        menuItemActualizarCarrito = new JMenuItem("Actualizar Carrito");
-        menuItemEliminarCarrito = new JMenuItem("Eliminar Carrito");
+        menuItemCrearCarrito = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.crear.carrito"));
+        menuItemListarCarritos = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.listar.carritos"));
+        menuItemDetalleCarrito = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.detalle.carrito"));
+        menuItemActualizarCarrito = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.actualizar.carrito"));
+        menuItemEliminarCarrito = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.eliminar.carrito"));
 
-        menuItemCrearUsuario = new JMenuItem("Crear Usuario");
-        menuItemActualizarUsuario = new JMenuItem("Actualizar Usuario");
-        menuItemListarUsuario = new JMenuItem("Buscar Usuario");
-        menuItemEliminarUsuario = new JMenuItem("Eliminar Usuario");
+        menuItemCrearUsuario = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.crear.usuario"));
+        menuItemActualizarUsuario = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.actualizar.usuario"));
+        menuItemListarUsuario = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.listar.usuario"));
+        menuItemEliminarUsuario = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.eliminar.usuario"));
 
-        menuItemCerrarSesion = new JMenuItem("Cerrar Sesión");
+        menuItemCerrarSesion = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.cerrar.sesion"));
 
-        menuItemEspanol = new JMenuItem("Espanol");
-        menuItemIngles = new JMenuItem("Ingles");
-        menuItemFrances = new JMenuItem("Frances");
+        menuItemEspanol = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.espanol"));
+        menuItemIngles = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.ingles"));
+        menuItemFrances = new JMenuItem(mensajeInternacionalizacionHandler.get("menu.frances"));
 
         menuBar.add(menuProducto);
         menuBar.add(menuCarrito);
@@ -107,7 +107,7 @@ public class MenuPrincipalView extends JFrame {
         setJMenuBar(menuBar);
         setContentPane(jDesktopPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Sistema de Carrito de Compras En Línea");
+        setTitle(mensajeInternacionalizacionHandler.get("menu.titulo"));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
     }
@@ -311,4 +311,101 @@ public class MenuPrincipalView extends JFrame {
         getMenuItemActualizarUsuario().setEnabled(false);
         getMenuItemEliminarUsuario().setEnabled(false);
     }
+
+    public void cambiarIdiomaEspanol(String lenguaje,String pais) {
+        mensajeInternacionalizacionHandler.setLenguaje(lenguaje, pais);
+
+        menuProducto.setText(mensajeInternacionalizacionHandler.get("menu.producto"));
+        menuCarrito.setText(mensajeInternacionalizacionHandler.get("menu.carrito"));
+        menuUsuario.setText(mensajeInternacionalizacionHandler.get("menu.usuario"));
+        menuIdioma.setText(mensajeInternacionalizacionHandler.get("menu.idioma"));
+        menuSalir.setText(mensajeInternacionalizacionHandler.get("menu.salir"));
+
+        menuItemCrearProducto.setText(mensajeInternacionalizacionHandler.get("menu.crear.producto"));
+        menuItemActualizarProducto.setText(mensajeInternacionalizacionHandler.get("menu.actualizar.producto"));
+        menuItemEliminarProducto.setText(mensajeInternacionalizacionHandler.get("menu.eliminar.producto"));
+        menuItemBuscarProducto.setText(mensajeInternacionalizacionHandler.get("menu.buscar.producto"));
+
+        menuItemCrearCarrito.setText(mensajeInternacionalizacionHandler.get("menu.crear.carrito"));
+        menuItemActualizarCarrito.setText(mensajeInternacionalizacionHandler.get("menu.actualizar.carrito"));
+        menuItemListarCarritos.setText(mensajeInternacionalizacionHandler.get("menu.listar.carritos"));
+        menuItemDetalleCarrito.setText(mensajeInternacionalizacionHandler.get("menu.detalle.carrito"));
+        menuItemEliminarCarrito.setText(mensajeInternacionalizacionHandler.get("menu.eliminar.carrito"));
+
+        menuItemCrearUsuario.setText(mensajeInternacionalizacionHandler.get("menu.crear.usuario"));
+        menuItemActualizarUsuario.setText(mensajeInternacionalizacionHandler.get("menu.actualizar.usuario"));
+        menuItemListarUsuario.setText(mensajeInternacionalizacionHandler.get("menu.listar.usuario"));
+        menuItemEliminarUsuario.setText(mensajeInternacionalizacionHandler.get("menu.eliminar.usuario"));
+        menuItemCerrarSesion.setText(mensajeInternacionalizacionHandler.get("menu.cerrar.sesion"));
+
+        menuItemEspanol.setText(mensajeInternacionalizacionHandler.get("menu.espanol"));
+        menuItemIngles.setText(mensajeInternacionalizacionHandler.get("menu.ingles"));
+        menuItemFrances.setText(mensajeInternacionalizacionHandler.get("menu.frances"));
+    }
+
+    public void cambiarIdiomaIngles(String lenguaje,String pais) {
+        mensajeInternacionalizacionHandler.setLenguaje(lenguaje, pais);
+
+        menuProducto.setText(mensajeInternacionalizacionHandler.get("menu.producto"));
+        menuCarrito.setText(mensajeInternacionalizacionHandler.get("menu.carrito"));
+        menuUsuario.setText(mensajeInternacionalizacionHandler.get("menu.usuario"));
+        menuIdioma.setText(mensajeInternacionalizacionHandler.get("menu.idioma"));
+        menuSalir.setText(mensajeInternacionalizacionHandler.get("menu.salir"));
+
+        menuItemCrearProducto.setText(mensajeInternacionalizacionHandler.get("menu.crear.producto"));
+        menuItemActualizarProducto.setText(mensajeInternacionalizacionHandler.get("menu.actualizar.producto"));
+        menuItemEliminarProducto.setText(mensajeInternacionalizacionHandler.get("menu.eliminar.producto"));
+        menuItemBuscarProducto.setText(mensajeInternacionalizacionHandler.get("menu.buscar.producto"));
+
+        menuItemCrearCarrito.setText(mensajeInternacionalizacionHandler.get("menu.crear.carrito"));
+        menuItemActualizarCarrito.setText(mensajeInternacionalizacionHandler.get("menu.actualizar.carrito"));
+        menuItemListarCarritos.setText(mensajeInternacionalizacionHandler.get("menu.listar.carritos"));
+        menuItemDetalleCarrito.setText(mensajeInternacionalizacionHandler.get("menu.detalle.carrito"));
+        menuItemEliminarCarrito.setText(mensajeInternacionalizacionHandler.get("menu.eliminar.carrito"));
+
+        menuItemCrearUsuario.setText(mensajeInternacionalizacionHandler.get("menu.crear.usuario"));
+        menuItemActualizarUsuario.setText(mensajeInternacionalizacionHandler.get("menu.actualizar.usuario"));
+        menuItemListarUsuario.setText(mensajeInternacionalizacionHandler.get("menu.listar.usuario"));
+        menuItemEliminarUsuario.setText(mensajeInternacionalizacionHandler.get("menu.eliminar.usuario"));
+        menuItemCerrarSesion.setText(mensajeInternacionalizacionHandler.get("menu.cerrar.sesion"));
+
+        menuItemEspanol.setText(mensajeInternacionalizacionHandler.get("menu.espanol"));
+        menuItemIngles.setText(mensajeInternacionalizacionHandler.get("menu.ingles"));
+        menuItemFrances.setText(mensajeInternacionalizacionHandler.get("menu.frances"));
+    }
+
+    public void cambiarIdiomaFrances(String lenguaje,String pais) {
+        mensajeInternacionalizacionHandler.setLenguaje(lenguaje, pais);
+
+        menuProducto.setText(mensajeInternacionalizacionHandler.get("menu.producto"));
+        menuCarrito.setText(mensajeInternacionalizacionHandler.get("menu.carrito"));
+        menuUsuario.setText(mensajeInternacionalizacionHandler.get("menu.usuario"));
+        menuIdioma.setText(mensajeInternacionalizacionHandler.get("menu.idioma"));
+        menuSalir.setText(mensajeInternacionalizacionHandler.get("menu.salir"));
+
+        menuItemCrearProducto.setText(mensajeInternacionalizacionHandler.get("menu.crear.producto"));
+        menuItemActualizarProducto.setText(mensajeInternacionalizacionHandler.get("menu.actualizar.producto"));
+        menuItemEliminarProducto.setText(mensajeInternacionalizacionHandler.get("menu.eliminar.producto"));
+        menuItemBuscarProducto.setText(mensajeInternacionalizacionHandler.get("menu.buscar.producto"));
+
+        menuItemCrearCarrito.setText(mensajeInternacionalizacionHandler.get("menu.crear.carrito"));
+        menuItemActualizarCarrito.setText(mensajeInternacionalizacionHandler.get("menu.actualizar.carrito"));
+        menuItemListarCarritos.setText(mensajeInternacionalizacionHandler.get("menu.listar.carritos"));
+        menuItemDetalleCarrito.setText(mensajeInternacionalizacionHandler.get("menu.detalle.carrito"));
+        menuItemEliminarCarrito.setText(mensajeInternacionalizacionHandler.get("menu.eliminar.carrito"));
+
+        menuItemCrearUsuario.setText(mensajeInternacionalizacionHandler.get("menu.crear.usuario"));
+        menuItemActualizarUsuario.setText(mensajeInternacionalizacionHandler.get("menu.actualizar.usuario"));
+        menuItemListarUsuario.setText(mensajeInternacionalizacionHandler.get("menu.listar.usuario"));
+        menuItemEliminarUsuario.setText(mensajeInternacionalizacionHandler.get("menu.eliminar.usuario"));
+        menuItemCerrarSesion.setText(mensajeInternacionalizacionHandler.get("menu.cerrar.sesion"));
+
+        menuItemEspanol.setText(mensajeInternacionalizacionHandler.get("menu.espanol"));
+        menuItemIngles.setText(mensajeInternacionalizacionHandler.get("menu.ingles"));
+        menuItemFrances.setText(mensajeInternacionalizacionHandler.get("menu.frances"));
+    }
+
+
+
+
 }

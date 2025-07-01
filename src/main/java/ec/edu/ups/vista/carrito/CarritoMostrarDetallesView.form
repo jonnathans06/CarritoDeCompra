@@ -68,14 +68,18 @@
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
         </constraints>
-        <properties/>
+        <properties>
+          <foreground color="-15197648"/>
+        </properties>
         <border type="none"/>
         <children>
           <component id="26ecf" class="javax.swing.JLabel" binding="LblTitulo">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
             <properties>
+              <font size="36" style="1"/>
+              <foreground color="-131078"/>
               <text value="DETALLE CARRITO"/>
             </properties>
           </component>

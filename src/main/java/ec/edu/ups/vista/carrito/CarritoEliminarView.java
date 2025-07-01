@@ -3,6 +3,7 @@ package ec.edu.ups.vista.carrito;
 import ec.edu.ups.dao.CarritoDAO;
 import ec.edu.ups.modelo.Carrito;
 import ec.edu.ups.modelo.Producto;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -19,9 +20,10 @@ public class CarritoEliminarView extends JInternalFrame{
     private JLabel LblTitulo;
     private JLabel LblCodCarrito;
     private CarritoDAO carritoDAO;
+    MensajeInternacionalizacionHandler mI;
     DefaultTableModel  modelo;
 
-    public CarritoEliminarView() {
+    public CarritoEliminarView(MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setTitle("Eliminar Carrito");
         setSize(500, 500);
@@ -30,7 +32,7 @@ public class CarritoEliminarView extends JInternalFrame{
         setClosable(true);
         setResizable(true);
         setIconifiable(true);
-
+        this.mI = mI;
         modelo = new DefaultTableModel();
         Object[] columnas = {"Código","Fecha","Usuario","Subtotal","Total"};
         modelo.setColumnIdentifiers(columnas);
@@ -112,6 +114,27 @@ public class CarritoEliminarView extends JInternalFrame{
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public void cambiarIdioma(String lenguaje, String pais) {
+        mI.setLenguaje(lenguaje, pais);
+        setTitle(mI.get("ventana.carrito.eliminar.titulo"));
+
+        LblTitulo.setText(mI.get("ventana.carrito.eliminar.titulo"));
+        LblCodCarrito.setText(mI.get("ventana.carrito.eliminar.codigo"));
+
+        BtnBuscar.setText(mI.get("ventana.carrito.eliminar.buscar"));
+        BtnEliminar.setText(mI.get("ventana.carrito.eliminar.eliminar"));
+
+        Object[] columnas = {
+                mI.get("ventana.carrito.eliminar.tabla.codigo"),
+                mI.get("ventana.carrito.eliminar.tabla.fecha"),
+                mI.get("ventana.carrito.eliminar.tabla.usuario"),
+                mI.get("ventana.carrito.eliminar.tabla.subtotal"),
+                mI.get("ventana.carrito.eliminar.tabla.total")
+        };
+        modelo.setColumnIdentifiers(columnas);
+        TblCarritos.getTableHeader().repaint();
     }
 
     public void cargargaDatosBusqueda(List<Carrito> carritos) {

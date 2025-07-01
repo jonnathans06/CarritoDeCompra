@@ -4,6 +4,7 @@ import ec.edu.ups.dao.CarritoDAO;
 import ec.edu.ups.modelo.Carrito;
 import ec.edu.ups.modelo.ItemCarrito;
 import ec.edu.ups.modelo.Producto;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -23,8 +24,9 @@ public class CarritoActualizarView extends JInternalFrame {
     private Carrito carritoActual;
     private CarritoDAO carritoDAO;
     DefaultTableModel modelo;
+    private MensajeInternacionalizacionHandler mI;
 
-    public CarritoActualizarView(CarritoDAO carritoDAO) {
+    public CarritoActualizarView(CarritoDAO carritoDAO, MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setTitle("Actualizar Carrito");
         setSize(600, 400);
@@ -32,12 +34,14 @@ public class CarritoActualizarView extends JInternalFrame {
         setClosable(true);
         setResizable(true);
         this.carritoDAO = carritoDAO;
+        this.mI = mI;
         modelo = new DefaultTableModel();
         Object[] columnas = {"Código", "Producto", "Cantidad", "Total"};
         modelo.setColumnIdentifiers(columnas);
         TblProductos.setModel(modelo);
 
         cargarDatosProductos();int cantidad = Integer.parseInt((String) CbxCantiadad.getSelectedItem());
+        cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 
     public JTextField getTxtCodigo() {
@@ -201,6 +205,24 @@ public class CarritoActualizarView extends JInternalFrame {
         } else {
             mostrarMensaje("Seleccione un producto para actualizar la cantidad.");
         }
+    }
+
+    public void cambiarIdioma(String lenguaje, String pais) {
+        mI.setLenguaje(lenguaje, pais);
+        setTitle(mI.get("ventana.carrito.actualizar.titulo"));
+        LblTitulo.setText(mI.get("ventana.carrito.actualizar.titulo"));
+        LblCodCarrito.setText(mI.get("ventana.carrito.codigo"));
+        LblCantidad.setText(mI.get("ventana.carrito.cantidad"));
+        BtnBuscar.setText(mI.get("ventana.buscar"));
+        BtnGuardar.setText(mI.get("ventana.guardar"));
+
+        Object[] columnas = {
+            mI.get("ventana.producto.codigo"),
+            mI.get("ventana.producto.nombre"),
+            mI.get("ventana.carrito.cantidad"),
+            mI.get("ventana.carrito.total")
+        };
+        modelo.setColumnIdentifiers(columnas);
     }
 
 
