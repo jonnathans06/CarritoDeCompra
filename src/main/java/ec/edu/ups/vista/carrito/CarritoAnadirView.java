@@ -298,10 +298,6 @@ public class CarritoAnadirView extends JInternalFrame {
         tblProductos.getTableHeader().repaint();
     }
 
-
-
-
-
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);
     }

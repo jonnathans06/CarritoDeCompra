@@ -4,6 +4,7 @@ import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.vista.login.LoginView;
+import ec.edu.ups.vista.login.RegistroView;
 import ec.edu.ups.vista.usuario.UsuarioCrearView;
 import ec.edu.ups.vista.usuario.UsuarioListarView;
 import ec.edu.ups.vista.usuario.UsuarioActualizarView;
@@ -11,6 +12,8 @@ import ec.edu.ups.vista.usuario.UsuarioEliminarView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class UsuarioController {
@@ -22,16 +25,19 @@ public class UsuarioController {
     private final UsuarioListarView usuarioListarView;
     private final UsuarioActualizarView usuarioActualizarView;
     private final UsuarioEliminarView usuarioEliminarView;
+    private final RegistroView registroView;
 
     public UsuarioController(UsuarioDAO usuarioDAO, LoginView loginView,
                              UsuarioCrearView usuarioCrearView, UsuarioListarView usuarioListarView,
-                             UsuarioActualizarView usuarioActualizarView, UsuarioEliminarView usuarioEliminarView) {
+                             UsuarioActualizarView usuarioActualizarView, UsuarioEliminarView usuarioEliminarView,
+                             RegistroView registroView) {
         this.usuarioDAO = usuarioDAO;
         this.loginView = loginView;
         this.usuarioCrearView = usuarioCrearView;
         this.usuarioListarView = usuarioListarView;
         this.usuarioActualizarView = usuarioActualizarView;
         this.usuarioEliminarView = usuarioEliminarView;
+        this.registroView = registroView;
         this.usuario = null;
         configurarEventosEnVistas();
         configurarEventosUsuarios();
@@ -42,12 +48,14 @@ public class UsuarioController {
         loginView.getBtnIniciarSesion().addActionListener(e -> autenticar());
 
         loginView.getBtnRegistrarse().addActionListener(e -> {
-            if (loginView.getTxtUsername().getText().isEmpty() || loginView.getTxtContrasenia().getText().isEmpty()) {
-                loginView.mostrarMensaje("Debe ingresar usuario y contraseña.");
-            } else {
-                crearUsuario();
-                loginView.mostrarMensaje("Usuario creado exitosamente.");
-            }
+            loginView.setVisible(false);
+            registroView.setVisible(true);
+        });
+
+        registroView.getBtnRegistrarse().addActionListener(e -> {
+            crearUsuario();
+            registroView.setVisible(false);
+            loginView.setVisible(true);
         });
     }
 
@@ -141,10 +149,24 @@ public class UsuarioController {
     }
 
     public void crearUsuario() {
-        String username = loginView.getTxtUsername().getText();
-        String contrasenia = loginView.getTxtContrasenia().getText();
-        Usuario usuario = new Usuario(username, contrasenia, Rol.USUARIO);
+        String nombre = registroView.getTxtNombre().getText();
+        String apellido = registroView.getTxtApellido().getText();
+        String telefono = registroView.getTxtTelefono().getText();
+        String correo = registroView.getTxtCorreo().getText();
+        String username = registroView.getTxtUsuario().getText();
+        String contrasenia = new String(registroView.getTxtContrasenia().getPassword());
+        Rol rol = Rol.USUARIO;
+
+        int dia = Integer.parseInt(registroView.getCbxDia().getSelectedItem().toString());
+        int mes = Integer.parseInt(registroView.getCbxMes().getSelectedItem().toString()) - 1;
+        int anio = Integer.parseInt(registroView.getTxtAño().getText());
+
+        GregorianCalendar fechaCreacion = new GregorianCalendar(anio, mes, dia);
+
+        Usuario usuario = new Usuario(nombre, apellido, telefono, correo, username, contrasenia, rol, fechaCreacion);
+
         usuarioDAO.crear(usuario);
+        System.out.println(usuario);
     }
 
     public void cerrarSesion() {

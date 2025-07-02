@@ -4,9 +4,7 @@ import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class UsuarioDAOMemoria implements UsuarioDAO {
 
@@ -14,9 +12,15 @@ public class UsuarioDAOMemoria implements UsuarioDAO {
 
     public UsuarioDAOMemoria() {
         usuarios = new ArrayList<Usuario>();
-        crear(new Usuario("", "", Rol.ADMINISTRADOR));
-        crear(new Usuario("admin", "12345", Rol.ADMINISTRADOR));
-        crear(new Usuario("user", "12345", Rol.USUARIO));
+        crear(new Usuario("Nombre", "Apellido", "012345678", "email@gmail.com", "",
+                "", Rol.ADMINISTRADOR, new GregorianCalendar(2025, Calendar.JULY, 2)));
+
+        crear(new Usuario("Admin", "Root", "000000000", "admin@admin.com", "admin",
+                "12345", Rol.ADMINISTRADOR, new GregorianCalendar(2023, Calendar.JANUARY, 1)));
+
+        crear(new Usuario("User", "LastName", "0000000000", "user@example.com", "user",
+                "12345", Rol.USUARIO, new GregorianCalendar(2025, Calendar.JULY, 2)));
+
     }
 
     @Override
