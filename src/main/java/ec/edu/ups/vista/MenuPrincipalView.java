@@ -38,10 +38,8 @@ public class MenuPrincipalView extends JFrame {
     private JMenuItem menuItemFrances;
 
     private JDesktopPane jDesktopPane;
-    private MiDesktopPane miDesktopPane;
 
     public MenuPrincipalView(MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler) {
-        miDesktopPane = new MiDesktopPane();
         this.mensajeInternacionalizacionHandler = mensajeInternacionalizacionHandler;
         initComponents();
     }
@@ -107,7 +105,6 @@ public class MenuPrincipalView extends JFrame {
         menuIdioma.add(menuItemFrances);
 
         setJMenuBar(menuBar);
-        setContentPane(miDesktopPane);
         jDesktopPane.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
         setContentPane(jDesktopPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -298,14 +295,6 @@ public class MenuPrincipalView extends JFrame {
 
     public JDesktopPane getjDesktopPane() {
         return jDesktopPane;
-    }
-
-    public MiDesktopPane getMiDesktopPane() {
-        return miDesktopPane;
-    }
-
-    public void setMiDesktopPane(MiDesktopPane miDesktopPane) {
-        this.miDesktopPane = miDesktopPane;
     }
 
     public void setjDesktopPane(JDesktopPane jDesktopPane) {

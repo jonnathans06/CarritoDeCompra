@@ -13,6 +13,7 @@ import ec.edu.ups.vista.usuario.UsuarioEliminarView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -65,6 +66,13 @@ public class UsuarioController {
             usuarioCrearView.limpiarCampos();
         });
 
+        usuarioCrearView.getBtnCancelar().addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                usuarioCrearView.limpiarCampos();
+            }
+        });
+
         usuarioListarView.getBtnListar().addActionListener(e ->
                 usuarioListarView.listarUsuarios(usuarioDAO.listarTodos())
         );
@@ -95,13 +103,22 @@ public class UsuarioController {
         });
 
         usuarioActualizarView.getBtnGuardar().addActionListener(e -> {
+            String nombre = usuarioActualizarView.getTxtNombre().getText();
+            String apellido = usuarioActualizarView.getTxtApellido().getText();
+            String correo = usuarioActualizarView.getTxtCorreo().getText();
+            String telefono = usuarioActualizarView.getTxtTelefono().getText();
             String username = usuarioActualizarView.getTxtUsername().getText();
             String password = usuarioActualizarView.getTxtPassword().getText();
             Rol rol = Rol.valueOf(usuarioActualizarView.getCbxRol().getSelectedItem().toString());
+
+            Usuario usuarioOriginal = usuarioDAO.buscarPorUsername(username);
+            GregorianCalendar fechaOriginal = usuarioOriginal.getFechaCreacion();
+
             boolean confirmar = usuarioActualizarView.confirmarEliminacion();
 
             if (confirmar) {
-                Usuario usuarioNuevo = new Usuario(username, password, rol);
+                Usuario usuarioNuevo = new Usuario(nombre, apellido, telefono, correo, username, password, rol, fechaOriginal);
+                System.out.println(usuarioNuevo);
                 usuarioDAO.actualizar(usuarioNuevo);
                 usuarioActualizarView.limpiarCampos();
                 usuarioActualizarView.editarValoresActualizarFalse();
@@ -109,6 +126,7 @@ public class UsuarioController {
             } else {
                 usuarioActualizarView.mostrarMensaje("Actualización cancelada.");
             }
+
         });
     }
 

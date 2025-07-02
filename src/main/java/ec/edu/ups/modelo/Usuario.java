@@ -28,7 +28,7 @@ public class Usuario {
         this.username = username;
         this.contrasenia = contrasenia;
         this.rol = rol;
-        this.fechaCreacion = new GregorianCalendar();
+        this.fechaCreacion = fechaCreacion;
     }
 
     public String getNombre() {
@@ -85,6 +85,10 @@ public class Usuario {
 
     public void setTelefono(String telefono) {
         this.telefono = telefono;
+    }
+
+    public GregorianCalendar getFechaCreacion() {
+        return fechaCreacion;
     }
 
     public String getFechaFormateada() {

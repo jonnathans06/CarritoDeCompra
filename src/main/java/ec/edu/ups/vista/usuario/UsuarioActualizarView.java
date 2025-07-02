@@ -1,7 +1,6 @@
 package ec.edu.ups.vista.usuario;
 
 import ec.edu.ups.dao.UsuarioDAO;
-import ec.edu.ups.modelo.Rol;
 import ec.edu.ups.modelo.Usuario;
 import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
@@ -21,6 +20,10 @@ public class UsuarioActualizarView extends JInternalFrame {
     private JLabel LblUsuario;
     private JLabel LblContraseña;
     private JLabel LblRol;
+    private JTextField TxtNombre;
+    private JTextField TxtApellido;
+    private JTextField TxtCorreo;
+    private JTextField TxtTelefono;
     private UsuarioDAO usuarioDAO;
     private Usuario usuarioSeleccionado;
     MensajeInternacionalizacionHandler mI;
@@ -151,6 +154,38 @@ public class UsuarioActualizarView extends JInternalFrame {
         LblRol = lblRol;
     }
 
+    public JTextField getTxtNombre() {
+        return TxtNombre;
+    }
+
+    public void setTxtNombre(JTextField txtNombre) {
+        TxtNombre = txtNombre;
+    }
+
+    public JTextField getTxtApellido() {
+        return TxtApellido;
+    }
+
+    public void setTxtApellido(JTextField txtApellido) {
+        TxtApellido = txtApellido;
+    }
+
+    public JTextField getTxtCorreo() {
+        return TxtCorreo;
+    }
+
+    public void setTxtCorreo(JTextField txtCorreo) {
+        TxtCorreo = txtCorreo;
+    }
+
+    public JTextField getTxtTelefono() {
+        return TxtTelefono;
+    }
+
+    public void setTxtTelefono(JTextField txtTelefono) {
+        TxtTelefono = txtTelefono;
+    }
+
     public void cambiarIdioma(String lenguaje, String pais) {
         setTitle(mI.get("ventana.usuario.actualizar.titulo"));
 
@@ -185,16 +220,28 @@ public class UsuarioActualizarView extends JInternalFrame {
             return;
         }
 
+        TxtNombre.setText(usuario.getNombre());
+        TxtApellido.setText(usuario.getApellido());
+        TxtCorreo.setText(usuario.getCorreo());
+        TxtTelefono.setText(usuario.getTelefono());
         TxtUsername.setText(usuario.getUsername());
         TxtPassword.setText(usuario.getContrasenia());
         CbxRol.setSelectedItem(usuario.getRol());
     }
 
     public void editarValoresActualizarTrue() {
+        TxtNombre.setEnabled(true);
+        TxtApellido.setEnabled(true);
+        TxtCorreo.setEnabled(true);
+        TxtTelefono.setEnabled(true);
         TxtPassword.setEnabled(true);
     }
 
     public void editarValoresActualizarFalse() {
+        TxtNombre.setEnabled(false);
+        TxtApellido.setEnabled(false);
+        TxtCorreo.setEnabled(false);
+        TxtTelefono.setEnabled(false);
         TxtUsername.setEnabled(false);
         TxtPassword.setEnabled(false);
         CbxRol.setEnabled(false);
