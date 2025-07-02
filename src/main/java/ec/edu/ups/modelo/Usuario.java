@@ -100,7 +100,7 @@ public class Usuario {
     public String toString() {
         return "[" + "Nombre: " + nombre + ", "
                 + "Apellido: " + apellido + ", "
-                + "Fecha de Nacimiento: " + getFechaFormateada()
+                + "Fecha de Nacimiento: " + getFechaFormateada() + ", "
                 + "Telefono: " + telefono + ", "
                 + "Correo: " + correo + ", "
                 + "Username: " + username + ", "

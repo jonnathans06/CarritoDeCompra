@@ -166,7 +166,6 @@ public class UsuarioController {
         Usuario usuario = new Usuario(nombre, apellido, telefono, correo, username, contrasenia, rol, fechaCreacion);
 
         usuarioDAO.crear(usuario);
-        System.out.println(usuario);
     }
 
     public void cerrarSesion() {

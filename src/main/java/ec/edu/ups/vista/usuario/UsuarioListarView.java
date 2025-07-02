@@ -28,7 +28,7 @@ public class UsuarioListarView extends JInternalFrame {
         this.mI = mI;
 
         modelo = new DefaultTableModel();
-        Object[] columnas = {"Username", "Password", "Rol"};
+        Object[] columnas = {"Usuario", "Contraseña", "Rol", "Nombre", "Apellido", "Correo", "Teléfono", "Fecha de Creación"};
         modelo.setColumnIdentifiers(columnas);
         TblUser.setModel(modelo);
 
@@ -102,7 +102,12 @@ public class UsuarioListarView extends JInternalFrame {
         String[] columnas = {
                 mI.get("ventana.usuario.listar.tabla.username"),
                 mI.get("ventana.usuario.listar.tabla.password"),
-                mI.get("ventana.usuario.listar.tabla.rol")
+                mI.get("ventana.usuario.listar.tabla.rol"),
+                mI.get("ventana.usuario.listar.tabla.nombre"),
+                mI.get("ventana.usuario.listar.tabla.apellido"),
+                mI.get("ventana.usuario.listar.tabla.correo"),
+                mI.get("ventana.usuario.listar.tabla.telefono"),
+                mI.get("ventana.usuario.listar.tabla.fechaCreacion")
         };
         modelo.setColumnIdentifiers(columnas);
     }
@@ -112,10 +117,15 @@ public class UsuarioListarView extends JInternalFrame {
         modelo.setRowCount(0);
 
         for (Usuario usuario : listaUsuarios) {
-            Object[] fila = new Object[3];
+            Object[] fila = new Object[10];
             fila[0] = usuario.getUsername();
             fila[1] = usuario.getContrasenia();
             fila[2] = usuario.getRol().toString();
+            fila[3] = usuario.getNombre();
+            fila[4] = usuario.getApellido();
+            fila[5] = usuario.getCorreo();
+            fila[6] = usuario.getTelefono();
+            fila[7] = usuario.getFechaFormateada();
             modelo.addRow(fila);
         }
 
@@ -126,10 +136,15 @@ public class UsuarioListarView extends JInternalFrame {
 
         for (Usuario usuario : listaUsuarios) {
             if (usuario.getUsername().equalsIgnoreCase(username)) {
-                Object[] fila = new Object[3];
+                Object[] fila = new Object[10];
                 fila[0] = usuario.getUsername();
                 fila[1] = usuario.getContrasenia();
                 fila[2] = usuario.getRol().toString();
+                fila[3] = usuario.getNombre();
+                fila[4] = usuario.getApellido();
+                fila[5] = usuario.getCorreo();
+                fila[6] = usuario.getTelefono();
+                fila[7] = usuario.getFechaFormateada();
                 modelo.addRow(fila);
             }
         }
