@@ -28,6 +28,7 @@ public class RegistroView extends JFrame{
     private JLabel LblPerfilUsuario;
     private JLabel LblAnio;
     private JTextField TxtAño;
+    private JComboBox CbxAnio;
     private GregorianCalendar fechaCreacion;
 
     public JTextField getTxtNombre() {
@@ -222,6 +223,14 @@ public class RegistroView extends JFrame{
         this.fechaCreacion = fechaCreacion;
     }
 
+    public JComboBox getCbxAnio() {
+        return CbxAnio;
+    }
+
+    public void setCbxAnio(JComboBox cbxAnio) {
+        CbxAnio = cbxAnio;
+    }
+
     public RegistroView() {
         setContentPane(panelPrincipal);
         setTitle("Registro de Usuario");
@@ -231,6 +240,7 @@ public class RegistroView extends JFrame{
 
         cargarDias();
         cargarMeses();
+        cargarAnios();
     }
 
     public void cargarDias() {
@@ -244,6 +254,14 @@ public class RegistroView extends JFrame{
         CbxMes.removeAllItems();
         for (int i = 1; i <= 12; i++) {
             CbxMes.addItem(i);
+        }
+    }
+
+    public void cargarAnios() {
+        CbxAnio.removeAllItems();
+        int anioActual = java.util.Calendar.getInstance().get(java.util.Calendar.YEAR);
+        for (int i = 1960; i <= anioActual; i++) {
+            CbxAnio.addItem(i);
         }
     }
 }

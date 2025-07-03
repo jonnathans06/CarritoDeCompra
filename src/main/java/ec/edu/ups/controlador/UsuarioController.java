@@ -177,7 +177,7 @@ public class UsuarioController {
 
         int dia = Integer.parseInt(registroView.getCbxDia().getSelectedItem().toString());
         int mes = Integer.parseInt(registroView.getCbxMes().getSelectedItem().toString()) - 1;
-        int anio = Integer.parseInt(registroView.getTxtAño().getText());
+        int anio = Integer.parseInt(registroView.getCbxAnio().getSelectedItem().toString());
 
         GregorianCalendar fechaCreacion = new GregorianCalendar(anio, mes, dia);
 
