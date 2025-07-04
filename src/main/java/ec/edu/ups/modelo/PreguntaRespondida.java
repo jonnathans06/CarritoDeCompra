@@ -27,8 +27,6 @@ public class PreguntaRespondida {
 
     @Override
     public String toString() {
-        return "[ID pregunta: " + preguntas.getId() + "\n" +
-                " Enunciado: " + preguntas.getEnunciado() + "\n" +
-                " Respuesta: " + respuesta.getTexto() + "]";
+        return getPreguntas().getEnunciado();
     }
 }

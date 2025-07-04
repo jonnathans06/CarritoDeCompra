@@ -4,6 +4,7 @@ import ec.edu.ups.dao.PreguntasDAO;
 import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.*;
 import ec.edu.ups.vista.login.LoginView;
+import ec.edu.ups.vista.login.RecuperacionView;
 import ec.edu.ups.vista.login.RegistroPreguntasView;
 import ec.edu.ups.vista.login.RegistroView;
 import ec.edu.ups.vista.usuario.UsuarioCrearView;
@@ -29,6 +30,7 @@ public class UsuarioController {
     private final RegistroView registroView;
     private final PreguntasDAO preguntasDAO;
     private final RegistroPreguntasView registroPreguntasView;
+    private final RecuperacionView recuperacionView;
     private List<PreguntaRespondida> preguntasConRespuesta = new ArrayList<>();
     private Usuario usuarioRegistro;
 
@@ -37,7 +39,7 @@ public class UsuarioController {
                              UsuarioCrearView usuarioCrearView, UsuarioListarView usuarioListarView,
                              UsuarioActualizarView usuarioActualizarView, UsuarioEliminarView usuarioEliminarView,
                              RegistroView registroView, PreguntasDAO preguntasDAO,
-                             RegistroPreguntasView registroPreguntasView) {
+                             RegistroPreguntasView registroPreguntasView, RecuperacionView recuperacionView) {
         this.usuarioDAO = usuarioDAO;
         this.loginView = loginView;
         this.usuarioCrearView = usuarioCrearView;
@@ -45,12 +47,14 @@ public class UsuarioController {
         this.usuarioActualizarView = usuarioActualizarView;
         this.usuarioEliminarView = usuarioEliminarView;
         this.registroView = registroView;
+        this.recuperacionView = recuperacionView;
         this.usuario = null;
         this.preguntasDAO = preguntasDAO;
         this.registroPreguntasView = registroPreguntasView;
         configurarEventosEnVistas();
         configurarEventosUsuarios();
         configurarEventosPreguntas();
+        configurarEventosRecuperar();
         configurarEventosEliminar();
     }
 
@@ -136,18 +140,54 @@ public class UsuarioController {
     private void configurarEventosPreguntas() {
         registroView.getBtnRegistrarse().addActionListener(e -> {
             crearUsuario();
-            loginView.setVisible(true);
             registroView.setVisible(false);
             registroPreguntasView.setVisible(true);
         });
         registroPreguntasView.getBtnGuardar().addActionListener(e -> {
             guardarRespuesta();
+            registroPreguntasView.limpiarCampos();
+
+            if (preguntasConRespuesta.size() == 3) {
+                registroPreguntasView.getBtnFinalizar().setEnabled(true);
+            }
+
         });
         registroPreguntasView.getBtnFinalizar().addActionListener(e -> {
             guardarPreguntaRespondidaUsuario();
-            System.out.println(usuarioRegistro);
+            registroPreguntasView.setVisible(false);
+            loginView.setVisible(true);
         });
     }
+
+    private void configurarEventosRecuperar() {
+        loginView.getBtnRecuperar().addActionListener(e -> {
+            loginView.setVisible(false);
+            recuperacionView.setVisible(true);
+        });
+
+        recuperacionView.getBtnBuscar().addActionListener(e -> {
+            recuperacionView.buscarUsuario();
+            recuperacionView.cargarPreguntasSeguridad();
+        });
+
+        recuperacionView.getBtnVerificar().addActionListener(e -> {
+            if (recuperacionView.validarRespuesta()) {
+                recuperacionView.getBtnCambiarContrasenia().setEnabled(true);
+                recuperacionView.getBtnCambiarContrasenia().addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        cambiarContrasenia();
+                        recuperacionView.mostrarMensaje("Contraseña cambiada correctamente");
+                        recuperacionView.setVisible(false);
+                        loginView.setVisible(true);
+                    }
+                });
+            } else {
+                recuperacionView.mostrarMensaje("Respuesta no valida.");
+            }
+        });
+    }
+
     private void configurarEventosEliminar() {
         usuarioEliminarView.getBtnBuscar().addActionListener(e -> {
             String codigo = usuarioEliminarView.getTxtUsername().getText();
@@ -208,16 +248,22 @@ public class UsuarioController {
         Respuesta respuesta = new Respuesta(registroPreguntasView.getTxtRespuesta().getText());
         PreguntaRespondida preguntaRespondida = new PreguntaRespondida(preguntas, respuesta);
         preguntasConRespuesta.add(preguntaRespondida);
-        System.out.println(preguntaRespondida);
     }
 
     public void guardarPreguntaRespondidaUsuario() {
         if (usuarioRegistro != null) {
             usuarioRegistro.agregarPreguntasRespondidas(preguntasConRespuesta);
-            usuarioDAO.actualizar(usuarioRegistro); // Por si quieres persistir el cambio
-        } else {
-            System.out.println("usuarioRegistro es null");
+            usuarioDAO.actualizar(usuarioRegistro);
         }
+    }
+
+    public void cambiarContrasenia() {
+        String usuarioBuscar = recuperacionView.getTxtUsuario().getText();
+        Usuario usuarioActualizar = usuarioDAO.buscarPorUsername(usuarioBuscar);
+
+        String nuevaConstrasenia = recuperacionView.getTxtContrasenia().getText();
+        usuarioActualizar.setContrasenia(nuevaConstrasenia);
+
     }
 
     public void cerrarSesion() {

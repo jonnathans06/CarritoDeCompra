@@ -21,7 +21,7 @@ public class RegistroPreguntasView extends JFrame {
     public RegistroPreguntasView(PreguntasDAO preguntasDAOMemoria) {
         setContentPane(panelPrincipal);
         setTitle("Registro Preguntas");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(550, 360);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -77,6 +77,18 @@ public class RegistroPreguntasView extends JFrame {
 
     public void setBtnFinalizar(JButton btnFinalizar) {
         BtnFinalizar = btnFinalizar;
+    }
+
+    public void mostrarMensaje(String mensaje) {
+        JOptionPane.showMessageDialog(this, mensaje);
+    }
+
+    public void limpiarCampos() {
+        int selectedIndex = CbxPreguntas.getSelectedIndex();
+        if (selectedIndex != -1) {
+            CbxPreguntas.removeItemAt(selectedIndex);
+        }
+        TxtRespuesta.setText("");
     }
 
     public void cargarPreguntas() {

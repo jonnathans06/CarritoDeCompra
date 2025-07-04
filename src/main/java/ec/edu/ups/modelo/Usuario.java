@@ -16,12 +16,6 @@ public class Usuario {
     private GregorianCalendar fechaCreacion;
     private List<PreguntaRespondida> preguntaRespondida;
 
-    public Usuario(String nombreDeUsuario, String contrasenia, Rol rol) {
-        this.username = nombreDeUsuario;
-        this.contrasenia = contrasenia;
-        this.rol = rol;
-    }
-
     public Usuario(String nombre, String apellido, String telefono, String correo, String username,
                    String contrasenia, Rol rol, GregorianCalendar fechaCreacion) {
         this.nombre = nombre;
@@ -115,6 +109,7 @@ public class Usuario {
     public void agregarPreguntasRespondidas(List<PreguntaRespondida> preguntasConRespuesta) {
         preguntaRespondida.addAll(preguntasConRespuesta);
     }
+
 
     @Override
     public String toString() {

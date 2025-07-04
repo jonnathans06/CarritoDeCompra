@@ -17,6 +17,7 @@ import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 import ec.edu.ups.vista.*;
 import ec.edu.ups.vista.carrito.*;
 import ec.edu.ups.vista.login.LoginView;
+import ec.edu.ups.vista.login.RecuperacionView;
 import ec.edu.ups.vista.login.RegistroPreguntasView;
 import ec.edu.ups.vista.login.RegistroView;
 import ec.edu.ups.vista.producto.ProductoActualizarView;
@@ -53,12 +54,14 @@ public class Main {
                 UsuarioEliminarView  usuarioEliminarView = new UsuarioEliminarView(mI);
                 RegistroView registroView = new RegistroView();
                 RegistroPreguntasView registroPreguntasView = new RegistroPreguntasView(preguntasDAO);
+                RecuperacionView recuperacionView = new RecuperacionView(usuarioDAO);
                 loginView.setVisible(true);
 
                 UsuarioController usuarioController = new UsuarioController(usuarioDAO, loginView,
                                                                             usuarioCrearView, usuarioListarView,
                                                                             usuarioActualizarView, usuarioEliminarView,
-                                                                            registroView, preguntasDAO, registroPreguntasView);
+                                                                            registroView, preguntasDAO,
+                                                                            registroPreguntasView, recuperacionView);
 
                 loginView.addWindowListener(new WindowAdapter() {
                     @Override
