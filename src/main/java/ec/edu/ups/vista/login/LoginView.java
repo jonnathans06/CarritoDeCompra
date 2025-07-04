@@ -1,5 +1,7 @@
 package ec.edu.ups.vista.login;
 
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 import java.net.URL;
 
@@ -12,13 +14,17 @@ public class LoginView extends JFrame {
     private JButton btnRegistrarse;
     private JButton BtnRecuperar;
     private JLabel LblTitulo;
+    private JLabel LblUsuario;
+    private JLabel LblContraseña;
+    private MensajeInternacionalizacionHandler mI;
 
-    public LoginView() {
+    public LoginView(MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setTitle("Iniciar Sesión");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(600, 400);
         setLocationRelativeTo(null);
+        this.mI = mI;
 
         URL loginURL = LoginView.class.getClassLoader().getResource("imagenes/login.png");
         ImageIcon iconoBtnIniciarSesion = new ImageIcon(loginURL);
@@ -28,6 +34,7 @@ public class LoginView extends JFrame {
         ImageIcon iconoBtnRegistrar = new ImageIcon(registrarURL);
         btnRegistrarse.setIcon(iconoBtnRegistrar);
 
+        cambiarIdioma(mI.getLocale().getCountry(), mI.getLocale().getLanguage());
     }
 
     public JPanel getPanelPrincipal() {
@@ -46,8 +53,32 @@ public class LoginView extends JFrame {
         this.panelSecundario = panelSecundario;
     }
 
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
     public JTextField getTxtUsername() {
         return txtUsername;
+    }
+
+    public JLabel getLblUsuario() {
+        return LblUsuario;
+    }
+
+    public void setLblUsuario(JLabel lblUsuario) {
+        LblUsuario = lblUsuario;
+    }
+
+    public JLabel getLblContraseña() {
+        return LblContraseña;
+    }
+
+    public void setLblContraseña(JLabel lblContraseña) {
+        LblContraseña = lblContraseña;
     }
 
     public void setTxtUsername(JTextField txtUsername) {
@@ -84,6 +115,21 @@ public class LoginView extends JFrame {
 
     public void setBtnRecuperar(JButton btnRecuperar) {
         BtnRecuperar = btnRecuperar;
+    }
+
+    public void cambiarIdioma(String idioma, String pais){
+        mI.setLenguaje(idioma, pais);
+
+        setTitle(mI.get("ventana.login.titulo"));
+        LblTitulo.setText(mI.get("ventana.login.titulo"));
+
+        LblUsuario.setText(mI.get("ventana.login.usuario"));
+        LblContraseña.setText(mI.get("ventana.login.contrasenia"));
+
+        btnIniciarSesion.setText(mI.get("ventana.login.iniciarSesion"));
+        btnRegistrarse.setText(mI.get("ventana.login.registrar"));
+        BtnRecuperar.setText(mI.get("ventana.login.btnRecuperar"));
+
     }
 
     public void mostrarMensaje(String mensaje) {

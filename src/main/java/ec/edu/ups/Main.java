@@ -33,12 +33,12 @@ import java.awt.event.WindowEvent;
 public class Main {
     public static void main(String[] args) {
 
+        MensajeInternacionalizacionHandler mI = new MensajeInternacionalizacionHandler("es", "EC");
         UsuarioDAO usuarioDAO = new UsuarioDAOMemoria();
-        LoginView loginView = new LoginView();
+        LoginView loginView = new LoginView(mI);
         ProductoDAO productoDAO = new ProductoDAOMemoria();
         CarritoDAO carritoDAO = new CarritoDAOMemoria();
 
-        MensajeInternacionalizacionHandler mI = new MensajeInternacionalizacionHandler("es", "EC");
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
