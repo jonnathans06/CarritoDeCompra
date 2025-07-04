@@ -1,7 +1,9 @@
 package ec.edu.ups.modelo;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class Usuario {
     private String nombre;
@@ -12,6 +14,7 @@ public class Usuario {
     private String contrasenia;
     private Rol rol;
     private GregorianCalendar fechaCreacion;
+    private List<PreguntaRespondida> preguntaRespondida;
 
     public Usuario(String nombreDeUsuario, String contrasenia, Rol rol) {
         this.username = nombreDeUsuario;
@@ -29,6 +32,7 @@ public class Usuario {
         this.contrasenia = contrasenia;
         this.rol = rol;
         this.fechaCreacion = fechaCreacion;
+        this.preguntaRespondida = new ArrayList<>();
     }
 
     public String getNombre() {
@@ -91,6 +95,14 @@ public class Usuario {
         return fechaCreacion;
     }
 
+    public List<PreguntaRespondida> getPreguntaRespondida() {
+        return preguntaRespondida;
+    }
+
+    public void setPreguntaRespondida(List<PreguntaRespondida> preguntaRespondida) {
+        this.preguntaRespondida = preguntaRespondida;
+    }
+
     public String getFechaFormateada() {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         return formato.format(fechaCreacion.getTime());
@@ -98,6 +110,10 @@ public class Usuario {
 
     public void setFechaCreacion(GregorianCalendar fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
+    }
+
+    public void agregarPreguntasRespondidas(List<PreguntaRespondida> preguntasConRespuesta) {
+        preguntaRespondida.addAll(preguntasConRespuesta);
     }
 
     @Override
@@ -109,7 +125,7 @@ public class Usuario {
                 + "Correo: " + correo + ", "
                 + "Username: " + username + ", "
                 + "Contrasenia: " + contrasenia + ", "
-                + "Rol: " + rol + ", "
+                + "Rol: " + rol + ", " + "\nPreguntas: " + "\n" + preguntaRespondida
                 + "]";
     }
 }

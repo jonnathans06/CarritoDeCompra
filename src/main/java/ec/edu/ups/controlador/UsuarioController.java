@@ -1,9 +1,10 @@
 package ec.edu.ups.controlador;
 
+import ec.edu.ups.dao.PreguntasDAO;
 import ec.edu.ups.dao.UsuarioDAO;
-import ec.edu.ups.modelo.Rol;
-import ec.edu.ups.modelo.Usuario;
+import ec.edu.ups.modelo.*;
 import ec.edu.ups.vista.login.LoginView;
+import ec.edu.ups.vista.login.RegistroPreguntasView;
 import ec.edu.ups.vista.login.RegistroView;
 import ec.edu.ups.vista.usuario.UsuarioCrearView;
 import ec.edu.ups.vista.usuario.UsuarioListarView;
@@ -12,8 +13,7 @@ import ec.edu.ups.vista.usuario.UsuarioEliminarView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
 
@@ -27,11 +27,17 @@ public class UsuarioController {
     private final UsuarioActualizarView usuarioActualizarView;
     private final UsuarioEliminarView usuarioEliminarView;
     private final RegistroView registroView;
+    private final PreguntasDAO preguntasDAO;
+    private final RegistroPreguntasView registroPreguntasView;
+    private List<PreguntaRespondida> preguntasConRespuesta = new ArrayList<>();
+    private Usuario usuarioRegistro;
+
 
     public UsuarioController(UsuarioDAO usuarioDAO, LoginView loginView,
                              UsuarioCrearView usuarioCrearView, UsuarioListarView usuarioListarView,
                              UsuarioActualizarView usuarioActualizarView, UsuarioEliminarView usuarioEliminarView,
-                             RegistroView registroView) {
+                             RegistroView registroView, PreguntasDAO preguntasDAO,
+                             RegistroPreguntasView registroPreguntasView) {
         this.usuarioDAO = usuarioDAO;
         this.loginView = loginView;
         this.usuarioCrearView = usuarioCrearView;
@@ -40,8 +46,11 @@ public class UsuarioController {
         this.usuarioEliminarView = usuarioEliminarView;
         this.registroView = registroView;
         this.usuario = null;
+        this.preguntasDAO = preguntasDAO;
+        this.registroPreguntasView = registroPreguntasView;
         configurarEventosEnVistas();
         configurarEventosUsuarios();
+        configurarEventosPreguntas();
         configurarEventosEliminar();
     }
 
@@ -51,12 +60,6 @@ public class UsuarioController {
         loginView.getBtnRegistrarse().addActionListener(e -> {
             loginView.setVisible(false);
             registroView.setVisible(true);
-        });
-
-        registroView.getBtnRegistrarse().addActionListener(e -> {
-            crearUsuario();
-            registroView.setVisible(false);
-            loginView.setVisible(true);
         });
     }
 
@@ -130,6 +133,21 @@ public class UsuarioController {
         });
     }
 
+    private void configurarEventosPreguntas() {
+        registroView.getBtnRegistrarse().addActionListener(e -> {
+            crearUsuario();
+            loginView.setVisible(true);
+            registroView.setVisible(false);
+            registroPreguntasView.setVisible(true);
+        });
+        registroPreguntasView.getBtnGuardar().addActionListener(e -> {
+            guardarRespuesta();
+        });
+        registroPreguntasView.getBtnFinalizar().addActionListener(e -> {
+            guardarPreguntaRespondidaUsuario();
+            System.out.println(usuarioRegistro);
+        });
+    }
     private void configurarEventosEliminar() {
         usuarioEliminarView.getBtnBuscar().addActionListener(e -> {
             String codigo = usuarioEliminarView.getTxtUsername().getText();
@@ -181,9 +199,25 @@ public class UsuarioController {
 
         GregorianCalendar fechaCreacion = new GregorianCalendar(anio, mes, dia);
 
-        Usuario usuario = new Usuario(nombre, apellido, telefono, correo, username, contrasenia, rol, fechaCreacion);
+        usuarioRegistro = new Usuario(nombre, apellido, telefono, correo, username, contrasenia, rol, fechaCreacion);
+        usuarioDAO.crear(usuarioRegistro);
+    }
 
-        usuarioDAO.crear(usuario);
+    public void guardarRespuesta() {
+        Preguntas preguntas = (Preguntas) registroPreguntasView.getCbxPreguntas().getSelectedItem();;
+        Respuesta respuesta = new Respuesta(registroPreguntasView.getTxtRespuesta().getText());
+        PreguntaRespondida preguntaRespondida = new PreguntaRespondida(preguntas, respuesta);
+        preguntasConRespuesta.add(preguntaRespondida);
+        System.out.println(preguntaRespondida);
+    }
+
+    public void guardarPreguntaRespondidaUsuario() {
+        if (usuarioRegistro != null) {
+            usuarioRegistro.agregarPreguntasRespondidas(preguntasConRespuesta);
+            usuarioDAO.actualizar(usuarioRegistro); // Por si quieres persistir el cambio
+        } else {
+            System.out.println("usuarioRegistro es null");
+        }
     }
 
     public void cerrarSesion() {

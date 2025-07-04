@@ -4,9 +4,11 @@ import ec.edu.ups.controlador.CarritoController;
 import ec.edu.ups.controlador.ProductoController;
 import ec.edu.ups.controlador.UsuarioController;
 import ec.edu.ups.dao.CarritoDAO;
+import ec.edu.ups.dao.PreguntasDAO;
 import ec.edu.ups.dao.ProductoDAO;
 import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.dao.impl.CarritoDAOMemoria;
+import ec.edu.ups.dao.impl.PreguntasDAOMemoria;
 import ec.edu.ups.dao.impl.ProductoDAOMemoria;
 import ec.edu.ups.dao.impl.UsuarioDAOMemoria;
 import ec.edu.ups.modelo.Rol;
@@ -15,6 +17,7 @@ import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 import ec.edu.ups.vista.*;
 import ec.edu.ups.vista.carrito.*;
 import ec.edu.ups.vista.login.LoginView;
+import ec.edu.ups.vista.login.RegistroPreguntasView;
 import ec.edu.ups.vista.login.RegistroView;
 import ec.edu.ups.vista.producto.ProductoActualizarView;
 import ec.edu.ups.vista.producto.ProductoAnadirView;
@@ -38,6 +41,7 @@ public class Main {
         LoginView loginView = new LoginView(mI);
         ProductoDAO productoDAO = new ProductoDAOMemoria();
         CarritoDAO carritoDAO = new CarritoDAOMemoria();
+        PreguntasDAO preguntasDAO = new PreguntasDAOMemoria();
 
 
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -48,12 +52,13 @@ public class Main {
                 UsuarioActualizarView usuarioActualizarView = new UsuarioActualizarView(usuarioDAO, mI);
                 UsuarioEliminarView  usuarioEliminarView = new UsuarioEliminarView(mI);
                 RegistroView registroView = new RegistroView();
+                RegistroPreguntasView registroPreguntasView = new RegistroPreguntasView(preguntasDAO);
                 loginView.setVisible(true);
 
                 UsuarioController usuarioController = new UsuarioController(usuarioDAO, loginView,
                                                                             usuarioCrearView, usuarioListarView,
                                                                             usuarioActualizarView, usuarioEliminarView,
-                                                                            registroView);
+                                                                            registroView, preguntasDAO, registroPreguntasView);
 
                 loginView.addWindowListener(new WindowAdapter() {
                     @Override
