@@ -103,7 +103,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if(!productoAnadirView.isVisible()){
                                         productoAnadirView.setVisible(true);
-                                        principalView.getjDesktopPane().add(productoAnadirView);
+                                        principalView.getMiDesktopPane().add(productoAnadirView);
                                     }
                                 }
                             });
@@ -113,7 +113,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if(!productoListaView.isVisible()){
                                         productoListaView.setVisible(true);
-                                        principalView.getjDesktopPane().add(productoListaView);
+                                        principalView.getMiDesktopPane().add(productoListaView);
                                     }
                                 }
                             });
@@ -124,7 +124,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if (!productoEliminarView.isVisible()) {
                                         productoEliminarView.setVisible(true);
-                                        principalView.getjDesktopPane().add(productoEliminarView);
+                                        principalView.getMiDesktopPane().add(productoEliminarView);
                                     }
                                 }
                             });
@@ -134,7 +134,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if (!productoActualizarView.isVisible()) {
                                         productoActualizarView.setVisible(true);
-                                        principalView.getjDesktopPane().add(productoActualizarView);
+                                        principalView.getMiDesktopPane().add(productoActualizarView);
                                     }
                                 }
                             });
@@ -144,7 +144,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if(!carritoAnadirView.isVisible()){
                                         carritoAnadirView.setVisible(true);
-                                        principalView.getjDesktopPane().add(carritoAnadirView);
+                                        principalView.getMiDesktopPane().add(carritoAnadirView);
                                     }
                                 }
                             });
@@ -154,7 +154,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if(!carritoListarView.isVisible()){
                                         carritoActualizarView.setVisible(true);
-                                        principalView.getjDesktopPane().add(carritoActualizarView);
+                                        principalView.getMiDesktopPane().add(carritoActualizarView);
                                     }
                                 }
                             });
@@ -164,7 +164,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if(!productoListaView.isVisible()){
                                         carritoListarView.setVisible(true);
-                                        principalView.getjDesktopPane().add(carritoListarView);
+                                        principalView.getMiDesktopPane().add(carritoListarView);
                                     }
                                 }
                             });
@@ -174,7 +174,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if (!carritoMostrarDetallesView.isVisible()) {
                                         carritoMostrarDetallesView.setVisible(true);
-                                        principalView.getjDesktopPane().add(carritoMostrarDetallesView);
+                                        principalView.getMiDesktopPane().add(carritoMostrarDetallesView);
                                     }
                                 }
                             });
@@ -184,7 +184,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if (!usuarioCrearView.isVisible()) {
                                         usuarioCrearView.setVisible(true);
-                                        principalView.getjDesktopPane().add(usuarioCrearView);
+                                        principalView.getMiDesktopPane().add(usuarioCrearView);
                                     }
                                 }
                             });
@@ -194,7 +194,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if (!usuarioListarView.isVisible()) {
                                         usuarioListarView.setVisible(true);
-                                        principalView.getjDesktopPane().add(usuarioListarView);
+                                        principalView.getMiDesktopPane().add(usuarioListarView);
                                     }
                                 }
                             });
@@ -204,7 +204,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if (!usuarioActualizarView.isVisible()) {
                                         usuarioActualizarView.setVisible(true);
-                                        principalView.getjDesktopPane().add(usuarioActualizarView);
+                                        principalView.getMiDesktopPane().add(usuarioActualizarView);
                                     }
                                 }
                             });
@@ -214,7 +214,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if (!usuarioEliminarView.isVisible()) {
                                         usuarioEliminarView.setVisible(true);
-                                        principalView.getjDesktopPane().add(usuarioEliminarView);
+                                        principalView.getMiDesktopPane().add(usuarioEliminarView);
                                         System.out.println("Se activó");
                                     }
                                 }
@@ -233,7 +233,7 @@ public class Main {
                                 public void actionPerformed(ActionEvent e) {
                                     if (!carritoAnadirView.isVisible()) {
                                         carritoEliminarView.setVisible(true);
-                                        principalView.getjDesktopPane().add(carritoEliminarView);
+                                        principalView.getMiDesktopPane().add(carritoEliminarView);
                                     }
                                 }
                             });

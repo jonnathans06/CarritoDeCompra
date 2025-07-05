@@ -6,6 +6,7 @@ import javax.swing.*;
 
 public class MenuPrincipalView extends JFrame {
     private MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler;
+    private MiDesktopPane miDesktopPane;
 
     private JMenuBar menuBar;
 
@@ -37,15 +38,16 @@ public class MenuPrincipalView extends JFrame {
     private JMenuItem menuItemIngles;
     private JMenuItem menuItemFrances;
 
-    private JDesktopPane jDesktopPane;
+
 
     public MenuPrincipalView(MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler) {
         this.mensajeInternacionalizacionHandler = mensajeInternacionalizacionHandler;
+        miDesktopPane = new MiDesktopPane();
         initComponents();
     }
 
     public void initComponents() {
-        jDesktopPane = new JDesktopPane();
+        miDesktopPane = new MiDesktopPane();
         menuBar = new JMenuBar();
 
         menuProducto = new JMenu(mensajeInternacionalizacionHandler.get("menu.producto"));
@@ -105,8 +107,8 @@ public class MenuPrincipalView extends JFrame {
         menuIdioma.add(menuItemFrances);
 
         setJMenuBar(menuBar);
-        jDesktopPane.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
-        setContentPane(jDesktopPane);
+        miDesktopPane.setDragMode(JDesktopPane.OUTLINE_DRAG_MODE);
+        setContentPane(miDesktopPane);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle(mensajeInternacionalizacionHandler.get("menu.titulo"));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -293,12 +295,12 @@ public class MenuPrincipalView extends JFrame {
         JOptionPane.showMessageDialog(this, mensaje, "Información", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    public JDesktopPane getjDesktopPane() {
-        return jDesktopPane;
+    public MiDesktopPane getMiDesktopPane() {
+        return miDesktopPane;
     }
 
-    public void setjDesktopPane(JDesktopPane jDesktopPane) {
-        this.jDesktopPane = jDesktopPane;
+    public void setMiDesktopPane(MiDesktopPane miDesktopPane) {
+        this.miDesktopPane = miDesktopPane;
     }
 
     public void deshabilitarMenusAdministrador() {
