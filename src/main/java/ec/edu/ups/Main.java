@@ -52,16 +52,19 @@ public class Main {
                 UsuarioListarView usuarioListarView = new UsuarioListarView(mI);
                 UsuarioActualizarView usuarioActualizarView = new UsuarioActualizarView(usuarioDAO, mI);
                 UsuarioEliminarView  usuarioEliminarView = new UsuarioEliminarView(mI);
-                RegistroView registroView = new RegistroView();
-                RegistroPreguntasView registroPreguntasView = new RegistroPreguntasView(preguntasDAO);
-                RecuperacionView recuperacionView = new RecuperacionView(usuarioDAO);
+                RegistroView registroView = new RegistroView(mI);
+                RegistroPreguntasView registroPreguntasView = new RegistroPreguntasView(preguntasDAO, mI);
+                RecuperacionView recuperacionView = new RecuperacionView(usuarioDAO, mI);
                 loginView.setVisible(true);
+                registroView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                registroPreguntasView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+                registroView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
 
                 UsuarioController usuarioController = new UsuarioController(usuarioDAO, loginView,
                                                                             usuarioCrearView, usuarioListarView,
                                                                             usuarioActualizarView, usuarioEliminarView,
                                                                             registroView, preguntasDAO,
-                                                                            registroPreguntasView, recuperacionView);
+                                                                            registroPreguntasView, recuperacionView, mI);
 
                 loginView.addWindowListener(new WindowAdapter() {
                     @Override

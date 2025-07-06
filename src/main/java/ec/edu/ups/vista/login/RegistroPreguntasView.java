@@ -3,6 +3,7 @@ package ec.edu.ups.vista.login;
 import ec.edu.ups.dao.PreguntasDAO;
 import ec.edu.ups.dao.impl.PreguntasDAOMemoria;
 import ec.edu.ups.modelo.Preguntas;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 
@@ -17,8 +18,9 @@ public class RegistroPreguntasView extends JFrame {
     private Preguntas preguntas;
     private PreguntasDAOMemoria preguntasDAO;
     private PreguntasDAO preguntasDAOMemoria;
+    private MensajeInternacionalizacionHandler mI;
 
-    public RegistroPreguntasView(PreguntasDAO preguntasDAOMemoria) {
+    public RegistroPreguntasView(PreguntasDAO preguntasDAOMemoria, MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setTitle("Registro Preguntas");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -27,8 +29,10 @@ public class RegistroPreguntasView extends JFrame {
         setResizable(false);
         preguntasDAO = new PreguntasDAOMemoria();
         this.preguntasDAOMemoria = preguntasDAOMemoria;
+        this.mI = mI;
 
         cargarPreguntas();
+        cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 
     public JLabel getLblTitulo() {
@@ -97,4 +101,15 @@ public class RegistroPreguntasView extends JFrame {
             CbxPreguntas.addItem(pregunta);
         }
     }
+
+    public void cambiarIdioma(String idioma, String pais) {
+        mI.setLenguaje(idioma, pais);
+
+        setTitle(mI.get("ventana.registroPreguntas.titulo"));
+        LblTitulo.setText(mI.get("ventana.registroPreguntas.titulo"));
+        LblRespuesta.setText(mI.get("ventana.registroPreguntas.respuesta"));
+        BtnGuardar.setText(mI.get("ventana.registroPreguntas.guardar"));
+        BtnFinalizar.setText(mI.get("ventana.registroPreguntas.finalizar"));
+    }
+
 }

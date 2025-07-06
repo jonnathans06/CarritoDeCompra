@@ -3,6 +3,7 @@ package ec.edu.ups.controlador;
 import ec.edu.ups.dao.PreguntasDAO;
 import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.*;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 import ec.edu.ups.vista.login.LoginView;
 import ec.edu.ups.vista.login.RecuperacionView;
 import ec.edu.ups.vista.login.RegistroPreguntasView;
@@ -33,13 +34,15 @@ public class UsuarioController {
     private final RecuperacionView recuperacionView;
     private List<PreguntaRespondida> preguntasConRespuesta = new ArrayList<>();
     private Usuario usuarioRegistro;
+    private MensajeInternacionalizacionHandler mI;
 
 
     public UsuarioController(UsuarioDAO usuarioDAO, LoginView loginView,
                              UsuarioCrearView usuarioCrearView, UsuarioListarView usuarioListarView,
                              UsuarioActualizarView usuarioActualizarView, UsuarioEliminarView usuarioEliminarView,
                              RegistroView registroView, PreguntasDAO preguntasDAO,
-                             RegistroPreguntasView registroPreguntasView, RecuperacionView recuperacionView) {
+                             RegistroPreguntasView registroPreguntasView, RecuperacionView recuperacionView,
+                             MensajeInternacionalizacionHandler mI) {
         this.usuarioDAO = usuarioDAO;
         this.loginView = loginView;
         this.usuarioCrearView = usuarioCrearView;
@@ -51,11 +54,13 @@ public class UsuarioController {
         this.usuario = null;
         this.preguntasDAO = preguntasDAO;
         this.registroPreguntasView = registroPreguntasView;
+        this.mI = mI;
         configurarEventosEnVistas();
         configurarEventosUsuarios();
         configurarEventosPreguntas();
         configurarEventosRecuperar();
         configurarEventosEliminar();
+        cambiarIdiomasVentanas();
     }
 
     private void configurarEventosEnVistas() {
@@ -273,5 +278,11 @@ public class UsuarioController {
 
     public Usuario getUsuarioAutenticado() {
         return usuario;
+    }
+
+    public void cambiarIdiomasVentanas(){
+        recuperacionView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+        registroPreguntasView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+        registroView.cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 }

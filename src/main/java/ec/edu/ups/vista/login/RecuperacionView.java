@@ -3,6 +3,7 @@ package ec.edu.ups.vista.login;
 import ec.edu.ups.dao.UsuarioDAO;
 import ec.edu.ups.modelo.PreguntaRespondida;
 import ec.edu.ups.modelo.Usuario;
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
 
@@ -21,8 +22,9 @@ public class RecuperacionView extends JFrame{
     private JLabel LblNuevaContraseña;
     private JButton BtnCambiarContrasenia;
     private UsuarioDAO usuarioDAO;
+    private MensajeInternacionalizacionHandler mI;
 
-    public RecuperacionView(UsuarioDAO usuarioDAO) {
+    public RecuperacionView(UsuarioDAO usuarioDAO, MensajeInternacionalizacionHandler mI) {
         setContentPane(panelPrincipal);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Recuperación Contraseña");
@@ -30,8 +32,10 @@ public class RecuperacionView extends JFrame{
         setLocationRelativeTo(null);
         setResizable(false);
         this.usuarioDAO = usuarioDAO;
+        this.mI = mI;
 
         cargarPreguntasSeguridad();
+        cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 
     public JLabel getLblTitulo() {
@@ -157,6 +161,22 @@ public class RecuperacionView extends JFrame{
         }
     return false;
     }
+
+    public void cambiarIdioma(String idioma, String pais) {
+        mI.setLenguaje(idioma, pais);
+
+        setTitle(mI.get("ventana.recuperacion.titulo"));
+
+        LblTitulo.setText(mI.get("ventana.recuperacion.titulo"));
+        LblInformativo.setText(mI.get("ventana.recuperacion.informativo"));
+        LblRespuesta.setText(mI.get("ventana.recuperacion.respuesta"));
+        LblNuevaContraseña.setText(mI.get("ventana.recuperacion.nuevaContrasenia"));
+
+        BtnBuscar.setText(mI.get("ventana.recuperacion.btnBuscar"));
+        BtnVerificar.setText(mI.get("ventana.recuperacion.btnVerificar"));
+        BtnCambiarContrasenia.setText(mI.get("ventana.recuperacion.btnCambiarContrasenia"));
+    }
+
 
     public void mostrarMensaje(String mensaje) {
         JOptionPane.showMessageDialog(this, mensaje);

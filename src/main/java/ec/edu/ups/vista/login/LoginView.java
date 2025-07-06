@@ -8,14 +8,16 @@ import java.net.URL;
 public class LoginView extends JFrame {
     private JPanel panelPrincipal;
     private JPanel panelSecundario;
-    private JTextField txtUsername;
-    private JPasswordField txtContrasenia;
+    private JTextField TxtUsername;
+    private JPasswordField TxtContrasenia;
     private JButton btnIniciarSesion;
     private JButton btnRegistrarse;
     private JButton BtnRecuperar;
     private JLabel LblTitulo;
     private JLabel LblUsuario;
     private JLabel LblContraseña;
+    private JComboBox CbxIdioma;
+    private JLabel LblIdioma;
     private MensajeInternacionalizacionHandler mI;
 
     public LoginView(MensajeInternacionalizacionHandler mI) {
@@ -34,7 +36,21 @@ public class LoginView extends JFrame {
         ImageIcon iconoBtnRegistrar = new ImageIcon(registrarURL);
         btnRegistrarse.setIcon(iconoBtnRegistrar);
 
+        cargarIdiomas();
         cambiarIdioma(mI.getLocale().getCountry(), mI.getLocale().getLanguage());
+
+
+        CbxIdioma.addActionListener(e -> {
+            String seleccionado = (String) CbxIdioma.getSelectedItem();
+
+            if (seleccionado.equalsIgnoreCase("Español")) {
+                cambiarIdioma("EC", "es");
+            } else if (seleccionado.equalsIgnoreCase("Ingles")) {
+                cambiarIdioma("US", "en");
+            } else if (seleccionado.equalsIgnoreCase("Frances")) {
+                cambiarIdioma("FR", "fr");
+            }
+        });
     }
 
     public JPanel getPanelPrincipal() {
@@ -53,44 +69,44 @@ public class LoginView extends JFrame {
         this.panelSecundario = panelSecundario;
     }
 
-    public JLabel getLblTitulo() {
-        return LblTitulo;
-    }
-
-    public void setLblTitulo(JLabel lblTitulo) {
-        LblTitulo = lblTitulo;
-    }
-
     public JTextField getTxtUsername() {
-        return txtUsername;
-    }
-
-    public JLabel getLblUsuario() {
-        return LblUsuario;
-    }
-
-    public void setLblUsuario(JLabel lblUsuario) {
-        LblUsuario = lblUsuario;
-    }
-
-    public JLabel getLblContraseña() {
-        return LblContraseña;
-    }
-
-    public void setLblContraseña(JLabel lblContraseña) {
-        LblContraseña = lblContraseña;
+        return TxtUsername;
     }
 
     public void setTxtUsername(JTextField txtUsername) {
-        this.txtUsername = txtUsername;
+        this.TxtUsername = TxtUsername;
+    }
+
+    public JComboBox getCbxIdioma() {
+        return CbxIdioma;
+    }
+
+    public void setCbxIdioma(JComboBox cbxIdioma) {
+        CbxIdioma = cbxIdioma;
+    }
+
+    public JLabel getLblIdioma() {
+        return LblIdioma;
+    }
+
+    public void setLblIdioma(JLabel lblIdioma) {
+        LblIdioma = lblIdioma;
+    }
+
+    public MensajeInternacionalizacionHandler getmI() {
+        return mI;
+    }
+
+    public void setmI(MensajeInternacionalizacionHandler mI) {
+        this.mI = mI;
     }
 
     public JPasswordField getTxtContrasenia() {
-        return txtContrasenia;
+        return TxtContrasenia;
     }
 
     public void setTxtContrasenia(JPasswordField txtContrasenia) {
-        this.txtContrasenia = txtContrasenia;
+        this.TxtContrasenia = txtContrasenia;
     }
 
     public JButton getBtnIniciarSesion() {
@@ -117,7 +133,31 @@ public class LoginView extends JFrame {
         BtnRecuperar = btnRecuperar;
     }
 
-    public void cambiarIdioma(String idioma, String pais){
+    public JLabel getLblTitulo() {
+        return LblTitulo;
+    }
+
+    public void setLblTitulo(JLabel lblTitulo) {
+        LblTitulo = lblTitulo;
+    }
+
+    public JLabel getLblUsuario() {
+        return LblUsuario;
+    }
+
+    public void setLblUsuario(JLabel lblUsuario) {
+        LblUsuario = lblUsuario;
+    }
+
+    public JLabel getLblContraseña() {
+        return LblContraseña;
+    }
+
+    public void setLblContraseña(JLabel lblContraseña) {
+        LblContraseña = lblContraseña;
+    }
+
+    public void cambiarIdioma(String pais, String idioma) {
         mI.setLenguaje(idioma, pais);
 
         setTitle(mI.get("ventana.login.titulo"));
@@ -129,7 +169,14 @@ public class LoginView extends JFrame {
         btnIniciarSesion.setText(mI.get("ventana.login.iniciarSesion"));
         btnRegistrarse.setText(mI.get("ventana.login.registrar"));
         BtnRecuperar.setText(mI.get("ventana.login.btnRecuperar"));
+        LblIdioma.setText("Idioma:");
+    }
 
+    public void cargarIdiomas() {
+        CbxIdioma.removeAllItems();
+        CbxIdioma.addItem("Español");
+        CbxIdioma.addItem("Ingles");
+        CbxIdioma.addItem("Frances");
     }
 
     public void mostrarMensaje(String mensaje) {

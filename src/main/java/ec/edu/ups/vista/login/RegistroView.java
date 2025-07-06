@@ -1,5 +1,7 @@
 package ec.edu.ups.vista.login;
 
+import ec.edu.ups.util.MensajeInternacionalizacionHandler;
+
 import javax.swing.*;
 import java.util.GregorianCalendar;
 
@@ -30,6 +32,21 @@ public class RegistroView extends JFrame{
     private JTextField TxtAño;
     private JComboBox CbxAnio;
     private GregorianCalendar fechaCreacion;
+    private MensajeInternacionalizacionHandler mI;
+
+    public RegistroView(MensajeInternacionalizacionHandler mI) {
+        setContentPane(panelPrincipal);
+        setTitle("Registro de Usuario");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(470, 500);
+        setLocationRelativeTo(null);
+        this.mI = mI;
+
+        cargarDias();
+        cargarMeses();
+        cargarAnios();
+        cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
+    }
 
     public JTextField getTxtNombre() {
         return TxtNombre;
@@ -231,17 +248,6 @@ public class RegistroView extends JFrame{
         CbxAnio = cbxAnio;
     }
 
-    public RegistroView() {
-        setContentPane(panelPrincipal);
-        setTitle("Registro de Usuario");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(470, 500);
-        setLocationRelativeTo(null);
-
-        cargarDias();
-        cargarMeses();
-        cargarAnios();
-    }
 
     public void cargarDias() {
         CbxDia.removeAllItems();
@@ -264,4 +270,27 @@ public class RegistroView extends JFrame{
             CbxAnio.addItem(i);
         }
     }
+
+    public void cambiarIdioma(String idioma, String pais) {
+        mI.setLenguaje(idioma, pais);
+
+        setTitle(mI.get("ventana.registro.titulo"));
+
+        LblTitulo.setText(mI.get("ventana.registro.titulo"));
+        LblDatosPersonales.setText(mI.get("ventana.registro.datosPersonales"));
+        LblNombre.setText(mI.get("ventana.registro.nombre"));
+        LblApellido.setText(mI.get("ventana.registro.apellido"));
+        LblCorreo.setText(mI.get("ventana.registro.correo"));
+        LblTelefono.setText(mI.get("ventana.registro.telefono"));
+        LblDia.setText(mI.get("ventana.registro.dia"));
+        LblMes.setText(mI.get("ventana.registro.mes"));
+        LblAnio.setText(mI.get("ventana.registro.anio"));
+        LblUsuario.setText(mI.get("ventana.registro.usuario"));
+        LblContrasenia.setText(mI.get("ventana.registro.contrasenia"));
+        LblPerfilUsuario.setText(mI.get("ventana.registro.perfilUsuario"));
+
+        BtnRegistrarse.setText(mI.get("ventana.registro.btnRegistrarse"));
+        BtnCancelar.setText(mI.get("ventana.registro.btnCancelar"));
+    }
+
 }

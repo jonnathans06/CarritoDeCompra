@@ -3,6 +3,7 @@ package ec.edu.ups.vista;
 import ec.edu.ups.util.MensajeInternacionalizacionHandler;
 
 import javax.swing.*;
+import java.net.URL;
 
 public class MenuPrincipalView extends JFrame {
     private MensajeInternacionalizacionHandler mensajeInternacionalizacionHandler;
@@ -113,6 +114,78 @@ public class MenuPrincipalView extends JFrame {
         setTitle(mensajeInternacionalizacionHandler.get("menu.titulo"));
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setVisible(true);
+
+        // Iconos banderas en menú de idiomas
+        URL menuPrincipalEspanolURL = MenuPrincipalView.class.getClassLoader().getResource("imagenes/espana.png");
+        ImageIcon iconoIdiomaEspañol = new ImageIcon(menuPrincipalEspanolURL);
+        menuItemEspanol.setIcon(iconoIdiomaEspañol);
+
+        URL menuPrincipalInglesURL = MenuPrincipalView.class.getClassLoader().getResource("imagenes/ingles.png");
+        ImageIcon iconoIdiomaIngles = new ImageIcon(menuPrincipalInglesURL);
+        menuItemIngles.setIcon(iconoIdiomaIngles);
+
+        URL menuPrincipalFrancesURL = MenuPrincipalView.class.getClassLoader().getResource("imagenes/francia.png");
+        ImageIcon iconoIdiomaFrances = new ImageIcon(menuPrincipalFrancesURL);
+        menuItemFrances.setIcon(iconoIdiomaFrances);
+
+        // Iconos CRUD Usuario
+        URL menuPrincipalAgregarUsuario = MenuPrincipalView.class.getClassLoader().getResource("imagenes/usuarioCrear.png");
+        ImageIcon iconoCrearUsuario = new ImageIcon(menuPrincipalAgregarUsuario);
+        menuItemCrearUsuario.setIcon(iconoCrearUsuario);
+
+        URL menuPrincipalActualizarUsuario = MenuPrincipalView.class.getClassLoader().getResource("imagenes/usuarioActualizar.png");
+        ImageIcon iconoActualizarUsuario = new ImageIcon(menuPrincipalActualizarUsuario);
+        menuItemActualizarUsuario.setIcon(iconoActualizarUsuario);
+
+        URL menuPrincipalListarUsuario = MenuPrincipalView.class.getClassLoader().getResource("imagenes/usuarioBuscar.png");
+        ImageIcon iconoListarUsuario = new ImageIcon(menuPrincipalListarUsuario);
+        menuItemListarUsuario.setIcon(iconoListarUsuario);
+
+        URL menuPrincipalEliminarUsuario = MenuPrincipalView.class.getClassLoader().getResource("imagenes/usuarioEliminar.png");
+        ImageIcon iconoEliminarUsuario = new ImageIcon(menuPrincipalEliminarUsuario);
+        menuItemEliminarUsuario.setIcon(iconoEliminarUsuario);
+
+        // Iconos CRUD Carrito de Compra
+        URL menuPrincipalCrearCarrito = MenuPrincipalView.class.getClassLoader().getResource("imagenes/carritoDeComprasCrear.png");
+        ImageIcon iconoCrearCarrito = new ImageIcon(menuPrincipalCrearCarrito);
+        menuItemCrearCarrito.setIcon(iconoCrearCarrito);
+
+        URL menuPrincipalActualizarCarrito = MenuPrincipalView.class.getClassLoader().getResource("imagenes/carritoDeComprasActualizar.png");
+        ImageIcon iconoActualizarCarrito = new ImageIcon(menuPrincipalActualizarCarrito);
+        menuItemActualizarCarrito.setIcon(iconoActualizarCarrito);
+
+        URL menuPrincipalListarCarritos = MenuPrincipalView.class.getClassLoader().getResource("imagenes/carritoDeComprasBuscar.png");
+        ImageIcon iconoListarCarritos = new ImageIcon(menuPrincipalListarCarritos);
+        menuItemListarCarritos.setIcon(iconoListarCarritos);
+
+        URL menuPrincipalDetalleCarrito = MenuPrincipalView.class.getClassLoader().getResource("imagenes/carritoDeComprasDetalle.png");
+        ImageIcon iconoDetalleCarrito = new ImageIcon(menuPrincipalDetalleCarrito);
+        menuItemDetalleCarrito.setIcon(iconoDetalleCarrito);
+
+        URL menuPrincipalEliminarCarrito = MenuPrincipalView.class.getClassLoader().getResource("imagenes/carritoDeComprasEliminar.png");
+        ImageIcon iconoEliminarCarrito = new ImageIcon(menuPrincipalEliminarCarrito);
+        menuItemEliminarCarrito.setIcon(iconoEliminarCarrito);
+
+        // Iconos CRUD Producto
+        URL menuPrincipalCrearProducto = MenuPrincipalView.class.getClassLoader().getResource("imagenes/productoCrear.png");
+        ImageIcon iconoCrearProducto = new ImageIcon(menuPrincipalCrearProducto);
+        menuItemCrearProducto.setIcon(iconoCrearProducto);
+
+        URL menuPrincipalActualizarProducto = MenuPrincipalView.class.getClassLoader().getResource("imagenes/productoActualizar.png");
+        ImageIcon iconoActualizarProducto = new ImageIcon(menuPrincipalActualizarProducto);
+        menuItemActualizarProducto.setIcon(iconoActualizarProducto);
+
+        URL menuPrincipalEliminarProducto = MenuPrincipalView.class.getClassLoader().getResource("imagenes/productoEliminar.png");
+        ImageIcon iconoEliminarProducto = new ImageIcon(menuPrincipalEliminarProducto);
+        menuItemEliminarProducto.setIcon(iconoEliminarProducto);
+
+        URL menuPrincipalBuscarProducto = MenuPrincipalView.class.getClassLoader().getResource("imagenes/productoBuscar.png");
+        ImageIcon iconoBuscarProducto = new ImageIcon(menuPrincipalBuscarProducto);
+        menuItemBuscarProducto.setIcon(iconoBuscarProducto);
+
+        URL menuPrincipalCerrarSesion = MenuPrincipalView.class.getClassLoader().getResource("imagenes/cerrarSesion.png");
+        ImageIcon iconoCerrarSesion = new ImageIcon(menuPrincipalCerrarSesion);
+        menuItemCerrarSesion.setIcon(iconoCerrarSesion);
     }
 
     public JMenu getMenuProducto() {
