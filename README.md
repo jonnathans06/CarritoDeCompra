@@ -40,9 +40,9 @@ Implementar un sistema educativo que simula un **carrito de compras**, utilizand
 
 ---
 
-## 📐 Diagrama UML de Clases
+## 🎦 Link del video
 
-<!-- Espacio reservado para el diagrama UML -->
+https://youtu.be/3wC4Tvq8xeI
 
 ---
 
