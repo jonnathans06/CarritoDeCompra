@@ -30,7 +30,6 @@ public class CarritoListarView extends JInternalFrame {
         Object[] columnas = {"Código","Fecha","Usuario","Subtotal","Total"};
         modelo.setColumnIdentifiers(columnas);
         TblCarritos.setModel(modelo);
-        //cambiarIdioma(mI.getLocale().getLanguage(), mI.getLocale().getCountry());
     }
 
     public JTextField getTxtCodigo() {

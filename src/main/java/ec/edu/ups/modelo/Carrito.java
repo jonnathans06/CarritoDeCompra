@@ -15,13 +15,6 @@ public class Carrito {
     private List<ItemCarrito> items;
     private Usuario usuario;
 
-    public Carrito() {
-        codigo = contador++;
-        items = new ArrayList<>();
-        fechaCreacion = new GregorianCalendar();
-        this.usuario = usuario;
-    }
-
     public Carrito(Usuario usuario) {
         codigo = contador++;
         items = new ArrayList<>();
